@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EatWithMe</string>
+    <string name="button_new_group">Nowa grupa</string>
+    <string name="no_groups_available">Nie jesteś zapisany do żadnej z grup, spróbuj utworzyć nową grupe</string>
+</resources>
