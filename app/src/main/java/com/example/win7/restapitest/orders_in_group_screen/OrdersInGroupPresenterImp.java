@@ -28,15 +28,14 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
     public void onClickOrder(int position) {
 
         OrderInGroup order = ordersResult.get(position);
-        ordersInGroupView.showToast(order.getName() + " is selected!");
+        ordersInGroupView.showToast(order.getRestaurant().getName() + " is selected!");
 
     }
 
     @Override
-    public void getOrders() {
+    public void getOrders(String groupId) {
 
-        ordersResult = apiConnection.getOrdersInGroup();
-
+        ordersResult = apiConnection.getOrdersInGroup(groupId);
 
         if(ordersResult.isEmpty()){
             ordersInGroupView.setEmptyView();

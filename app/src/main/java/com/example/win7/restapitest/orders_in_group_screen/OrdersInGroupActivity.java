@@ -29,8 +29,7 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders_in_group);
-
-
+        
         emptyView = (TextView) findViewById(R.id.empty_view);
 
         ordersInGroupPresenter = new OrdersInGroupPresenterImp(this);
@@ -60,7 +59,7 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
 
         //******************************************************************************************
 
-        ordersInGroupPresenter.getOrders();
+        ordersInGroupPresenter.getOrders("5");
     }
 
     public void onClickAddNewGroup(View v)

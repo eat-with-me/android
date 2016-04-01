@@ -19,6 +19,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
 
         public TextView groupName;
 
+
         public ViewHolder(View view) {
             super(view);
             groupName = (TextView) view.findViewById(R.id.groupName);

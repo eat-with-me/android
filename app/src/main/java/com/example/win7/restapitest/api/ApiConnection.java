@@ -12,9 +12,7 @@ public interface ApiConnection {
 
     public List<Group> getGroups();
 
-    public List<OrderInGroup> getOrdersInGroup();
-
-    public void requestForOrdersList();
+    public List<OrderInGroup> getOrdersInGroup(String groupNumber);
 
 
 }

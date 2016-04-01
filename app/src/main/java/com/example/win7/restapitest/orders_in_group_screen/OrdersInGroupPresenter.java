@@ -7,7 +7,7 @@ public interface OrdersInGroupPresenter {
 
     void onClickOrder(int position);
 
-    void getOrders();
+    void getOrders(String groupId);
 
     void onClickNewOrder();
 
