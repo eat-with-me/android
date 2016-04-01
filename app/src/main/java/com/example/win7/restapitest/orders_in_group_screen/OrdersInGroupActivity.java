@@ -1,4 +1,4 @@
-package com.example.win7.restapitest.main_screen;
+package com.example.win7.restapitest.orders_in_group_screen;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,41 +9,34 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
-//import butterknife.Bind;
-//import butterknife.ButterKnife;
-
 import com.example.win7.restapitest.R;
-import com.example.win7.restapitest.model.Group;
+import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MainView {
-
+public class OrdersInGroupActivity extends AppCompatActivity implements OrdersInGroupView{
 
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private TextView emptyView;
-
-    private MainPresenter mainPresenter;
+    OrdersInGroupPresenter ordersInGroupPresenter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_orders_in_group);
+
 
         emptyView = (TextView) findViewById(R.id.empty_view);
 
-        mainPresenter = new MainPresenterImp(this);
+        ordersInGroupPresenter = new OrdersInGroupPresenterImp(this);
 
         //recyclerview******************************************************************************
-        recyclerView = (RecyclerView) findViewById(R.id.list_of_groups);
+        recyclerView = (RecyclerView) findViewById(R.id.list_of_orders);
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -55,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
             @Override
             public void onClick(View view, int position) {
 
-                mainPresenter.onClickGroup(position);
+                ordersInGroupPresenter.onClickOrder(position);
 
             }
 
@@ -67,27 +60,25 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         //******************************************************************************************
 
-        mainPresenter.getGroups();
-
+        ordersInGroupPresenter.getOrders();
     }
-
 
     public void onClickAddNewGroup(View v)
     {
-        mainPresenter.onClickNewGroup();
+        ordersInGroupPresenter.onClickNewOrder();
     }
 
 
     @Override
     protected void onDestroy(){
-        mainPresenter.onDestroy();
+        ordersInGroupPresenter.onDestroy();
         super.onDestroy();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        mainPresenter.onResume();
+        ordersInGroupPresenter.onResume();
 
     }
 
@@ -99,9 +90,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
 
     @Override
-    public void loadGourps(List<Group> groupsResult)
+    public void loadOrders(List<OrderInGroup> ordersResult)
     {
-        adapter = new GroupsAdapter(groupsResult);
+        adapter = new OrdersAdapter(ordersResult);
         recyclerView.setAdapter(adapter);
     }
 

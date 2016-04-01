@@ -6,6 +6,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import com.example.win7.restapitest.model.Group;
+import com.example.win7.restapitest.model.OrderInGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +38,22 @@ public class ApiConnectionImp implements ApiConnection {
 //            }
 //        });
 
-        mockData();
+        mockGroups();
         return groupsResult;
     }
 
+    @Override
+    public List<OrderInGroup> getOrdersInGroup() {
+        return null;
+    }
 
-    private void mockData(){
+    @Override
+    public void requestForOrdersList() {
+
+    }
+
+
+    private void mockGroups(){
 
         groupsResult = new ArrayList<Group>();
 
@@ -121,4 +132,7 @@ public class ApiConnectionImp implements ApiConnection {
 
     }
 
+    private void mockOrders(){
+
+    }
 }

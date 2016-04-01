@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/windowBackground"
-    tools:context=".main_screen.MainActivity">
+    tools:context="com.example.win7.restapitest.orders_in_group_screen.OrdersInGroupActivity">
 
 
     <TextView
@@ -15,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:visibility="gone"
         android:textColor="@color/text"
-        android:text="@string/no_groups_available"
+        android:text="@string/no_orders_available"
         android:textSize="20dp"
         android:textStyle="bold"
         android:gravity="center"/>
@@ -23,7 +22,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_new_group"
+        android:text="@string/button_new_order"
         android:id="@+id/button"
         android:background="@color/colorButton"
         android:textColor="@color/text"
@@ -36,10 +35,11 @@
         android:layout_alignParentStart="true" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_of_groups"
+        android:id="@+id/list_of_orders"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/button" />
+
 </RelativeLayout>

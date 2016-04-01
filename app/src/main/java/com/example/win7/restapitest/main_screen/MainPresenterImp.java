@@ -5,6 +5,7 @@ import android.widget.Toast;
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.ApiConnectionImp;
 import com.example.win7.restapitest.model.Group;
+import com.example.win7.restapitest.others.Factory;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class MainPresenterImp implements MainPresenter {
 
     public MainPresenterImp(MainView mainView) {
         this.mainView = mainView;
-        this.apiConnection = new ApiConnectionImp();
+        this.apiConnection = Factory.getApiConnection();
 
     }
 
