@@ -43,6 +43,7 @@ public class MainPresenterImp implements MainPresenter {
             mainView.setEmptyView();
         }
         else{
+
             mainView.loadGourps(groupsResult);
         }
 

@@ -1,15 +1,23 @@
 package com.example.win7.restapitest.model;
 
 
+import com.google.gson.annotations.SerializedName;
+
+
+// /groups
+
 public class Group {
 
-
+    @SerializedName("id")
     private Integer id;
 
+    @SerializedName("name")
     private String name;
 
+    @SerializedName("created_at")
     private String createdAt;
 
+    @SerializedName("updated_at")
     private String updatedAt;
 
 

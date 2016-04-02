@@ -1,21 +1,31 @@
 package com.example.win7.restapitest.model;
 
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
+// /restaurants/<id>
+
 public class RestaurantMenu {
 
+    @SerializedName("id")
     private Integer id;
 
+    @SerializedName("name")
     private String name;
 
+    @SerializedName("phone_number")
     private String phoneNumber;
 
+    @SerializedName("created_at")
     private String createdAt;
 
+    @SerializedName("updated_at")
     private String updatedAt;
 
+    @SerializedName("meals")
     private List<Meal> meals = new ArrayList<Meal>();
 
     public Integer getId() {

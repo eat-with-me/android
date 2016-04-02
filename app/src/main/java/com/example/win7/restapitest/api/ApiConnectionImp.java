@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ApiConnectionImp implements ApiConnection {
 
-    private final String URL = "http://2ac29ca2.ngrok.io/";
+    private final String URL = "http://56c79c98.ngrok.io";
     private List<Group> groupsResult = new ArrayList<Group>();
     private List<OrderInGroup> ordersResult = new ArrayList<OrderInGroup>();
     private RestAdapter adapter;
@@ -50,20 +50,20 @@ public class ApiConnectionImp implements ApiConnection {
 
     @Override
     public List<OrderInGroup> getOrdersInGroup(String groupNumber) {
-//        api.getOrdersInGroups(groupNumber,new Callback<List<OrderInGroup>>() {
-//
-//            @Override
-//            public void success(List<OrderInGroup> orderResponse, Response response) {
-//                ordersResult = orderResponse;
-//            }
-//
-//            @Override
-//            public void failure(RetrofitError error) {
-//                //TODO obsłużyć brak połączenia z internetem
-//            }
-//        });
+        api.getOrdersInGroups(groupNumber,new Callback<List<OrderInGroup>>() {
 
-        mockOrders();
+            @Override
+            public void success(List<OrderInGroup> orderResponse, Response response) {
+                ordersResult = orderResponse;
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                //TODO obsłużyć brak połączenia z internetem
+            }
+        });
+
+        //mockOrders();
         return ordersResult;
     }
 
@@ -148,6 +148,8 @@ public class ApiConnectionImp implements ApiConnection {
     }
 
     private void mockOrders(){
+
+        ordersResult = new ArrayList<OrderInGroup>();
 
         Restaurant restaurant = new Restaurant();
         restaurant.setName("restauracja1");

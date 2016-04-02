@@ -29,7 +29,7 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders_in_group);
-        
+
         emptyView = (TextView) findViewById(R.id.empty_view);
 
         ordersInGroupPresenter = new OrdersInGroupPresenterImp(this);
@@ -59,10 +59,11 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
 
         //******************************************************************************************
 
-        ordersInGroupPresenter.getOrders("5");
+        ordersInGroupPresenter.getOrders("1");
+
     }
 
-    public void onClickAddNewGroup(View v)
+    public void onClickNewOrder(View v)
     {
         ordersInGroupPresenter.onClickNewOrder();
     }
@@ -91,6 +92,7 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
     @Override
     public void loadOrders(List<OrderInGroup> ordersResult)
     {
+
         adapter = new OrdersAdapter(ordersResult);
         recyclerView.setAdapter(adapter);
     }

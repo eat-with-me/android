@@ -1,14 +1,31 @@
 package com.example.win7.restapitest.model;
 
+import com.google.gson.annotations.SerializedName;
+
+// /groups/<id>/orders
+
 public class OrderInGroup {
 
 
+    @SerializedName("id")
     private Integer id;
+
+    @SerializedName("closing_time")
     private String closingTime;
+
+    @SerializedName("restaurant_id")
     private Integer restaurantId;
+
+    @SerializedName("created_at")
     private String createdAt;
+
+    @SerializedName("updated_at")
     private String updatedAt;
+
+    @SerializedName("group_id")
     private Integer groupId;
+
+    @SerializedName("restaurant")
     private Restaurant restaurant;
 
     public Integer getId() {

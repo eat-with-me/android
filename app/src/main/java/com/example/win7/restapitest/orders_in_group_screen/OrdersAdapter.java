@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
-import com.example.win7.restapitest.main_screen.GroupsAdapter;
-import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
 
 import java.util.List;
@@ -48,11 +46,11 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     public void onBindViewHolder(OrdersAdapter.ViewHolder holder, int position) {
         OrderInGroup order = orders.get(position);
         holder.restaurantName.setText(order.getRestaurant().getName());
-        holder.restaurantName.setText(order.getClosingTime());
+        holder.closingTime.setText(order.getClosingTime());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return orders.size();
     }
 }

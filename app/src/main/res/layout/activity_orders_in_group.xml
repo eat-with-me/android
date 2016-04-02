@@ -11,12 +11,10 @@
         android:id="@+id/empty_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:visibility="gone"
         android:textColor="@color/text"
         android:text="@string/no_orders_available"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"/>
 
@@ -28,7 +26,7 @@
         android:background="@color/colorButton"
         android:textColor="@color/text"
         android:textStyle="bold"
-        android:onClick="onClickAddNewGroup"
+        android:onClick="onClickNewOrder"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
