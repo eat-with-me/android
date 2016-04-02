@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class Group {
 
     @SerializedName("id")
-    private Integer id;
+    private String id;
 
     @SerializedName("name")
     private String name;
@@ -23,12 +23,12 @@ public class Group {
 
 
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

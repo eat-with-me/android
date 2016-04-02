@@ -42,18 +42,7 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
             ordersInGroupView.setEmptyView();
         }
         else{
-            ordersInGroupView.showToast(ordersResult.get(1).getId().toString());
-          ordersInGroupView.showToast(ordersResult.get(1).getClosingTime());
-           ordersInGroupView.showToast(ordersResult.get(1).getRestaurantId().toString());
-            ordersInGroupView.showToast(ordersResult.get(1).getCreatedAt());
-            ordersInGroupView.showToast(ordersResult.get(1).getUpdatedAt());
-          ordersInGroupView.showToast(ordersResult.get(1).getGroupId().toString());
 
-            ordersInGroupView.showToast(ordersResult.get(1).getRestaurant().getId().toString());
-            ordersInGroupView.showToast(ordersResult.get(1).getRestaurant().getName());
-            ordersInGroupView.showToast(ordersResult.get(1).getRestaurant().getPhoneNumber());
-            ordersInGroupView.showToast(ordersResult.get(1).getRestaurant().getCreatedAt());
-            ordersInGroupView.showToast(ordersResult.get(1).getRestaurant().getUpdatedAt());
             ordersInGroupView.loadOrders(ordersResult);
         }
 

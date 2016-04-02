@@ -1,5 +1,6 @@
 package com.example.win7.restapitest.orders_in_group_screen;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
+import com.example.win7.restapitest.main_screen.MainPresenterImp;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
@@ -33,6 +35,11 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
         emptyView = (TextView) findViewById(R.id.empty_view);
 
         ordersInGroupPresenter = new OrdersInGroupPresenterImp(this);
+
+        Intent intent = getIntent();
+        String groupId = intent.getStringExtra(MainPresenterImp.GROUP_ID);
+
+
 
         //recyclerview******************************************************************************
         recyclerView = (RecyclerView) findViewById(R.id.list_of_orders);
@@ -59,7 +66,7 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
 
         //******************************************************************************************
 
-        ordersInGroupPresenter.getOrders("1");
+        ordersInGroupPresenter.getOrders(groupId);
 
     }
 

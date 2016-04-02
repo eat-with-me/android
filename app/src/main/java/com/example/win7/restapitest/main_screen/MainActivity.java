@@ -1,5 +1,6 @@
 package com.example.win7.restapitest.main_screen;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.Group;
+import com.example.win7.restapitest.orders_in_group_screen.OrdersInGroupActivity;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         mainPresenter = new MainPresenterImp(this);
 
+       
+
         //recyclerview******************************************************************************
         recyclerView = (RecyclerView) findViewById(R.id.list_of_groups);
         recyclerView.setHasFixedSize(true);
@@ -56,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
             public void onClick(View view, int position) {
 
                 mainPresenter.onClickGroup(position);
+                //Group group = groupsResult.get(position);
+
 
             }
 
