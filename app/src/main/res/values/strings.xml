@@ -7,4 +7,6 @@
     <string name="no_menu_available">Menu restauracji jest puste</string>
     <string name="button_go_to_cart">Koszyk</string>
     <string name="menu">menu</string>
+    <string name="products">Produkty</string>
+    <string name="totalPrice">SUMA</string>
 </resources>

@@ -28,6 +28,8 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private TextView emptyView;
+    private TextView totalPrice;
+    private TextView totalProducts;
 
     private RestaurantMenuPresenter restaurantMenuPresenter;
 

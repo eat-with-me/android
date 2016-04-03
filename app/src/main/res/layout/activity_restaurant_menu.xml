@@ -21,20 +21,86 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
         android:textStyle="bold"
         android:gravity="center"/>
 
-    <Button
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_go_to_cart"
-        android:id="@+id/button"
         android:background="@color/colorButton"
-        android:textColor="@color/text"
-        android:textStyle="bold"
         android:onClick="onClickGoToCart"
+        android:minHeight="50dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:clickable="true"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text"
+            android:text="@string/button_go_to_cart"
+            android:id="@+id/cart"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="39dp"
+            android:layout_marginEnd="39dp"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/products"
+            android:id="@+id/productsText"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/numberOfProducts"
+            android:layout_below="@+id/productsText"
+            android:layout_toLeftOf="@+id/totalPriceText"
+            android:layout_toStartOf="@+id/totalPriceText"
+            android:layout_alignBottom="@+id/Price"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/totalPrice"
+            android:id="@+id/totalPriceText"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/productsText"
+            android:layout_toEndOf="@+id/productsText"
+            android:layout_marginLeft="29dp"
+            android:layout_marginStart="29dp"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/Price"
+            android:layout_below="@+id/totalPriceText"
+            android:layout_alignLeft="@+id/totalPriceText"
+            android:layout_alignStart="@+id/totalPriceText"
+            android:gravity="center" />
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/menu_list"
@@ -42,18 +108,24 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/button"
-        android:layout_below="@+id/textView" />
+        android:layout_below="@+id/menuText"
+        android:layout_above="@+id/relativeLayout" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/menu"
-        android:id="@+id/textView"
+        android:id="@+id/menuText"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:height="25dp"
+        android:background="@color/colorButton"
+        android:gravity="center_vertical"
+        android:elegantTextHeight="false"
+        android:paddingLeft="20dp"
+        android:visibility="gone" />
 
 </RelativeLayout>
