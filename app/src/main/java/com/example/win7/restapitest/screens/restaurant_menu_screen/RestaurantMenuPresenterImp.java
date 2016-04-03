@@ -1,17 +1,20 @@
 package com.example.win7.restapitest.screens.restaurant_menu_screen;
 
 import com.example.win7.restapitest.api.ApiConnection;
+import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.Meal;
 import com.example.win7.restapitest.model.Order;
+import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.Factory;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * Created by win7 on 02/04/2016.
  */
-public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter{
+public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter,OnDownloadFinishedListener<RestaurantMenu> {
 
 
     private RestaurantMenuView restaurantMenuView;
@@ -47,15 +50,9 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter{
     @Override
     public void getMenu(String restaurantId) {
 
-        menuResult = apiConnection.getRestaurantMenu(restaurantId);
+        apiConnection.getRestaurantMenu(restaurantId, this);
 
-        if(menuResult.isEmpty()){
-            restaurantMenuView.setEmptyView();
-        }
-        else{
 
-            restaurantMenuView.loadMenu(menuResult);
-        }
     }
 
     @Override
@@ -73,5 +70,25 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter{
     @Override
     public void onResume() {
 
+    }
+
+    @Override
+    public void onSuccess(RestaurantMenu arg) {
+
+        menuResult = arg;
+        restaurantMenuView.hideProgress();
+
+        if(menuResult.isEmpty()){
+            restaurantMenuView.setEmptyView();
+        }
+        else{
+
+            restaurantMenuView.loadMenu(menuResult);
+        }
+    }
+
+    @Override
+    public void onError() {
+        restaurantMenuView.showError();
     }
 }

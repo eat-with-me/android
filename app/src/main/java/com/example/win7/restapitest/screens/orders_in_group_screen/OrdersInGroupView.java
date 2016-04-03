@@ -15,4 +15,10 @@ public interface OrdersInGroupView {
     void showToast(String message);
 
     void goToRestaurantMenuActivity(String restaurantId);
+
+    void showProgress();
+
+    void hideProgress();
+
+    void showError();
 }

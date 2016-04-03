@@ -9,4 +9,5 @@
     <string name="menu">menu</string>
     <string name="products">Produkty</string>
     <string name="totalPrice">SUMA</string>
+    <string name="no_internet">Brak dostępu do Internetu</string>
 </resources>

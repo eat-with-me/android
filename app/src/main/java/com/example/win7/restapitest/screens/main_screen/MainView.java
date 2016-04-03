@@ -10,7 +10,10 @@ import java.util.List;
 public interface MainView {
 
     void setEmptyView();
-    void loadGourps(List<Group> groupsResult);
+    void loadGroups(List<Group> groupsResult);
     void showToast(String message);
     void goToOrdersInGroupActivity(String groupId);
+    void showProgress();
+    void hideProgress();
+    void showError();
 }

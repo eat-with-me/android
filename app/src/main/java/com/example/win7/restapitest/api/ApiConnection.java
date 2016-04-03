@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface ApiConnection {
 
-    List<Group> getGroups();
+    void getGroups(final OnDownloadFinishedListener listener);
 
-    List<OrderInGroup> getOrdersInGroup(String groupNumber);
+    void getOrdersInGroup(String groupNumber, final OnDownloadFinishedListener listener);
 
-    RestaurantMenu getRestaurantMenu(String restaurantId);
+    void getRestaurantMenu(String restaurantId, final OnDownloadFinishedListener listener);
 
-    List<RestaurantMenu>getAllRestaurantsMenu();
+    void getAllRestaurantsMenu();
 }

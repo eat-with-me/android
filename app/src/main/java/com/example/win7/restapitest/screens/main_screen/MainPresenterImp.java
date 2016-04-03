@@ -1,10 +1,8 @@
 package com.example.win7.restapitest.screens.main_screen;
 
-import android.content.Intent;
-
 import com.example.win7.restapitest.api.ApiConnection;
+import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.Group;
-import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 import com.example.win7.restapitest.others.Factory;
 
 import java.util.List;
@@ -12,7 +10,7 @@ import java.util.List;
 /**
  * Created by win7 on 28/03/2016.
  */
-public class MainPresenterImp implements MainPresenter {
+public class MainPresenterImp implements MainPresenter,OnDownloadFinishedListener<List<Group>> {
 
 
     private MainView mainView;
@@ -37,17 +35,7 @@ public class MainPresenterImp implements MainPresenter {
     @Override
     public void getGroups() {
 
-        groupsResult = apiConnection.getGroups();
-
-
-        if(groupsResult.isEmpty()){
-            mainView.setEmptyView();
-        }
-        else{
-
-            mainView.loadGourps(groupsResult);
-        }
-
+        apiConnection.getGroups(this);
 
     }
 
@@ -65,5 +53,29 @@ public class MainPresenterImp implements MainPresenter {
         mainView.showToast("New group is selected");
     }
 
+    @Override
+
+    public void onSuccess(List<Group> list) {
+
+        groupsResult = list;
+        mainView.hideProgress();
+
+
+        if(groupsResult.isEmpty()){
+            mainView.setEmptyView();
+        }
+        else{
+
+            mainView.loadGroups(groupsResult);
+        }
+
+
+    }
+
+
+    @Override
+    public void onError() {
+        mainView.showError();
+    }
 }
 

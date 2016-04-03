@@ -7,30 +7,27 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
-import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
-import com.example.win7.restapitest.screens.main_screen.GroupsAdapter;
-import com.example.win7.restapitest.screens.main_screen.MainActivity;
-import com.example.win7.restapitest.screens.main_screen.MainPresenter;
-import com.example.win7.restapitest.screens.main_screen.MainPresenterImp;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
-
-import java.util.List;
 
 public class RestaurantMenuActivity extends AppCompatActivity  implements RestaurantMenuView{
 
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private TextView emptyView;
+    private TextView messageTextView;
     private TextView totalPrice;
     private TextView totalProducts;
+    private RelativeLayout relativeLayout;
+    private ProgressBar progressBar;
 
     private RestaurantMenuPresenter restaurantMenuPresenter;
 
@@ -40,9 +37,15 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
         setContentView(R.layout.activity_restaurant_menu);
 
 
-        emptyView = (TextView) findViewById(R.id.empty_view);
+        messageTextView = (TextView) findViewById(R.id.empty_view);
         totalPrice = (TextView) findViewById(R.id.price);
-        totalProducts = (TextView) findViewById(R.id.numberOfProducts);
+        totalProducts = (TextView) findViewById(R.id.number_of_products);
+        recyclerView = (RecyclerView) findViewById(R.id.menu_list);
+        relativeLayout = (RelativeLayout) findViewById(R.id.relative_layout);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
+
+
         totalPrice.setText("0");
         totalPrice.setText("0");
 
@@ -51,8 +54,10 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
         Intent intent = getIntent();
         String restaurantId = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_ID);
 
+        showProgress();
+
         //recyclerview******************************************************************************
-        recyclerView = (RecyclerView) findViewById(R.id.menu_list);
+
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -103,7 +108,7 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
     @Override
     public void setEmptyView(){
         recyclerView.setVisibility(View.GONE);
-        emptyView.setVisibility(View.VISIBLE);
+        messageTextView.setVisibility(View.VISIBLE);
     }
 
 
@@ -129,12 +134,39 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
     public void setTotalProducts(String products){
         totalProducts.setText(products);
     }
-//    @Override
-//    public void goToOrdersInGroupActivity(String groupId) {
-//
-//        Intent intent = new Intent(this, OrdersInGroupActivity.class);
-//        intent.putExtra(GROUP_ID, groupId);
-//        startActivity(intent);
-//    }
+
+    @Override
+    public void showProgress() {
+        //TODO rozwiązać to jakoś inaczej (przeładowanie całego widoku)
+
+        progressBar.setVisibility(View.VISIBLE);
+        messageTextView.setVisibility(View.INVISIBLE);
+        relativeLayout.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+
+        progressBar.setVisibility(View.INVISIBLE);
+        messageTextView.setVisibility(View.INVISIBLE);
+        relativeLayout.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+
+
+    @Override
+    public void showError() {
+
+        progressBar.setVisibility(View.INVISIBLE);
+        relativeLayout.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+
+        //TODO przenieść tekst gdzieś indziej
+
+        messageTextView.setText("Brak połączenia z internetem");
+        messageTextView.setVisibility(View.VISIBLE);
+    }
 
 }

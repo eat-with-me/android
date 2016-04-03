@@ -7,16 +7,16 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
-import com.example.win7.restapitest.screens.main_screen.MainPresenterImp;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
-import com.example.win7.restapitest.screens.main_screen.MainView;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 
 import java.util.List;
@@ -26,8 +26,11 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private TextView emptyView;
-    OrdersInGroupPresenter ordersInGroupPresenter;
+    private TextView messageTextView;
+    private Button button;
+    private ProgressBar progressBar;
+
+    private OrdersInGroupPresenter ordersInGroupPresenter;
 
     public static final String RESTAURANT_ID = "restaurantId" ;
 
@@ -37,19 +40,22 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders_in_group);
 
-        emptyView = (TextView) findViewById(R.id.empty_view);
+        messageTextView = (TextView) findViewById(R.id.empty_view);
+        recyclerView = (RecyclerView) findViewById(R.id.list_of_orders);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        button = (Button) findViewById(R.id.button);
 
         ordersInGroupPresenter = new OrdersInGroupPresenterImp(this);
 
         Intent intent = getIntent();
         String groupId = intent.getStringExtra(MainActivity.GROUP_ID);
 
+        showProgress();
 
 
         //recyclerview******************************************************************************
-        recyclerView = (RecyclerView) findViewById(R.id.list_of_orders);
-        recyclerView.setHasFixedSize(true);
 
+        recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -97,7 +103,7 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
     @Override
     public void setEmptyView(){
         recyclerView.setVisibility(View.GONE);
-        emptyView.setVisibility(View.VISIBLE);
+        messageTextView.setVisibility(View.VISIBLE);
     }
 
 
@@ -120,6 +126,42 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
         Intent intent = new Intent(this, RestaurantMenuActivity.class);
         intent.putExtra(RESTAURANT_ID, restaurantId);
         startActivity(intent);
+
+    }
+
+    @Override
+    public void showProgress() {
+
+        //TODO rozwiązać to jakoś inaczej (przeładowanie całego widoku)
+
+        progressBar.setVisibility(View.VISIBLE);
+        messageTextView.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+        progressBar.setVisibility(View.INVISIBLE);
+        messageTextView.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void showError() {
+
+        progressBar.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+
+        //TODO przenieść tekst gdzieś indziej
+
+        messageTextView.setText("Brak połączenia z internetem");
+        messageTextView.setVisibility(View.VISIBLE);
 
     }
 

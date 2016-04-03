@@ -7,6 +7,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +32,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private TextView emptyView;
+    private TextView messageTextView;
+    private ProgressBar progressBar;
+    private Button button;
+    private String noInternet;
 
     private MainPresenter mainPresenter;
 
@@ -40,14 +45,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        emptyView = (TextView) findViewById(R.id.empty_view);
+        messageTextView = (TextView) findViewById(R.id.empty_view);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        button = (Button) findViewById(R.id.button);
+        recyclerView = (RecyclerView) findViewById(R.id.list_of_groups);
+
 
         mainPresenter = new MainPresenterImp(this);
 
-
+        showProgress();
 
         //recyclerview******************************************************************************
-        recyclerView = (RecyclerView) findViewById(R.id.list_of_groups);
+
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -60,9 +69,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
             public void onClick(View view, int position) {
 
                 mainPresenter.onClickGroup(position);
-                //Group group = groupsResult.get(position);
-
-
             }
 
             @Override
@@ -100,12 +106,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void setEmptyView(){
         recyclerView.setVisibility(View.GONE);
-        emptyView.setVisibility(View.VISIBLE);
+        messageTextView.setVisibility(View.VISIBLE);
     }
 
 
     @Override
-    public void loadGourps(List<Group> groupsResult)
+    public void loadGroups(List<Group> groupsResult)
     {
         adapter = new GroupsAdapter(groupsResult);
         recyclerView.setAdapter(adapter);
@@ -124,5 +130,41 @@ public class MainActivity extends AppCompatActivity implements MainView {
         startActivity(intent);
     }
 
+    @Override
+    public void showProgress() {
+
+        //TODO rozwiązać to jakoś inaczej (przeładowanie całego widoku)
+
+        progressBar.setVisibility(View.VISIBLE);
+        messageTextView.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.INVISIBLE);
+        messageTextView.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showError() {
+        progressBar.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+
+
+        messageTextView.setText("Brak połączenia z internetem");
+        messageTextView.setVisibility(View.VISIBLE);
+
+    }
+
 
 }
+
+
+
+//TODO zorbić z tych trzech aktywnośći jakiś szablon albo zastosowac dziedziczenie

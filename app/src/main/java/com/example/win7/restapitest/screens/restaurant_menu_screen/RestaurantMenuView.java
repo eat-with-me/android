@@ -19,4 +19,10 @@ public interface RestaurantMenuView {
     void setTotalPrice(String price);
 
     void setTotalProducts(String products);
+
+    void showProgress();
+
+    void hideProgress();
+
+    void showError();
 }
