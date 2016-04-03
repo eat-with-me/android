@@ -4,4 +4,7 @@
     <string name="no_groups_available">Nie jesteś zapisany do żadnej z grup, spróbuj utworzyć nową grupe</string>
     <string name="no_orders_available">Brak aktywnych zamówień</string>
     <string name="button_new_order">Nowe zamówienie</string>
+    <string name="no_menu_available">Menu restauracji jest puste</string>
+    <string name="button_go_to_cart">Koszyk</string>
+    <string name="menu">menu</string>
 </resources>

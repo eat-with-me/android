@@ -2,6 +2,7 @@ package com.example.win7.restapitest.api;
 
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.RestaurantMenu;
 
 import java.util.List;
 
@@ -17,5 +18,11 @@ public interface Api {
 
     @GET("/groups/{id}/orders")
     public void getOrdersInGroups(@Path("id") String user,Callback<List<OrderInGroup>> callback);
+
+    @GET("/restaurants")
+    public void getAllRestaurantsMenu(Callback<List<RestaurantMenu>> callback);
+
+    @GET("/restaurants/{id}")
+    public void getRestaurantMenu(@Path("id") String user,Callback<RestaurantMenu> callback);
 
 }

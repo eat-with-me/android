@@ -1,7 +1,6 @@
-package com.example.win7.restapitest.orders_in_group_screen;
+package com.example.win7.restapitest.screens.orders_in_group_screen;
 
 import com.example.win7.restapitest.api.ApiConnection;
-import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.others.Factory;
 
@@ -28,7 +27,8 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
     public void onClickOrder(int position) {
 
         OrderInGroup order = ordersResult.get(position);
-        ordersInGroupView.showToast(order.getRestaurant().getName() + " is selected!");
+        String orderId = order.getId();
+        ordersInGroupView.goToRestaurantMenuActivity(orderId);
 
     }
 

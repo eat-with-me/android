@@ -28,6 +28,9 @@ public class RestaurantMenu {
     @SerializedName("meals")
     private List<Meal> meals = new ArrayList<Meal>();
 
+
+
+
     public Integer getId() {
         return id;
     }
@@ -74,5 +77,8 @@ public class RestaurantMenu {
 
     public void setMeals(List<Meal> meals) {
         this.meals = meals;
+    }
+
+    public boolean isEmpty() { return meals.isEmpty();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.win7.restapitest.orders_in_group_screen;
+package com.example.win7.restapitest.screens.orders_in_group_screen;
 
 import com.example.win7.restapitest.model.OrderInGroup;
 
@@ -13,4 +13,6 @@ public interface OrdersInGroupView {
     void loadOrders(List<OrderInGroup> ordersResult);
 
     void showToast(String message);
+
+    void goToRestaurantMenuActivity(String restaurantId);
 }

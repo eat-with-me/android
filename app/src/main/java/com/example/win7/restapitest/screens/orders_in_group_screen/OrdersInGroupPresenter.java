@@ -1,4 +1,4 @@
-package com.example.win7.restapitest.orders_in_group_screen;
+package com.example.win7.restapitest.screens.orders_in_group_screen;
 
 /**
  * Created by win7 on 01/04/2016.

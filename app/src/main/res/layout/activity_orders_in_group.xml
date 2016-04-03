@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
-    tools:context="com.example.win7.restapitest.orders_in_group_screen.OrdersInGroupActivity">
+    tools:context=".screens.orders_in_group_screen.OrdersInGroupActivity">
 
 
     <TextView

@@ -6,8 +6,10 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import com.example.win7.restapitest.model.Group;
+import com.example.win7.restapitest.model.Meal;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Restaurant;
+import com.example.win7.restapitest.model.RestaurantMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +19,14 @@ import java.util.List;
  */
 public class ApiConnectionImp implements ApiConnection {
 
+    //TODO zrobić coś z listami
+
     private final String URL = "http://56c79c98.ngrok.io";
     private List<Group> groupsResult = new ArrayList<Group>();
     private List<OrderInGroup> ordersResult = new ArrayList<OrderInGroup>();
+    private RestaurantMenu menuResult = new RestaurantMenu();
+    private List<RestaurantMenu>  allRestaurantsMenuResult = new ArrayList<RestaurantMenu>();
+
     private RestAdapter adapter;
     private Api api;
 
@@ -29,7 +36,7 @@ public class ApiConnectionImp implements ApiConnection {
     }
 
 
-
+    @Override
     public List<Group> getGroups()
     {
         api.getGroups(new Callback<List<Group>>() {
@@ -50,7 +57,7 @@ public class ApiConnectionImp implements ApiConnection {
 
     @Override
     public List<OrderInGroup> getOrdersInGroup(String groupNumber) {
-        api.getOrdersInGroups(groupNumber,new Callback<List<OrderInGroup>>() {
+        api.getOrdersInGroups(groupNumber, new Callback<List<OrderInGroup>>() {
 
             @Override
             public void success(List<OrderInGroup> orderResponse, Response response) {
@@ -65,6 +72,43 @@ public class ApiConnectionImp implements ApiConnection {
 
         //mockOrders();
         return ordersResult;
+    }
+
+    @Override
+    public RestaurantMenu getRestaurantMenu(String restaurantId) {
+//        api.getRestaurantMenu(restaurantId, new Callback<RestaurantMenu>() {
+//
+//            @Override
+//            public void success(RestaurantMenu menuResponse, Response response) {
+//                menuResult = menuResponse;
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                //TODO obsłużyć brak połączenia z internetem
+//            }
+//        });
+        mockMenu();
+        return menuResult;
+    }
+
+    @Override
+    public List<RestaurantMenu> getAllRestaurantsMenu() {
+//        api.getAllRestaurantsMenu(new Callback<List<RestaurantMenu>>() {
+//
+//            @Override
+//            public void success(List<RestaurantMenu> allRestaurantsMenuResponse, Response response) {
+//                allRestaurantsMenuResult = allRestaurantsMenuResponse;
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                //TODO obsłużyć brak połączenia z internetem
+//            }
+//        });
+
+        mockMenu();
+        return allRestaurantsMenuResult;
     }
 
 
@@ -181,4 +225,32 @@ public class ApiConnectionImp implements ApiConnection {
         ordersResult.add(orderInGroup);
 
     }
+
+    private void mockMenu()
+    {
+        menuResult = new RestaurantMenu();
+        menuResult.setName("KFC");
+        menuResult.setCreatedAt("cerated time");
+        menuResult.setId(3);
+        menuResult.setPhoneNumber("345345");
+        menuResult.setUpdatedAt("updatedAt");
+
+
+        Meal meal = new Meal();
+        meal.setName("ziemniory");
+        meal.setPrice(3.45);
+        menuResult.getMeals().add(meal);
+
+        meal = new Meal();
+        meal.setName("Schabowy");
+        meal.setPrice(5.57);
+        menuResult.getMeals().add(meal);
+
+        meal = new Meal();
+        meal.setName("surówka");
+        meal.setPrice(9.56);
+        menuResult.getMeals().add(meal);
+
+    }
+
 }

@@ -8,13 +8,13 @@ public class OrderInGroup {
 
 
     @SerializedName("id")
-    private Integer id;
+    private String id;
 
     @SerializedName("closing_time")
     private String closingTime;
 
     @SerializedName("restaurant_id")
-    private Integer restaurantId;
+    private String restaurantId;
 
     @SerializedName("created_at")
     private String createdAt;
@@ -28,11 +28,11 @@ public class OrderInGroup {
     @SerializedName("restaurant")
     private Restaurant restaurant;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -44,11 +44,11 @@ public class OrderInGroup {
         this.closingTime = closingTime;
     }
 
-    public Integer getRestaurantId() {
+    public String getRestaurantId() {
         return restaurantId;
     }
 
-    public void setRestaurantId(Integer restaurantId) {
+    public void setRestaurantId(String restaurantId) {
         this.restaurantId = restaurantId;
     }
 

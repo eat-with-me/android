@@ -1,4 +1,4 @@
-package com.example.win7.restapitest.main_screen;
+package com.example.win7.restapitest.screens.orders_in_group_screen;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,58 +10,55 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
-//import butterknife.Bind;
-//import butterknife.ButterKnife;
-
 import com.example.win7.restapitest.R;
-import com.example.win7.restapitest.model.Group;
-import com.example.win7.restapitest.orders_in_group_screen.OrdersInGroupActivity;
+import com.example.win7.restapitest.screens.main_screen.MainActivity;
+import com.example.win7.restapitest.screens.main_screen.MainPresenterImp;
+import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
+import com.example.win7.restapitest.screens.main_screen.MainView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MainView {
-
+public class OrdersInGroupActivity extends AppCompatActivity implements OrdersInGroupView{
 
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private TextView emptyView;
+    OrdersInGroupPresenter ordersInGroupPresenter;
 
-    private MainPresenter mainPresenter;
+    public static final String RESTAURANT_ID = "restaurantId" ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_orders_in_group);
 
         emptyView = (TextView) findViewById(R.id.empty_view);
 
-        mainPresenter = new MainPresenterImp(this);
+        ordersInGroupPresenter = new OrdersInGroupPresenterImp(this);
 
-       
+        Intent intent = getIntent();
+        String groupId = intent.getStringExtra(MainActivity.GROUP_ID);
+
+
 
         //recyclerview******************************************************************************
-        recyclerView = (RecyclerView) findViewById(R.id.list_of_groups);
+        recyclerView = (RecyclerView) findViewById(R.id.list_of_orders);
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
 
-                mainPresenter.onClickGroup(position);
-                //Group group = groupsResult.get(position);
-
+                ordersInGroupPresenter.onClickOrder(position);
 
             }
 
@@ -73,27 +70,26 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         //******************************************************************************************
 
-        mainPresenter.getGroups();
+        ordersInGroupPresenter.getOrders(groupId);
 
     }
 
-
-    public void onClickAddNewGroup(View v)
+    public void onClickNewOrder(View v)
     {
-        mainPresenter.onClickNewGroup();
+        ordersInGroupPresenter.onClickNewOrder();
     }
 
 
     @Override
     protected void onDestroy(){
-        mainPresenter.onDestroy();
+        ordersInGroupPresenter.onDestroy();
         super.onDestroy();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        mainPresenter.onResume();
+        ordersInGroupPresenter.onResume();
 
     }
 
@@ -105,15 +101,25 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
 
     @Override
-    public void loadGourps(List<Group> groupsResult)
+    public void loadOrders(List<OrderInGroup> ordersResult)
     {
-        adapter = new GroupsAdapter(groupsResult);
+
+        adapter = new OrdersAdapter(ordersResult);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void showToast(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void goToRestaurantMenuActivity(String restaurantId) {
+
+        Intent intent = new Intent(this, OrdersInGroupActivity.class);
+        intent.putExtra(RESTAURANT_ID, restaurantId);
+        startActivity(intent);
+
     }
 
 

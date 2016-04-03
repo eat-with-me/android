@@ -1,4 +1,4 @@
-package com.example.win7.restapitest.main_screen;
+package com.example.win7.restapitest.screens.main_screen;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

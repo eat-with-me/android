@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/windowBackground"
-    tools:context=".screens.main_screen.MainActivity">
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/windowBackground"
+tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
 
 
     <TextView
@@ -15,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:visibility="gone"
         android:textColor="@color/text"
-        android:text="@string/no_groups_available"
+        android:text="@string/no_menu_available"
         android:textSize="20dp"
         android:textStyle="bold"
         android:gravity="center"/>
@@ -23,12 +24,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_new_group"
+        android:text="@string/button_go_to_cart"
         android:id="@+id/button"
         android:background="@color/colorButton"
         android:textColor="@color/text"
         android:textStyle="bold"
-        android:onClick="onClickAddNewGroup"
+        android:onClick="onClickGoToCart"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -36,12 +37,23 @@
         android:layout_alignParentStart="true" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_of_groups"
+        android:id="@+id/menu_list"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/button"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

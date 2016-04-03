@@ -1,4 +1,4 @@
-package com.example.win7.restapitest.orders_in_group_screen;
+package com.example.win7.restapitest.screens.orders_in_group_screen;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
