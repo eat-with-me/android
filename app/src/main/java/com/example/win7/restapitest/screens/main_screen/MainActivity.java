@@ -31,11 +31,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public static final String GROUP_ID = "groupId" ;
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
     private TextView messageTextView;
     private ProgressBar progressBar;
     private Button button;
-    private String noInternet;
+
 
     private MainPresenter mainPresenter;
 
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void loadGroups(List<Group> groupsResult)
     {
-        adapter = new GroupsAdapter(groupsResult);
+        RecyclerView.Adapter adapter = new GroupsAdapter(groupsResult);
         recyclerView.setAdapter(adapter);
     }
 
@@ -156,8 +155,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
         button.setVisibility(View.INVISIBLE);
         recyclerView.setVisibility(View.INVISIBLE);
 
-
-        messageTextView.setText("Brak połączenia z internetem");
+        String noInternet = getString(R.string.no_internet);
+        messageTextView.setText(noInternet);
         messageTextView.setVisibility(View.VISIBLE);
 
     }

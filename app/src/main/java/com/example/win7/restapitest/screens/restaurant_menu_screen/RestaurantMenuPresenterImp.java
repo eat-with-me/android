@@ -1,5 +1,6 @@
 package com.example.win7.restapitest.screens.restaurant_menu_screen;
 
+import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.Meal;
@@ -42,6 +43,8 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter,OnDow
 
         restaurantMenuView.setTotalPrice(totalPriceStr);
         restaurantMenuView.setTotalProducts(totalProducts.toString());
+
+
         restaurantMenuView.showToast("Dodano do koszyka");
 
 

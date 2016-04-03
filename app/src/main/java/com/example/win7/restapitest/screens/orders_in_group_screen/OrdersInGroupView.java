@@ -4,9 +4,7 @@ import com.example.win7.restapitest.model.OrderInGroup;
 
 import java.util.List;
 
-/**
- * Created by win7 on 01/04/2016.
- */
+
 public interface OrdersInGroupView {
     void setEmptyView();
 

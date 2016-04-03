@@ -10,4 +10,5 @@
     <string name="products">Produkty</string>
     <string name="totalPrice">SUMA</string>
     <string name="no_internet">Brak dostępu do Internetu</string>
+    <string name="add_to_cart">Dodano do koszyka</string>
 </resources>

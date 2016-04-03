@@ -7,9 +7,7 @@ import com.example.win7.restapitest.others.Factory;
 
 import java.util.List;
 
-/**
- * Created by win7 on 28/03/2016.
- */
+
 public class MainPresenterImp implements MainPresenter,OnDownloadFinishedListener<List<Group>> {
 
 

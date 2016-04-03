@@ -158,9 +158,9 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
         button.setVisibility(View.INVISIBLE);
         recyclerView.setVisibility(View.INVISIBLE);
 
-        //TODO przenieść tekst gdzieś indziej
 
-        messageTextView.setText("Brak połączenia z internetem");
+        String noInternet = getString(R.string.no_internet);
+        messageTextView.setText(noInternet);
         messageTextView.setVisibility(View.VISIBLE);
 
     }

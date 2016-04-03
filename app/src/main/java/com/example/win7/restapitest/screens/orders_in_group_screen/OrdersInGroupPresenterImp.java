@@ -2,15 +2,12 @@ package com.example.win7.restapitest.screens.orders_in_group_screen;
 
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
-import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.others.Factory;
 
 import java.util.List;
 
-/**
- * Created by win7 on 01/04/2016.
- */
+
 public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter,OnDownloadFinishedListener<List<OrderInGroup>> {
 
     private OrdersInGroupView ordersInGroupView;

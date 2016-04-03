@@ -10,9 +10,7 @@ import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.Meal;
 import com.example.win7.restapitest.model.RestaurantMenu;
 
-/**
- * Created by win7 on 02/04/2016.
- */
+
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
 
     private RestaurantMenu menu;

@@ -45,9 +45,8 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
 
-
         totalPrice.setText("0");
-        totalPrice.setText("0");
+        totalProducts.setText("0");
 
         restaurantMenuPresenter = new RestaurantMenuPresenterImp(this);
 
@@ -163,9 +162,9 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
         relativeLayout.setVisibility(View.INVISIBLE);
         recyclerView.setVisibility(View.INVISIBLE);
 
-        //TODO przenieść tekst gdzieś indziej
 
-        messageTextView.setText("Brak połączenia z internetem");
+        String noInternet = getString(R.string.no_internet);
+        messageTextView.setText(noInternet);
         messageTextView.setVisibility(View.VISIBLE);
     }
 
