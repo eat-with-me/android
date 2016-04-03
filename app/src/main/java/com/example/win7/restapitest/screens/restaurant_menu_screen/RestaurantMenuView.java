@@ -16,4 +16,7 @@ public interface RestaurantMenuView {
     void showToast(String message);
 
 
+    void setTotalPrice(String price);
+
+    void setTotalProducts(String products);
 }

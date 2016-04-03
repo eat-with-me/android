@@ -52,7 +52,7 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
             android:gravity="center" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textColor="@color/text"
             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -70,35 +70,36 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/numberOfProducts"
             android:layout_below="@+id/productsText"
+            android:layout_alignBottom="@+id/price"
+            android:gravity="center"
             android:layout_toLeftOf="@+id/totalPriceText"
-            android:layout_toStartOf="@+id/totalPriceText"
-            android:layout_alignBottom="@+id/Price"
-            android:gravity="center" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textColor="@color/text"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/totalPrice"
             android:id="@+id/totalPriceText"
-            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:layout_alignTop="@+id/productsText"
             android:layout_toRightOf="@+id/productsText"
-            android:layout_toEndOf="@+id/productsText"
-            android:layout_marginLeft="29dp"
-            android:layout_marginStart="29dp"
-            android:gravity="center" />
+            android:layout_toEndOf="@+id/productsText" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/Price"
+            android:id="@+id/price"
             android:layout_below="@+id/totalPriceText"
             android:layout_alignLeft="@+id/totalPriceText"
             android:layout_alignStart="@+id/totalPriceText"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_alignRight="@+id/totalPriceText"
+            android:layout_alignEnd="@+id/totalPriceText" />
 
     </RelativeLayout>
 

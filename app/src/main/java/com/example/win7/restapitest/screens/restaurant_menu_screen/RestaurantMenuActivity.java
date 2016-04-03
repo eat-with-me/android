@@ -40,6 +40,10 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
 
 
         emptyView = (TextView) findViewById(R.id.empty_view);
+        totalPrice = (TextView) findViewById(R.id.price);
+        totalProducts = (TextView) findViewById(R.id.numberOfProducts);
+        totalPrice.setText("0");
+        totalPrice.setText("0");
 
         restaurantMenuPresenter = new RestaurantMenuPresenterImp(this);
 
@@ -58,9 +62,6 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
             public void onClick(View view, int position) {
 
                 restaurantMenuPresenter.onClickMeal(position);
-
-
-
             }
 
             @Override
@@ -115,6 +116,16 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+
+    @Override
+    public void setTotalPrice(String price){
+        totalPrice.setText(price);
+    }
+
+    @Override
+    public void setTotalProducts(String products){
+        totalProducts.setText(products);
+    }
 //    @Override
 //    public void goToOrdersInGroupActivity(String groupId) {
 //

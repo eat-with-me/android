@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screens.restaurant_menu_screen.RestaurantMenuActivity">
+        <activity android:name=".screens.main_screen.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".screens.orders_in_group_screen.OrdersInGroupActivity" />
-        <activity android:name=".screens.main_screen.MainActivity"></activity>
+        <activity android:name=".screens.restaurant_menu_screen.RestaurantMenuActivity"></activity>
     </application>
 
 </manifest>

@@ -7,11 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
-import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.Meal;
 import com.example.win7.restapitest.model.RestaurantMenu;
-
-import java.util.List;
 
 /**
  * Created by win7 on 02/04/2016.

@@ -6,6 +6,8 @@ import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.Factory;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by win7 on 02/04/2016.
  */
@@ -28,9 +30,17 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter{
     public void onClickMeal(int position) {
 
         Meal meal = menuResult.getMeals().get(position);
-        String mealName = meal.getName();
         order.add(meal);
+        Double totalPrice = order.getTotalPrice();
+        Integer totalProducts = order.getNumberOfOrderedMeals();
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        String totalPriceStr = decimalFormat.format(totalPrice);
+
+        restaurantMenuView.setTotalPrice(totalPriceStr);
+        restaurantMenuView.setTotalProducts(totalProducts.toString());
         restaurantMenuView.showToast("Dodano do koszyka");
+
 
     }
 

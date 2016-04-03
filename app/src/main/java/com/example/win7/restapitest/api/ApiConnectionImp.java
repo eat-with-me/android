@@ -21,7 +21,8 @@ public class ApiConnectionImp implements ApiConnection {
 
     //TODO zrobić coś z listami
 
-    private final String URL = "http://56c79c98.ngrok.io";
+    private final String URL = "http://c86edbe5.ngrok.io";
+
     private List<Group> groupsResult = new ArrayList<Group>();
     private List<OrderInGroup> ordersResult = new ArrayList<OrderInGroup>();
     private RestaurantMenu menuResult = new RestaurantMenu();
@@ -76,19 +77,19 @@ public class ApiConnectionImp implements ApiConnection {
 
     @Override
     public RestaurantMenu getRestaurantMenu(String restaurantId) {
-//        api.getRestaurantMenu(restaurantId, new Callback<RestaurantMenu>() {
-//
-//            @Override
-//            public void success(RestaurantMenu menuResponse, Response response) {
-//                menuResult = menuResponse;
-//            }
-//
-//            @Override
-//            public void failure(RetrofitError error) {
-//                //TODO obsłużyć brak połączenia z internetem
-//            }
-//        });
-        mockMenu();
+        api.getRestaurantMenu(restaurantId, new Callback<RestaurantMenu>() {
+
+            @Override
+            public void success(RestaurantMenu menuResponse, Response response) {
+                menuResult = menuResponse;
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                //TODO obsłużyć brak połączenia z internetem
+            }
+        });
+        //mockMenu();
         return menuResult;
     }
 
