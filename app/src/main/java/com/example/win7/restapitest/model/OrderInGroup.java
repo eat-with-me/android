@@ -28,6 +28,7 @@ public class OrderInGroup {
     @SerializedName("restaurant")
     private Restaurant restaurant;
 
+
     public String getId() {
         return id;
     }
@@ -82,6 +83,10 @@ public class OrderInGroup {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public String getClosingTimeShort(){
+        return closingTime.substring(11,16);
     }
 }
 

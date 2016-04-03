@@ -46,7 +46,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     public void onBindViewHolder(OrdersAdapter.ViewHolder holder, int position) {
         OrderInGroup order = orders.get(position);
         holder.restaurantName.setText(order.getRestaurant().getName());
-        holder.closingTime.setText(order.getClosingTime());
+        holder.closingTime.setText(order.getClosingTimeShort());
     }
 
     @Override

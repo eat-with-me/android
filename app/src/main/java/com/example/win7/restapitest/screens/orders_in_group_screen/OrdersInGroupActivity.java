@@ -17,6 +17,7 @@ import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.main_screen.MainView;
+import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 
 import java.util.List;
 
@@ -116,7 +117,7 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
     @Override
     public void goToRestaurantMenuActivity(String restaurantId) {
 
-        Intent intent = new Intent(this, OrdersInGroupActivity.class);
+        Intent intent = new Intent(this, RestaurantMenuActivity.class);
         intent.putExtra(RESTAURANT_ID, restaurantId);
         startActivity(intent);
 
