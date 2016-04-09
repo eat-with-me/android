@@ -6,23 +6,24 @@ import com.example.win7.restapitest.model.RestaurantMenu;
 
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.Path;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 
 public interface Api {
 
     @GET("/groups")
-    public void getGroups(Callback<List<Group>> callback);
+    Call<List<Group>> getGroups();
 
     @GET("/groups/{id}/orders")
-    public void getOrdersInGroups(@Path("id") String user,Callback<List<OrderInGroup>> callback);
+    Call<List<OrderInGroup>> getOrdersInGroups(@Path("id") String user);
 
     @GET("/restaurants")
-    public void getAllRestaurantsMenu(Callback<List<RestaurantMenu>> callback);
+    Call<List<RestaurantMenu>> getAllRestaurantsMenu();
 
     @GET("/restaurants/{id}")
-    public void getRestaurantMenu(@Path("id") String user,Callback<RestaurantMenu> callback);
+    Call<RestaurantMenu> getRestaurantMenu(@Path("id") String user);
 
 }

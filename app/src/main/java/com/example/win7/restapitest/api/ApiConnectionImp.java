@@ -1,9 +1,11 @@
 package com.example.win7.restapitest.api;
 
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.Meal;
@@ -19,39 +21,61 @@ import java.util.List;
  */
 public class ApiConnectionImp implements ApiConnection {
 
+
+
+
     //TODO zrobić coś z listami
 
-    private final String URL = "http://9a21372f.ngrok.io/";
+    private final String BASE_URL = "http://eat24.herokuapp.com/";
 
     private List<Group> groupsResult = new ArrayList<Group>();
     private List<OrderInGroup> ordersResult = new ArrayList<OrderInGroup>();
     private RestaurantMenu menuResult = new RestaurantMenu();
     private List<RestaurantMenu>  allRestaurantsMenuResult = new ArrayList<RestaurantMenu>();
 
-    private RestAdapter adapter;
+    private Retrofit retrofit;
     private Api api;
 
     public ApiConnectionImp(){
-        adapter = new RestAdapter.Builder().setEndpoint(URL).build();
-        api = adapter.create(Api.class);
+
+         retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        api = retrofit.create(Api.class);
     }
 
 
     @Override
     public void getGroups(final OnDownloadFinishedListener listener)
     {
-        api.getGroups(new Callback<List<Group>>() {
-            @Override
-            public void success(List<Group> groupResponse, Response response) {
+        Call<List<Group>> call = api.getGroups();
+        call.enqueue(new Callback<List<Group>>() {
 
-                listener.onSuccess(groupResponse);
+            @Override
+
+            public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
+
+                int statusCode = response.code();
+
+                List<Group> groups = response.body();
+                listener.onSuccess(groups);
             }
 
+
             @Override
-            public void failure(RetrofitError error) {
+
+            public void onFailure(Call<List<Group>> call, Throwable t) {
+
                 listener.onError();
+
             }
+
         });
+
+
 
         //mockGroups();
 
@@ -60,17 +84,29 @@ public class ApiConnectionImp implements ApiConnection {
     @Override
     public void getOrdersInGroup(String groupNumber, final OnDownloadFinishedListener listener) {
 
-        api.getOrdersInGroups(groupNumber, new Callback<List<OrderInGroup>>() {
+
+        Call<List<OrderInGroup>> call = api.getOrdersInGroups(groupNumber);
+        call.enqueue(new Callback<List<OrderInGroup>>() {
 
             @Override
-            public void success(List<OrderInGroup> orderResponse, Response response) {
-                listener.onSuccess(orderResponse);
+
+            public void onResponse(Call<List<OrderInGroup>> call, Response<List<OrderInGroup>> response) {
+
+                int statusCode = response.code();
+
+                List<OrderInGroup> order = response.body();
+                listener.onSuccess(order);
             }
 
+
             @Override
-            public void failure(RetrofitError error) {
-               listener.onError();
+
+            public void onFailure(Call<List<OrderInGroup>> call, Throwable t) {
+
+                listener.onError();
+
             }
+
         });
 
         //mockOrders();
@@ -78,37 +114,37 @@ public class ApiConnectionImp implements ApiConnection {
 
     @Override
     public void getRestaurantMenu(String restaurantId, final OnDownloadFinishedListener listener) {
-        api.getRestaurantMenu(restaurantId, new Callback<RestaurantMenu>() {
+
+
+        Call<RestaurantMenu> call= api.getRestaurantMenu(restaurantId);
+        call.enqueue(new Callback<RestaurantMenu>() {
 
             @Override
-            public void success(RestaurantMenu menuResponse, Response response) {
-                listener.onSuccess(menuResponse);
+
+            public void onResponse(Call<RestaurantMenu> call, Response<RestaurantMenu> response) {
+
+                int statusCode = response.code();
+
+                RestaurantMenu menu = response.body();
+                listener.onSuccess(menu);
             }
 
+
             @Override
-            public void failure(RetrofitError error) {
+
+            public void onFailure(Call<RestaurantMenu> call, Throwable t) {
+
                 listener.onError();
+
             }
+
         });
-        //mockMenu();
+
+
     }
 
     @Override
     public void getAllRestaurantsMenu() {
-//        api.getAllRestaurantsMenu(new Callback<List<RestaurantMenu>>() {
-//
-//            @Override
-//            public void success(List<RestaurantMenu> allRestaurantsMenuResponse, Response response) {
-//                allRestaurantsMenuResult = allRestaurantsMenuResponse;
-//            }
-//
-//            @Override
-//            public void failure(RetrofitError error) {
-//                //TODO obsłużyć brak połączenia z internetem
-//            }
-//        });
-
-        //mockMenu();
 
     }
 
