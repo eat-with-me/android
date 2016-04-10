@@ -12,7 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 
-public interface Api {
+public interface Endpoints {
 
     @GET("/groups")
     Call<List<Group>> getGroups();

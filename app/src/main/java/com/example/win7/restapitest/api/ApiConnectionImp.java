@@ -34,7 +34,7 @@ public class ApiConnectionImp implements ApiConnection {
     private List<RestaurantMenu>  allRestaurantsMenuResult = new ArrayList<RestaurantMenu>();
 
     private Retrofit retrofit;
-    private Api api;
+    private Endpoints api;
 
     public ApiConnectionImp(){
 
@@ -44,7 +44,7 @@ public class ApiConnectionImp implements ApiConnection {
                 .build();
 
 
-        api = retrofit.create(Api.class);
+        api = retrofit.create(Endpoints.class);
     }
 
 
