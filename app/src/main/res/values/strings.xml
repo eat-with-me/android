@@ -31,5 +31,10 @@
     <string name="login_goes_wrong">Nie udało się zalogować</string>
     <string name="title_activity_login">Sign in</string>
 
+    <!--Strings related to loginActivity-->
+    <string name="sign_up_text">Zarejestruj</string>
+    <string name="password_again">Powtórz hasło</string>
+    <string name="error_defferent_passwords">Hasła nie są takie same</string>
+    <string name="something_goes_wrong">Nie udało się zarejestrować</string>
 
 </resources>

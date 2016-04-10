@@ -1,14 +1,10 @@
-package com.example.win7.restapitest.screens.login_screen;
+package com.example.win7.restapitest.screens.sign_up_screen;
 
 /**
  * Created by win7 on 10/04/2016.
  */
-public interface LoginPresenter {
-
-
-    void onClickLogin();
-
-    void onCLickSignUp();
+public interface SignUpPresenter {
+    void onClickSignUp();
 
     boolean isEmailCorrect(String email);
 

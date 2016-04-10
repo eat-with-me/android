@@ -43,8 +43,8 @@ public class LoginPresenterImp implements LoginPresenter{
     }
 
     @Override
-    public void onCLickCreateAccount() {
-        loginView.showToast("Create Account is selected");
+    public void onCLickSignUp() {
+        loginView.navigateToSignUpActivity();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class LoginPresenterImp implements LoginPresenter{
             loginView.setEmptyEmailError();
             return false;
         }
-        else if(isEmailValid(email)) {
+        else if(!isEmailValid(email)) {
 
             loginView.setInvalidEmailError();
             return false;
@@ -69,7 +69,7 @@ public class LoginPresenterImp implements LoginPresenter{
     @Override
     public boolean isEmailValid(String email) {
 
-        return !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
 

@@ -1,12 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
-    tools:context="com.example.win7.restapitest.screens.login_screen.LoginActivity"
+    tools:context="com.example.win7.restapitest.screens.sign_up_screen.SignUpActivity"
     android:weightSum="1">
 
-    <!-- Login progress -->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,20 +21,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_above="@+id/button"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:visibility="visible">
+            android:visibility="visible"
+            android:id="@+id/linearLayout"
+            android:layout_alignParentBottom="true">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/login_text"
-                android:id="@+id/login_text"
+                android:text="@string/sign_up_text"
+                android:id="@+id/sign_up_text"
                 android:textColor="@color/text"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="30dp"
@@ -43,28 +44,28 @@
 
 
             <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/login_goes_wrong"
-            android:textColor="@color/text"
-            android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/something_goes_wrong"
+                android:textColor="@color/text"
+                android:visibility="visible"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
                 android:gravity="center" />
 
             <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:textColor="@color/text"
-            android:hint="@string/prompt_email"
-            android:id="@+id/login_view"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColorHint="@color/text"
-            android:password="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:textColor="@color/text"
+                android:hint="@string/prompt_email"
+                android:id="@+id/login_view"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColorHint="@color/text"
+                android:password="false"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp" />
@@ -86,37 +87,36 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="30dp" />
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/password_again_view"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:textColorHint="@color/text"
+                android:hint="@string/password_again"
+                android:textColor="@color/text" />
+
             <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
-            android:src="@drawable/ic_check_circle_black_48dp"
-            android:alpha="0.50"
-            android:background="@null"
-            android:onClick="onClickLogin"
-            android:layout_below="@+id/password_view"
-            android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton"
+                android:src="@drawable/ic_check_circle_black_48dp"
+                android:alpha="0.50"
+                android:background="@null"
+                android:onClick="onClickSignUp"
                 android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/linearLayout"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginRight="30dp" />
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/button_create_account"
-            android:id="@+id/button"
-            android:background="@color/colorButton"
-            android:textColor="@color/text"
-            android:textStyle="bold"
-            android:onClick="onClickCreateAccount"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
     <TextView
@@ -134,5 +134,7 @@
         android:visibility="invisible"
         android:layout_alignParentStart="false"
         android:layout_centerInParent="true" />
+
+
 
 </RelativeLayout>

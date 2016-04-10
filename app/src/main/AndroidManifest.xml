@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +22,7 @@
         <activity android:name=".screens.orders_in_group_screen.OrdersInGroupActivity" />
         <activity android:name=".screens.restaurant_menu_screen.RestaurantMenuActivity" />
         <activity android:name=".screens.main_screen.MainActivity" />
-
+        <activity android:name=".screens.sign_up_screen.SignUpActivity"></activity>
     </application>
 
 </manifest> <!-- .screens.main_screen.MainActivity" -->
