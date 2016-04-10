@@ -148,11 +148,13 @@ public class ApiConnectionImp implements ApiConnection {
 
     }
 
+    @Override
+    public void login(String email, String password) {
+
+    }
 
 
-
-
-  //************************************************************************************************
+    //************************************************************************************************
 
     private void mockGroups(){
 

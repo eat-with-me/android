@@ -18,4 +18,6 @@ public interface ApiConnection {
     void getRestaurantMenu(String restaurantId, final OnDownloadFinishedListener listener);
 
     void getAllRestaurantsMenu();
+
+    void login(String email, String password);
 }

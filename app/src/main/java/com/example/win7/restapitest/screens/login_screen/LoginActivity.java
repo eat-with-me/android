@@ -1,6 +1,7 @@
 package com.example.win7.restapitest.screens.login_screen;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,13 +13,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import com.example.win7.restapitest.R;
+import com.example.win7.restapitest.screens.main_screen.MainActivity;
 
 
-class LoginActivity extends AppCompatActivity  implements LoginView{
+public class LoginActivity extends AppCompatActivity  implements LoginView{
 
 
     private ProgressBar progressBar;
@@ -27,6 +29,7 @@ class LoginActivity extends AppCompatActivity  implements LoginView{
     private EditText emailText;
     private EditText passwordText;
     private Button signUpButton;
+    private TextView loginGoesWrongView;
 
     private LoginPresenter loginPresenter;
 
@@ -39,78 +42,21 @@ class LoginActivity extends AppCompatActivity  implements LoginView{
         passwordText = (EditText) findViewById(R.id.password_view);
         messageView = (TextView) findViewById(R.id.message_view);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        loginForm = (RelativeLayout) findViewById(R.id.relative_layout);
+        loginForm = (RelativeLayout) findViewById(R.id.login_layout);
+        loginGoesWrongView = (TextView) findViewById(R.id.login_goes_wrong);
 
         loginPresenter = new LoginPresenterImp(this);
 
-
-        passwordText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-    }
-
-    private void attemptLogin() {
-//        if (mAuthTask != null) {
-//            return;
-//        }
-
-        // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
-
-        // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            //showProgress(true);
-            //mAuthTask = new UserLoginTask(email, password);
-            //mAuthTask.execute((Void) null);
-        }
     }
 
 
-    public void onClickLogin() {
+    public void onClickLogin(View v) {
+
         loginPresenter.onClickLogin();
     }
 
 
-    public void onClickCreateAccount(){
+    public void onClickCreateAccount(View v){
         loginPresenter.onCLickCreateAccount();
     }
 
@@ -124,13 +70,81 @@ class LoginActivity extends AppCompatActivity  implements LoginView{
         return passwordText.getText().toString();
     }
 
+    @Override
+    public void setEmptyEmailError(){
+
+        String emptyEmail = getString(R.string.error_empty_field);
+        emailText.setError(emptyEmail);
+    }
 
     @Override
-    public void setEmptyEmailError{
-
-        String emptyEmail = getString(R.string.no_internet);
-        emailText.setError("");
+    public void setEmptyPasswordError(){
+        String emptyPassword = getString(R.string.error_empty_field);
+        passwordText.setError(emptyPassword);
     }
+
+    @Override
+    public void setInvalidEmailError() {
+
+        String invalidEmail = getString(R.string.error_invalid_email);
+        emailText.setError(invalidEmail);
+
+    }
+
+    @Override
+    public void setEmailTooShortError() {
+
+        String passwordTooShort = getString(R.string.error_short_password);
+        passwordText.setError(passwordTooShort);
+
+    }
+
+    @Override
+    public void showProgressBar(){
+
+        messageView.setVisibility(View.INVISIBLE);
+        loginForm.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar(){
+
+        messageView.setVisibility(View.INVISIBLE);
+        loginForm.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showLoginGoesWrongMessage(){
+
+        loginGoesWrongView.setText(R.string.login_goes_wrong);
+        loginGoesWrongView.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void navigateToMainActivity(){
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    @Override
+    public void navigateToSignUpActivity(){
+        //TODO uzupełnić
+    }
+
+    @Override
+    public void showToast(String message){
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void resetErrors() {
+        passwordText.setError(null);
+        emailText.setError(null);
+    }
+
 
 }
 

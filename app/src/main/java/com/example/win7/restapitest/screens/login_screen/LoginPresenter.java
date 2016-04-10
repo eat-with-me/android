@@ -10,7 +10,9 @@ public interface LoginPresenter {
 
     void onCLickCreateAccount();
 
-    void checkEmail();
+    boolean isEmailCorrect(String email);
 
-    void checkPassword();
+    boolean isEmailValid(String email);
+
+    boolean isPasswordCorrect(String password);
 }
