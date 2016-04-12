@@ -1,20 +1,19 @@
 package com.example.win7.restapitest.api;
 
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 import com.example.win7.restapitest.model.Group;
-import com.example.win7.restapitest.model.Meal;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Restaurant;
 import com.example.win7.restapitest.model.RestaurantMenu;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by win7 on 28/03/2016.
@@ -270,31 +269,31 @@ public class ApiConnectionImp implements ApiConnection {
 
     }
 
-    private void mockMenu()
-    {
-        menuResult = new RestaurantMenu();
-        menuResult.setName("KFC");
-        menuResult.setCreatedAt("cerated time");
-        menuResult.setId(3);
-        menuResult.setPhoneNumber("345345");
-        menuResult.setUpdatedAt("updatedAt");
-
-
-        Meal meal = new Meal();
-        meal.setName("ziemniory");
-        meal.setPrice(3.45);
-        menuResult.getMeals().add(meal);
-
-        meal = new Meal();
-        meal.setName("Schabowy");
-        meal.setPrice(5.57);
-        menuResult.getMeals().add(meal);
-
-        meal = new Meal();
-        meal.setName("surówka");
-        meal.setPrice(9.56);
-        menuResult.getMeals().add(meal);
-
-    }
+//    private void mockMenu()
+//    {
+//        menuResult = new RestaurantMenu();
+//        menuResult.setName("KFC");
+//        menuResult.setCreatedAt("cerated time");
+//        menuResult.setId(3);
+//        menuResult.setPhoneNumber("345345");
+//        menuResult.setUpdatedAt("updatedAt");
+//
+//
+//        Meal meal = new Meal();
+//        meal.setName("ziemniory");
+//        meal.setPrice(3.45);
+//        menuResult.getMeals().add(meal);
+//
+//        meal = new Meal();
+//        meal.setName("Schabowy");
+//        meal.setPrice(5.57);
+//        menuResult.getMeals().add(meal);
+//
+//        meal = new Meal();
+//        meal.setName("surówka");
+//        meal.setPrice(9.56);
+//        menuResult.getMeals().add(meal);
+//
+//    }
 
 }

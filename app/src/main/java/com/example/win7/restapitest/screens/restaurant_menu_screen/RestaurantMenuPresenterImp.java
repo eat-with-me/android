@@ -1,16 +1,13 @@
 package com.example.win7.restapitest.screens.restaurant_menu_screen;
 
-import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.Meal;
 import com.example.win7.restapitest.model.Order;
-import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.Factory;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
 /**
  * Created by win7 on 02/04/2016.
@@ -61,7 +58,7 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter,OnDow
     @Override
     public void onClickGoToCart() {
 
-        restaurantMenuView.showToast("Go to cart is selected");
+//        restaurantMenuView.showToast("Go to cart is selected");
 
     }
 
@@ -73,6 +70,11 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter,OnDow
     @Override
     public void onResume() {
 
+    }
+
+    @Override
+    public Order getOrder() {
+        return order;
     }
 
     @Override

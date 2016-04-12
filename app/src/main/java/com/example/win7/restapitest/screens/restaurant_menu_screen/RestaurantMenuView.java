@@ -1,9 +1,8 @@
 package com.example.win7.restapitest.screens.restaurant_menu_screen;
 
-import com.example.win7.restapitest.model.Group;
-import com.example.win7.restapitest.model.RestaurantMenu;
+import android.view.View;
 
-import java.util.List;
+import com.example.win7.restapitest.model.RestaurantMenu;
 
 /**
  * Created by win7 on 02/04/2016.
@@ -15,6 +14,7 @@ public interface RestaurantMenuView {
 
     void showToast(String message);
 
+    void onClickGoToCart(View view);
 
     void setTotalPrice(String price);
 

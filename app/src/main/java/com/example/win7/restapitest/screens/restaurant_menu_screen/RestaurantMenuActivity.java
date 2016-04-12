@@ -1,8 +1,8 @@
 package com.example.win7.restapitest.screens.restaurant_menu_screen;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +16,7 @@ import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
+import com.example.win7.restapitest.screens.order_screen.OrderActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
 public class RestaurantMenuActivity extends AppCompatActivity  implements RestaurantMenuView{
@@ -87,7 +88,10 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
 
     public void onClickGoToCart(View v)
     {
-        restaurantMenuPresenter.onClickGoToCart();
+        Intent intent = new Intent(this, OrderActivity.class);
+        intent.putParcelableArrayListExtra("meals",restaurantMenuPresenter.getOrder().getMeals());
+
+        startActivity(intent);
     }
 
 
@@ -122,6 +126,7 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
     public void showToast(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
+
 
 
     @Override

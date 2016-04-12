@@ -36,21 +36,10 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
         android:id="@+id/relative_layout"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:nestedScrollingEnabled="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text"
-            android:text="@string/button_go_to_cart"
-            android:id="@+id/cart"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="39dp"
-            android:layout_marginEnd="39dp"
-            android:gravity="center" />
+
 
         <TextView
             android:layout_width="100dp"
@@ -101,6 +90,20 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
             android:gravity="center"
             android:layout_alignRight="@+id/totalPriceText"
             android:layout_alignEnd="@+id/totalPriceText" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton2"
+            android:layout_centerVertical="true"
+
+
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="39dp"
+            android:layout_marginEnd="39dp"
+            android:gravity="center"
+            android:background="@drawable/ic_shopping_basket"/>
 
     </RelativeLayout>
 

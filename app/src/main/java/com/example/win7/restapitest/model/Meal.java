@@ -1,8 +1,11 @@
 package com.example.win7.restapitest.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Meal {
+public class Meal implements Parcelable {
 
     @SerializedName("id")
     private Integer id;
@@ -23,7 +26,23 @@ public class Meal {
     private String updatedAt;
 
 
+    protected Meal(Parcel in) {
+        name = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+    }
 
+    public static final Creator<Meal> CREATOR = new Creator<Meal>() {
+        @Override
+        public Meal createFromParcel(Parcel in) {
+            return new Meal(in);
+        }
+
+        @Override
+        public Meal[] newArray(int size) {
+            return new Meal[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -71,5 +90,17 @@ public class Meal {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
     }
 }
