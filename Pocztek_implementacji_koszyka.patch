@@ -1,0 +1,448 @@
+Index: app/src/main/java/com/example/win7/restapitest/api/ApiConnectionImp.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/win7/restapitest/api/ApiConnectionImp.java	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ app/src/main/java/com/example/win7/restapitest/api/ApiConnectionImp.java	(revision )
+@@ -1,14 +1,7 @@
+ package com.example.win7.restapitest.api;
+ 
+ 
+-import retrofit2.Call;
+-import retrofit2.Callback;
+-import retrofit2.Response;
+-import retrofit2.Retrofit;
+-import retrofit2.converter.gson.GsonConverterFactory;
+-
+ import com.example.win7.restapitest.model.Group;
+-import com.example.win7.restapitest.model.Meal;
+ import com.example.win7.restapitest.model.OrderInGroup;
+ import com.example.win7.restapitest.model.Restaurant;
+ import com.example.win7.restapitest.model.RestaurantMenu;
+@@ -16,6 +9,12 @@
+ import java.util.ArrayList;
+ import java.util.List;
+ 
++import retrofit2.Call;
++import retrofit2.Callback;
++import retrofit2.Response;
++import retrofit2.Retrofit;
++import retrofit2.converter.gson.GsonConverterFactory;
++
+ /**
+  * Created by win7 on 28/03/2016.
+  */
+@@ -270,31 +269,31 @@
+ 
+     }
+ 
+-    private void mockMenu()
+-    {
+-        menuResult = new RestaurantMenu();
+-        menuResult.setName("KFC");
+-        menuResult.setCreatedAt("cerated time");
+-        menuResult.setId(3);
+-        menuResult.setPhoneNumber("345345");
+-        menuResult.setUpdatedAt("updatedAt");
+-
+-
+-        Meal meal = new Meal();
+-        meal.setName("ziemniory");
+-        meal.setPrice(3.45);
+-        menuResult.getMeals().add(meal);
+-
+-        meal = new Meal();
+-        meal.setName("Schabowy");
+-        meal.setPrice(5.57);
+-        menuResult.getMeals().add(meal);
+-
+-        meal = new Meal();
+-        meal.setName("surówka");
+-        meal.setPrice(9.56);
+-        menuResult.getMeals().add(meal);
+-
+-    }
++//    private void mockMenu()
++//    {
++//        menuResult = new RestaurantMenu();
++//        menuResult.setName("KFC");
++//        menuResult.setCreatedAt("cerated time");
++//        menuResult.setId(3);
++//        menuResult.setPhoneNumber("345345");
++//        menuResult.setUpdatedAt("updatedAt");
++//
++//
++//        Meal meal = new Meal();
++//        meal.setName("ziemniory");
++//        meal.setPrice(3.45);
++//        menuResult.getMeals().add(meal);
++//
++//        meal = new Meal();
++//        meal.setName("Schabowy");
++//        meal.setPrice(5.57);
++//        menuResult.getMeals().add(meal);
++//
++//        meal = new Meal();
++//        meal.setName("surówka");
++//        meal.setPrice(9.56);
++//        menuResult.getMeals().add(meal);
++//
++//    }
+ 
+ }
+Index: app/src/main/java/com/example/win7/restapitest/model/Order.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/win7/restapitest/model/Order.java	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ app/src/main/java/com/example/win7/restapitest/model/Order.java	(revision )
+@@ -1,14 +1,13 @@
+ package com.example.win7.restapitest.model;
+ 
+ import java.util.ArrayList;
+-import java.util.List;
+ 
+ /**
+  * Created by win7 on 03/04/2016.
+  */
+ public class Order {
+ 
+-    private List<Meal> meals = new ArrayList<Meal>();
++    private ArrayList<Meal> meals = new ArrayList<Meal>();
+     private double totalPrice = 0;
+ 
+ 
+@@ -29,4 +28,6 @@
+     public double getTotalPrice(){return totalPrice;  }
+ 
+     public int getNumberOfOrderedMeals(){return meals.size();}
++
++    public ArrayList<Meal> getMeals(){return meals;}
+ }
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ app/src/main/res/values/strings.xml	(revision )
+@@ -36,5 +36,7 @@
+     <string name="password_again">Powtórz hasło</string>
+     <string name="error_defferent_passwords">Hasła nie są takie same</string>
+     <string name="something_goes_wrong">Nie udało się zarejestrować</string>
++    <string name="wyczy_moje_posi_ki">Wyczyść moje posiłki</string>
++    <string name="koszyk_jest_pusty">Koszyk jest pusty</string>
+ 
+ </resources>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ .idea/misc.xml	(revision )
+@@ -37,7 +37,7 @@
+     <ConfirmationsSetting value="0" id="Add" />
+     <ConfirmationsSetting value="0" id="Remove" />
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+\ No newline at end of file
+Index: app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuPresenter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuPresenter.java	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuPresenter.java	(revision )
+@@ -1,5 +1,7 @@
+ package com.example.win7.restapitest.screens.restaurant_menu_screen;
+ 
++import com.example.win7.restapitest.model.Order;
++
+ /**
+  * Created by win7 on 02/04/2016.
+  */
+@@ -13,4 +15,6 @@
+     void onDestroy();
+ 
+     void onResume();
++
++    Order getOrder();
+ }
+Index: app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuView.java	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuView.java	(revision )
+@@ -1,10 +1,9 @@
+ package com.example.win7.restapitest.screens.restaurant_menu_screen;
+ 
+-import com.example.win7.restapitest.model.Group;
++import android.view.View;
++
+ import com.example.win7.restapitest.model.RestaurantMenu;
+ 
+-import java.util.List;
+-
+ /**
+  * Created by win7 on 02/04/2016.
+  */
+@@ -15,6 +14,7 @@
+ 
+     void showToast(String message);
+ 
++    void onClickGoToCart(View view);
+ 
+     void setTotalPrice(String price);
+ 
+Index: app/src/main/java/com/example/win7/restapitest/model/Meal.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/win7/restapitest/model/Meal.java	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ app/src/main/java/com/example/win7/restapitest/model/Meal.java	(revision )
+@@ -1,8 +1,11 @@
+ package com.example.win7.restapitest.model;
+ 
++import android.os.Parcel;
++import android.os.Parcelable;
++
+ import com.google.gson.annotations.SerializedName;
+ 
+-public class Meal {
++public class Meal implements Parcelable {
+ 
+     @SerializedName("id")
+     private Integer id;
+@@ -23,8 +26,24 @@
+     private String updatedAt;
+ 
+ 
++    protected Meal(Parcel in) {
++        name = in.readString();
++        createdAt = in.readString();
++        updatedAt = in.readString();
++    }
+ 
++    public static final Creator<Meal> CREATOR = new Creator<Meal>() {
++        @Override
++        public Meal createFromParcel(Parcel in) {
++            return new Meal(in);
++        }
+ 
++        @Override
++        public Meal[] newArray(int size) {
++            return new Meal[size];
++        }
++    };
++
+     public Integer getId() {
+         return id;
+     }
+@@ -71,5 +90,17 @@
+ 
+     public void setUpdatedAt(String updatedAt) {
+         this.updatedAt = updatedAt;
++    }
++
++    @Override
++    public int describeContents() {
++        return 0;
++    }
++
++    @Override
++    public void writeToParcel(Parcel dest, int flags) {
++        dest.writeString(name);
++        dest.writeString(createdAt);
++        dest.writeString(updatedAt);
+     }
+ }
+Index: app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuActivity.java	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuActivity.java	(revision )
+@@ -1,8 +1,8 @@
+ package com.example.win7.restapitest.screens.restaurant_menu_screen;
+ 
+ import android.content.Intent;
+-import android.support.v7.app.AppCompatActivity;
+ import android.os.Bundle;
++import android.support.v7.app.AppCompatActivity;
+ import android.support.v7.widget.DefaultItemAnimator;
+ import android.support.v7.widget.LinearLayoutManager;
+ import android.support.v7.widget.RecyclerView;
+@@ -16,6 +16,7 @@
+ import com.example.win7.restapitest.model.RestaurantMenu;
+ import com.example.win7.restapitest.others.ClickListener;
+ import com.example.win7.restapitest.others.RecyclerTouchListener;
++import com.example.win7.restapitest.screens.order_screen.OrderActivity;
+ import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
+ 
+ public class RestaurantMenuActivity extends AppCompatActivity  implements RestaurantMenuView{
+@@ -87,7 +88,10 @@
+ 
+     public void onClickGoToCart(View v)
+     {
+-        restaurantMenuPresenter.onClickGoToCart();
++        Intent intent = new Intent(this, OrderActivity.class);
++        intent.putParcelableArrayListExtra("meals",restaurantMenuPresenter.getOrder().getMeals());
++
++        startActivity(intent);
+     }
+ 
+ 
+@@ -122,6 +126,7 @@
+     public void showToast(String message){
+         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+     }
++
+ 
+ 
+     @Override
+Index: app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuPresenterImp.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuPresenterImp.java	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ app/src/main/java/com/example/win7/restapitest/screens/restaurant_menu_screen/RestaurantMenuPresenterImp.java	(revision )
+@@ -1,16 +1,13 @@
+ package com.example.win7.restapitest.screens.restaurant_menu_screen;
+ 
+-import com.example.win7.restapitest.R;
+ import com.example.win7.restapitest.api.ApiConnection;
+ import com.example.win7.restapitest.api.OnDownloadFinishedListener;
+ import com.example.win7.restapitest.model.Meal;
+ import com.example.win7.restapitest.model.Order;
+-import com.example.win7.restapitest.model.OrderInGroup;
+ import com.example.win7.restapitest.model.RestaurantMenu;
+ import com.example.win7.restapitest.others.Factory;
+ 
+ import java.text.DecimalFormat;
+-import java.util.List;
+ 
+ /**
+  * Created by win7 on 02/04/2016.
+@@ -61,7 +58,7 @@
+     @Override
+     public void onClickGoToCart() {
+ 
+-        restaurantMenuView.showToast("Go to cart is selected");
++//        restaurantMenuView.showToast("Go to cart is selected");
+ 
+     }
+ 
+@@ -73,6 +70,11 @@
+     @Override
+     public void onResume() {
+ 
++    }
++
++    @Override
++    public Order getOrder() {
++        return order;
+     }
+ 
+     @Override
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules.xml	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ .idea/modules.xml	(revision )
+@@ -2,8 +2,8 @@
+ <project version="4">
+   <component name="ProjectModuleManager">
+     <modules>
+-      <module fileurl="file://$PROJECT_DIR$/EatWithMe.iml" filepath="$PROJECT_DIR$/EatWithMe.iml" />
+       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
++      <module fileurl="file://$PROJECT_DIR$/droid3.iml" filepath="$PROJECT_DIR$/droid3.iml" />
+     </modules>
+   </component>
+ </project>
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ app/src/main/AndroidManifest.xml	(revision )
+@@ -22,7 +22,9 @@
+         <activity android:name=".screens.orders_in_group_screen.OrdersInGroupActivity" />
+         <activity android:name=".screens.restaurant_menu_screen.RestaurantMenuActivity" />
+         <activity android:name=".screens.main_screen.MainActivity" />
+-        <activity android:name=".screens.sign_up_screen.SignUpActivity"></activity>
++        <activity android:name=".screens.sign_up_screen.SignUpActivity"/>
++        <activity android:name=".screens.order_screen.OrderActivity">
++        </activity>
+     </application>
+ 
+ </manifest> <!-- .screens.main_screen.MainActivity" -->
+Index: app/src/main/res/layout/activity_restaurant_menu.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_restaurant_menu.xml	(revision 44d6781229848a8ec552889dba815c842937d915)
++++ app/src/main/res/layout/activity_restaurant_menu.xml	(revision )
+@@ -36,22 +36,11 @@
+         android:paddingLeft="20dp"
+         android:paddingTop="5dp"
+         android:id="@+id/relative_layout"
+-        android:visibility="visible">
++        android:visibility="visible"
++        android:nestedScrollingEnabled="true">
+ 
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:textColor="@color/text"
+-            android:text="@string/button_go_to_cart"
+-            android:id="@+id/cart"
+-            android:textStyle="bold"
+-            android:layout_centerVertical="true"
+-            android:layout_alignParentRight="true"
+-            android:layout_alignParentEnd="true"
+-            android:layout_marginRight="39dp"
+-            android:layout_marginEnd="39dp"
+-            android:gravity="center" />
+ 
++
+         <TextView
+             android:layout_width="100dp"
+             android:layout_height="wrap_content"
+@@ -101,6 +90,20 @@
+             android:gravity="center"
+             android:layout_alignRight="@+id/totalPriceText"
+             android:layout_alignEnd="@+id/totalPriceText" />
++
++        <ImageButton
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/imageButton2"
++            android:layout_centerVertical="true"
++
++
++            android:layout_alignParentRight="true"
++            android:layout_alignParentEnd="true"
++            android:layout_marginRight="39dp"
++            android:layout_marginEnd="39dp"
++            android:gravity="center"
++            android:background="@drawable/ic_shopping_basket"/>
+ 
+     </RelativeLayout>
+ 
