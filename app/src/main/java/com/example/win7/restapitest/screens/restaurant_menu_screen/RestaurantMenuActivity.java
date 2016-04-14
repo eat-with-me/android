@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
+import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
@@ -31,6 +32,7 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
     private ProgressBar progressBar;
 
     private RestaurantMenuPresenter restaurantMenuPresenter;
+    private static  final  int ORDER_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +91,9 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
     public void onClickGoToCart(View v)
     {
         Intent intent = new Intent(this, OrderActivity.class);
-        intent.putParcelableArrayListExtra("meals",restaurantMenuPresenter.getOrder().getMeals());
+        intent.putExtra("order", restaurantMenuPresenter.getOrder());
 
-        startActivity(intent);
+        startActivityForResult(intent, ORDER_ACTIVITY_REQUEST_CODE);
     }
 
 
@@ -172,5 +174,12 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
         messageTextView.setText(noInternet);
         messageTextView.setVisibility(View.VISIBLE);
     }
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        showProgress();
+        if (ORDER_ACTIVITY_REQUEST_CODE == requestCode && resultCode == RESULT_OK) {
+            Order response = data.getParcelableExtra("resp");
+            restaurantMenuPresenter.setOrder(response);
+        }
+        hideProgress();
+    }
 }

@@ -30,6 +30,7 @@ public class Meal implements Parcelable {
         name = in.readString();
         createdAt = in.readString();
         updatedAt = in.readString();
+        price = in.readDouble();
     }
 
     public static final Creator<Meal> CREATOR = new Creator<Meal>() {
@@ -102,5 +103,6 @@ public class Meal implements Parcelable {
         dest.writeString(name);
         dest.writeString(createdAt);
         dest.writeString(updatedAt);
+        dest.writeDouble(price);
     }
 }

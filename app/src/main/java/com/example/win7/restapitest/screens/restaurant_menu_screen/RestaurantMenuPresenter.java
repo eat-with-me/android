@@ -17,4 +17,6 @@ public interface RestaurantMenuPresenter {
     void onResume();
 
     Order getOrder();
+
+    void setOrder(Order response);
 }

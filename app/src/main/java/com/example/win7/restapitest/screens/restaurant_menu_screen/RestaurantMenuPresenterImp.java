@@ -32,6 +32,14 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter,OnDow
 
         Meal meal = menuResult.getMeals().get(position);
         order.add(meal);
+
+        setTotalPriceAndNumberOfProducts();
+
+        restaurantMenuView.showToast("Dodano do koszyka");
+
+
+    }
+    public void setTotalPriceAndNumberOfProducts(){
         Double totalPrice = order.getTotalPrice();
         Integer totalProducts = order.getNumberOfOrderedMeals();
 
@@ -40,11 +48,6 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter,OnDow
 
         restaurantMenuView.setTotalPrice(totalPriceStr);
         restaurantMenuView.setTotalProducts(totalProducts.toString());
-
-
-        restaurantMenuView.showToast("Dodano do koszyka");
-
-
     }
 
     @Override
@@ -70,12 +73,15 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter,OnDow
     @Override
     public void onResume() {
 
+        setTotalPriceAndNumberOfProducts();
+
     }
 
     @Override
     public Order getOrder() {
         return order;
     }
+    public void setOrder(Order order){this.order = order;}
 
     @Override
     public void onSuccess(RestaurantMenu arg) {

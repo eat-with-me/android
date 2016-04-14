@@ -10,11 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
-import com.example.win7.restapitest.model.Meal;
+import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
-
-import java.util.ArrayList;
 
 /**
  * Created by Mateusz on 2016-04-12.
@@ -26,6 +24,8 @@ public class OrderActivity extends AppCompatActivity implements OrderView {
     private TextView messageTextView;
     private OrderPresenter orderPresenter;
 
+    private Order order;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +35,10 @@ public class OrderActivity extends AppCompatActivity implements OrderView {
 
         orderPresenter = new OrderPresenterImp(this);
         Intent intent = getIntent();
-        ArrayList<Meal> meals = intent.getParcelableArrayListExtra("meals");
+        order = intent.getParcelableExtra("order");
 
-        adapter = new OrderAdapter(meals);
+
+        adapter = new OrderAdapter(order);
 
 
         recyclerView.setHasFixedSize(true);
@@ -50,7 +51,9 @@ public class OrderActivity extends AppCompatActivity implements OrderView {
             @Override
             public void onClick(View view, int position) {
 
-                orderPresenter.onClickMeal(position);
+                order.delete(order.getMeals().get(position));
+
+                adapter.notifyDataSetChanged();
 
             }
 
@@ -59,21 +62,28 @@ public class OrderActivity extends AppCompatActivity implements OrderView {
 
             }
         }));
-        setEmptyView();
+        if(order.getMeals().isEmpty())setEmptyView();
     }
 
     @Override
     public void setEmptyView(){
-//        recyclerView.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
         messageTextView.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void onClickCleanMyOrder() {
-
-    }
 
     public void onClickCleanMyOrder(View view) {
-        orderPresenter.onClickCleanMyOrder();
+        order.getMeals().clear();
+        order.setTotalPrice(0.0);
+        adapter.notifyDataSetChanged();
     }
+
+    public void finish() {
+        String response = "resp";
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(response,order);
+        setResult(RESULT_OK, resultIntent);
+        super.finish();
+    }
+
 }

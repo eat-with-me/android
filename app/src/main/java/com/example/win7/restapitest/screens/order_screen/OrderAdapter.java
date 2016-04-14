@@ -8,8 +8,7 @@ import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.Meal;
-
-import java.util.ArrayList;
+import com.example.win7.restapitest.model.Order;
 
 
 /**
@@ -17,7 +16,7 @@ import java.util.ArrayList;
  */
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
 
-    private ArrayList<Meal> meals;
+    private Order order;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -34,8 +33,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
     }
 
 
-    public OrderAdapter(ArrayList<Meal> meals) {
-        this.meals = meals;
+    public OrderAdapter(Order order) {
+        this.order = order;
     }
 
     @Override
@@ -52,16 +51,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Meal meal = meals.get(position);
+        Meal meal = order.getMeals().get(position);
 
         holder.dish.setText(meal.getName());
-        holder.price.setText("cena");
+        holder.price.setText(String.format("%.2f",meal.getPrice()));
+
 
     }
 
     @Override
     public int getItemCount() {
 
-        return meals.size();
+        return order.getMeals().size();
     }
 }
