@@ -25,14 +25,13 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorButton"
-        android:onClick="onClickGoToCart"
         android:minHeight="50dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:clickable="true"
+        android:clickable="false"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
         android:id="@+id/relative_layout"
@@ -64,7 +63,8 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
             android:gravity="center"
             android:layout_toLeftOf="@+id/totalPriceText"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:text="0" />
 
         <TextView
             android:layout_width="100dp"
@@ -89,7 +89,8 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
             android:layout_alignStart="@+id/totalPriceText"
             android:gravity="center"
             android:layout_alignRight="@+id/totalPriceText"
-            android:layout_alignEnd="@+id/totalPriceText" />
+            android:layout_alignEnd="@+id/totalPriceText"
+            android:text="0" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -103,7 +104,10 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
             android:layout_marginRight="39dp"
             android:layout_marginEnd="39dp"
             android:gravity="center"
-            android:background="@drawable/ic_shopping_basket"/>
+            android:background="@drawable/ic_shopping_basket_black_36dp"
+            android:alpha="0.5"
+            android:clickable="true"
+            android:onClick="onClickGoToCart" />
 
     </RelativeLayout>
 
@@ -114,7 +118,8 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/menuText"
-        android:layout_above="@+id/relative_layout" />
+        android:layout_above="@+id/relative_layout"
+        android:alpha="50" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -10,7 +10,7 @@ import com.example.win7.restapitest.model.RestaurantMenu;
 public interface RestaurantMenuView {
     void setEmptyView();
 
-    public void loadMenu(RestaurantMenu menuResult);
+    void loadMenu(RestaurantMenu menuResult);
 
     void showToast(String message);
 
@@ -25,4 +25,6 @@ public interface RestaurantMenuView {
     void hideProgress();
 
     void showError();
+
+    void navigateToOrderActivity();
 }

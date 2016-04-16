@@ -90,10 +90,8 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
 
     public void onClickGoToCart(View v)
     {
-        Intent intent = new Intent(this, OrderActivity.class);
-        intent.putExtra("order", restaurantMenuPresenter.getOrder());
+        restaurantMenuPresenter.onClickGoToCart();
 
-        startActivityForResult(intent, ORDER_ACTIVITY_REQUEST_CODE);
     }
 
 
@@ -174,6 +172,15 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
         messageTextView.setText(noInternet);
         messageTextView.setVisibility(View.VISIBLE);
     }
+
+    @Override
+    public void navigateToOrderActivity() {
+
+        Intent intent = new Intent(this, OrderActivity.class);
+        intent.putExtra("order", restaurantMenuPresenter.getOrder());
+        startActivity(intent);
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         showProgress();
         if (ORDER_ACTIVITY_REQUEST_CODE == requestCode && resultCode == RESULT_OK) {

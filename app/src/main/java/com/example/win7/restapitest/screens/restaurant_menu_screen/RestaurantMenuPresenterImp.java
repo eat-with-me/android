@@ -61,7 +61,7 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter,OnDow
     @Override
     public void onClickGoToCart() {
 
-//        restaurantMenuView.showToast("Go to cart is selected");
+        restaurantMenuView.navigateToOrderActivity();
 
     }
 
