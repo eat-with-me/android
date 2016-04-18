@@ -39,4 +39,8 @@
     <string name="wyczy_moje_posi_ki">Wyczyść moje posiłki</string>
     <string name="koszyk_jest_pusty">Koszyk jest pusty</string>
 
+
+    <!--Strings related to toolbar_main-->
+    <string name="action_login">Wyloguj</string>
+
 </resources>

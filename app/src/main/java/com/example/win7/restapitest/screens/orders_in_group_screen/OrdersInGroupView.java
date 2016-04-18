@@ -19,4 +19,6 @@ public interface OrdersInGroupView {
     void hideProgress();
 
     void showError();
+
+    void recycleViewInit();
 }

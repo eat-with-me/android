@@ -9,4 +9,6 @@ public interface OrderView {
 
     void setEmptyView();
     void onClickCleanMyOrder(View view);
+
+    void showToast(String message);
 }
