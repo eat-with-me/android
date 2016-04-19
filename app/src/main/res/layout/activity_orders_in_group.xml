@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_new_order"
-        android:id="@+id/bClearMyOrder"
+        android:id="@+id/button"
         android:background="@color/colorButton"
         android:textColor="@color/text"
         android:textStyle="bold"
@@ -39,15 +39,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-<<<<<<< HEAD
-        android:layout_above="@+id/bClearMyOrder" />
-=======
         android:layout_above="@+id/button"
         android:layout_below="@+id/my_toolbar"
         android:layout_marginTop="5dp" />
->>>>>>> 1f52df2a3d45d80e8541218ea4d8a987c99d9da8
-
-    <ProgressBar
+<ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"

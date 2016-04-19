@@ -64,7 +64,6 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
 
         if(order.getMeals().isEmpty()){
             setEmptyMyOrderView();
-            setEmptyOtherOrderView();
         }
 
     }
@@ -84,6 +83,11 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
 
     @Override
     public void onClickCleanMyOrder(View view) {
+
+    }
+
+    @Override
+    public void showToast(String message) {
 
     }
 

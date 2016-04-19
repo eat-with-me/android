@@ -47,13 +47,10 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
         messageTextView = (TextView) findViewById(R.id.empty_view);
         recyclerView = (RecyclerView) findViewById(R.id.list_of_orders);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-<<<<<<< HEAD
-        button = (Button) findViewById(R.id.bClearMyOrder);
-=======
         button = (Button) findViewById(R.id.button);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
->>>>>>> 1f52df2a3d45d80e8541218ea4d8a987c99d9da8
+
 
         ordersInGroupPresenter = new OrdersInGroupPresenterImp(this);
 
