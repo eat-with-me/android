@@ -8,7 +8,7 @@ import com.example.win7.restapitest.others.Factory;
 import java.util.List;
 
 
-public class MainPresenterImp implements MainPresenter,OnDownloadFinishedListener<List<Group>> {
+public class MainPresenterImp implements MainPresenter {
 
 
     private MainView mainView;
@@ -33,7 +33,27 @@ public class MainPresenterImp implements MainPresenter,OnDownloadFinishedListene
     @Override
     public void getGroups() {
 
-        apiConnection.getGroups(this);
+        apiConnection.getGroups(new OnDownloadFinishedListener<List<Group>>() {
+            @Override
+            public void onSuccess(List<Group> list) {
+                groupsResult = list;
+                mainView.hideProgress();
+
+
+                if(groupsResult.isEmpty()){
+                    mainView.setEmptyView();
+                }
+                else{
+
+                    mainView.loadGroups(groupsResult);
+                }
+            }
+
+            @Override
+            public void onError() {
+                mainView.showError();
+            }
+        });
 
     }
 
@@ -51,29 +71,5 @@ public class MainPresenterImp implements MainPresenter,OnDownloadFinishedListene
         mainView.showToast("New group is selected");
     }
 
-    @Override
-
-    public void onSuccess(List<Group> list) {
-
-        groupsResult = list;
-        mainView.hideProgress();
-
-
-        if(groupsResult.isEmpty()){
-            mainView.setEmptyView();
-        }
-        else{
-
-            mainView.loadGroups(groupsResult);
-        }
-
-
-    }
-
-
-    @Override
-    public void onError() {
-        mainView.showError();
-    }
-}
+ }
 
