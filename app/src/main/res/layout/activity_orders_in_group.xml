@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_new_order"
-        android:id="@+id/button"
+        android:id="@+id/bClearMyOrder"
         android:background="@color/colorButton"
         android:textColor="@color/text"
         android:textStyle="bold"
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/button" />
+        android:layout_above="@+id/bClearMyOrder" />
 
     <ProgressBar
         android:layout_width="wrap_content"

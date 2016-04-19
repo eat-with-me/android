@@ -21,14 +21,11 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter,OnDownl
 
     }
 
-
     @Override
     public void onClickOrder(int position) {
-
         OrderInGroup order = ordersResult.get(position);
         String orderId = order.getId();
         ordersInGroupView.goToRestaurantMenuActivity(orderId);
-
     }
 
     @Override

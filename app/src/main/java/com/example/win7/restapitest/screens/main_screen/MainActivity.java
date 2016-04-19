@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         messageTextView = (TextView) findViewById(R.id.empty_view);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        button = (Button) findViewById(R.id.button);
+        button = (Button) findViewById(R.id.bClearMyOrder);
         recyclerView = (RecyclerView) findViewById(R.id.list_of_groups);
 
 

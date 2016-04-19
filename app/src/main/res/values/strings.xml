@@ -38,5 +38,9 @@
     <string name="something_goes_wrong">Nie udało się zarejestrować</string>
     <string name="wyczy_moje_posi_ki">Wyczyść moje posiłki</string>
     <string name="koszyk_jest_pusty">Koszyk jest pusty</string>
+    <string name="moje_zamowienie">Moje zamowienie</string>
+    <string name="brak">Brak</string>
+    <string name="inne_zam_wienia">Inne zamówienia</string>
+    <string name="nie_ma_innych_zam_wie">Nie ma innych zamówień</string>
 
 </resources>

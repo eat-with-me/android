@@ -17,7 +17,7 @@ import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
-import com.example.win7.restapitest.screens.order_screen.OrderActivity;
+import com.example.win7.restapitest.screens.order_screen.OrderFragmentActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
 public class RestaurantMenuActivity extends AppCompatActivity  implements RestaurantMenuView{
@@ -176,17 +176,17 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
     @Override
     public void navigateToOrderActivity() {
 
-        Intent intent = new Intent(this, OrderActivity.class);
+        Intent intent = new Intent(this, OrderFragmentActivity.class);
         intent.putExtra("order", restaurantMenuPresenter.getOrder());
-        startActivity(intent);
+        startActivityForResult(intent,ORDER_ACTIVITY_REQUEST_CODE);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        showProgress();
+
         if (ORDER_ACTIVITY_REQUEST_CODE == requestCode && resultCode == RESULT_OK) {
             Order response = data.getParcelableExtra("resp");
             restaurantMenuPresenter.setOrder(response);
         }
-        hideProgress();
+
     }
 }

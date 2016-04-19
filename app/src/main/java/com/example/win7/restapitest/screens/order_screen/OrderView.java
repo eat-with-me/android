@@ -7,6 +7,7 @@ import android.view.View;
  */
 public interface OrderView {
 
-    void setEmptyView();
+    void setEmptyMyOrderView();
+    void setEmptyOtherOrderView();
     void onClickCleanMyOrder(View view);
 }

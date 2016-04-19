@@ -13,18 +13,23 @@
         <activity
             android:name=".screens.login_screen.LoginActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name=".screens.orders_in_group_screen.OrdersInGroupActivity" />
         <activity android:name=".screens.restaurant_menu_screen.RestaurantMenuActivity" />
-        <activity android:name=".screens.main_screen.MainActivity" />
-        <activity android:name=".screens.sign_up_screen.SignUpActivity"/>
-        <activity android:name=".screens.order_screen.OrderActivity">
+        <activity android:name=".screens.order_screen.OrderFragmentActivity" />
+        <activity android:name=".screens.main_screen.MainActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
+        <activity android:name=".screens.sign_up_screen.SignUpActivity"/>
     </application>
 
 </manifest> <!-- .screens.main_screen.MainActivity" -->

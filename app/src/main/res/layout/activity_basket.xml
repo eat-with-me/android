@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/moje_zamowienie"
+        android:id="@+id/bMyOrder"
+        android:background="@color/colorButton"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <fragment android:name="com.example.win7.restapitest.screens.order_screen.MyOrderFragment"
+        android:id="@+id/my_order_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bMyOrder"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/inne_zam_wienia"
+        android:id="@+id/bOtherOrders"
+        android:background="@color/colorButton"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        android:layout_below="@+id/my_order_fragment"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <fragment android:name="com.example.win7.restapitest.screens.order_screen.MyOrderFragment"
+        android:id="@+id/other_orders_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bOtherOrders"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Akceptuj zamówienie"
+        android:id="@+id/button"
+        android:background="@color/colorAccept"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
