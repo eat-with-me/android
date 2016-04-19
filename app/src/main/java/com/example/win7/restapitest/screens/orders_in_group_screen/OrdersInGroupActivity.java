@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -43,7 +47,13 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
         messageTextView = (TextView) findViewById(R.id.empty_view);
         recyclerView = (RecyclerView) findViewById(R.id.list_of_orders);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+<<<<<<< HEAD
         button = (Button) findViewById(R.id.bClearMyOrder);
+=======
+        button = (Button) findViewById(R.id.button);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+>>>>>>> 1f52df2a3d45d80e8541218ea4d8a987c99d9da8
 
         ordersInGroupPresenter = new OrdersInGroupPresenterImp(this);
 
@@ -53,29 +63,8 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
         showProgress();
 
 
-        //recyclerview******************************************************************************
+        recycleViewInit();
 
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-
-                ordersInGroupPresenter.onClickOrder(position);
-
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
-
-        //******************************************************************************************
 
         ordersInGroupPresenter.getOrders(groupId);
 
@@ -86,6 +75,13 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
         ordersInGroupPresenter.onClickNewOrder();
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
     @Override
     protected void onDestroy(){
@@ -165,5 +161,43 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
 
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_login:
+                showToast("TODO");
+                return true;
+
+            default:
+
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    public void recycleViewInit(){
+
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+                ordersInGroupPresenter.onClickOrder(position);
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+    }
 
 }

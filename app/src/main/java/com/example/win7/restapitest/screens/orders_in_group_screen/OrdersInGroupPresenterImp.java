@@ -8,7 +8,7 @@ import com.example.win7.restapitest.others.Factory;
 import java.util.List;
 
 
-public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter,OnDownloadFinishedListener<List<OrderInGroup>> {
+public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
 
     private OrdersInGroupView ordersInGroupView;
     private ApiConnection apiConnection;
@@ -31,7 +31,26 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter,OnDownl
     @Override
     public void getOrders(String groupId) {
 
-        apiConnection.getOrdersInGroup(groupId,this);
+        apiConnection.getOrdersInGroup(groupId, new OnDownloadFinishedListener<List<OrderInGroup>>() {
+            @Override
+            public void onSuccess(List<OrderInGroup> list) {
+                ordersResult = list;
+                ordersInGroupView.hideProgress();
+
+                if(ordersResult.isEmpty()){
+                    ordersInGroupView.setEmptyView();
+                }
+                else{
+
+                    ordersInGroupView.loadOrders(ordersResult);
+                }
+            }
+
+            @Override
+            public void onError() {
+                ordersInGroupView.showError();
+            }
+        });
     }
 
     @Override
@@ -48,25 +67,4 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter,OnDownl
 
     }
 
-
-    @Override
-    public void onSuccess(List<OrderInGroup> list) {
-
-        ordersResult = list;
-        ordersInGroupView.hideProgress();
-
-        if(ordersResult.isEmpty()){
-            ordersInGroupView.setEmptyView();
-        }
-        else{
-
-            ordersInGroupView.loadOrders(ordersResult);
-        }
-
-    }
-
-    @Override
-    public void onError() {
-        ordersInGroupView.showError();
-    }
 }

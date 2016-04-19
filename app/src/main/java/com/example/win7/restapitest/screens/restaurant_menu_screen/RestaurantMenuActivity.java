@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -46,10 +50,9 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
         recyclerView = (RecyclerView) findViewById(R.id.menu_list);
         relativeLayout = (RelativeLayout) findViewById(R.id.relative_layout);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
-
-        totalPrice.setText("0");
-        totalProducts.setText("0");
 
         restaurantMenuPresenter = new RestaurantMenuPresenterImp(this);
 
@@ -58,33 +61,9 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
 
         showProgress();
 
-        //recyclerview******************************************************************************
-
-        recyclerView.setHasFixedSize(true);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //recyclerView.setAdapter(adapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-
-                restaurantMenuPresenter.onClickMeal(position);
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
-
-        //******************************************************************************************
+        recycleViewInit();
 
         restaurantMenuPresenter.getMenu(restaurantId);
-
-
 
     }
 
@@ -94,6 +73,13 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
     @Override
     protected void onDestroy(){
@@ -187,6 +173,45 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
             Order response = data.getParcelableExtra("resp");
             restaurantMenuPresenter.setOrder(response);
         }
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_login:
+                showToast("TODO");
+                return true;
+
+            default:
+
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    private void recycleViewInit() {
+
+        recyclerView.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //recyclerView.setAdapter(adapter);
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+                restaurantMenuPresenter.onClickMeal(position);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
     }
 }

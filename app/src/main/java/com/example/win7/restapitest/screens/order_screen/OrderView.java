@@ -10,4 +10,6 @@ public interface OrderView {
     void setEmptyMyOrderView();
     void setEmptyOtherOrderView();
     void onClickCleanMyOrder(View view);
+
+    void showToast(String message);
 }

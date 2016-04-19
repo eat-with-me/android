@@ -17,7 +17,7 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
         android:visibility="gone"
         android:textColor="@color/text"
         android:text="@string/no_menu_available"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"/>
 
@@ -117,9 +117,10 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/menuText"
         android:layout_above="@+id/relative_layout"
-        android:alpha="50" />
+        android:alpha="50"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -145,5 +146,10 @@ tools:context=".screens.restaurant_menu_screen.RestaurantMenuActivity">
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:indeterminate="false" />
+
+    <include
+        layout="@layout/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

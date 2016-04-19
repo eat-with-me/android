@@ -24,11 +24,24 @@
         android:id="@+id/my_meals_in_order"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
+<<<<<<< HEAD:app/src/main/res/layout/my_order_view.xml
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true" />
 
 
 
 
+=======
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/button"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_marginTop="5dp" />
+
+    <include
+        layout="@layout/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+>>>>>>> 1f52df2a3d45d80e8541218ea4d8a987c99d9da8:app/src/main/res/layout/activity_order.xml
 
 </RelativeLayout>

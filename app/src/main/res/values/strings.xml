@@ -43,4 +43,8 @@
     <string name="inne_zam_wienia">Inne zamówienia</string>
     <string name="nie_ma_innych_zam_wie">Nie ma innych zamówień</string>
 
+
+    <!--Strings related to toolbar_main-->
+    <string name="action_login">Wyloguj</string>
+
 </resources>

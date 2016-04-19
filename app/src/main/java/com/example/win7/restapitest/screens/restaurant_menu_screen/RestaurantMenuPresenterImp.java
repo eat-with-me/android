@@ -12,7 +12,7 @@ import java.text.DecimalFormat;
 /**
  * Created by win7 on 02/04/2016.
  */
-public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter,OnDownloadFinishedListener<RestaurantMenu> {
+public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
 
 
     private RestaurantMenuView restaurantMenuView;
@@ -53,7 +53,26 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter,OnDow
     @Override
     public void getMenu(String restaurantId) {
 
-        apiConnection.getRestaurantMenu(restaurantId, this);
+        apiConnection.getRestaurantMenu(restaurantId, new OnDownloadFinishedListener<RestaurantMenu>() {
+            @Override
+            public void onSuccess(RestaurantMenu arg) {
+                menuResult = arg;
+                restaurantMenuView.hideProgress();
+
+                if(menuResult.isEmpty()){
+                    restaurantMenuView.setEmptyView();
+                }
+                else{
+
+                    restaurantMenuView.loadMenu(menuResult);
+                }
+            }
+
+            @Override
+            public void onError() {
+                restaurantMenuView.showError();
+            }
+        });
 
 
     }
@@ -83,23 +102,5 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter,OnDow
     }
     public void setOrder(Order order){this.order = order;}
 
-    @Override
-    public void onSuccess(RestaurantMenu arg) {
 
-        menuResult = arg;
-        restaurantMenuView.hideProgress();
-
-        if(menuResult.isEmpty()){
-            restaurantMenuView.setEmptyView();
-        }
-        else{
-
-            restaurantMenuView.loadMenu(menuResult);
-        }
-    }
-
-    @Override
-    public void onError() {
-        restaurantMenuView.showError();
-    }
 }
