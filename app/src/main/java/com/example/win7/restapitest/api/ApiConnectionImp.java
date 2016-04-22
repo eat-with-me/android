@@ -1,10 +1,15 @@
 package com.example.win7.restapitest.api;
 
 
+import android.util.Log;
+
 import com.example.win7.restapitest.model.Group;
+import com.example.win7.restapitest.model.LoginAnswer;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Restaurant;
 import com.example.win7.restapitest.model.RestaurantMenu;
+import com.example.win7.restapitest.model.Credentials;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -148,7 +153,36 @@ public class ApiConnectionImp implements ApiConnection {
     }
 
     @Override
-    public void login(String email, String password) {
+    public void login(final Credentials credentials, final OnLoginListener listener) {
+
+        Call<LoginAnswer> call= api.login(credentials);
+        call.enqueue(new Callback<LoginAnswer>() {
+
+            @Override
+
+            public void onResponse(Call<LoginAnswer> call, Response<LoginAnswer> response) {
+
+                int statusCode = response.code();
+
+                if (statusCode == 201) {
+                    listener.onSuccess();
+                } else if (statusCode == 401) {
+                    listener.onWrongCredentials();
+                } else {
+                    //TODO for sure here should be some something
+                }
+
+            }
+
+            @Override
+
+            public void onFailure(Call<LoginAnswer> call, Throwable t) {
+
+                listener.onError();
+
+            }
+
+        });
 
     }
 

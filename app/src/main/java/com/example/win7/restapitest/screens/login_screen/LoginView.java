@@ -29,4 +29,6 @@ public interface LoginView {
     void showToast(String message);
 
     void resetErrors();
+
+    void showWrongCredentialMessage();
 }

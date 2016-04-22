@@ -1,14 +1,18 @@
 package com.example.win7.restapitest.api;
 
 import com.example.win7.restapitest.model.Group;
+import com.example.win7.restapitest.model.LoginAnswer;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.RestaurantMenu;
+import com.example.win7.restapitest.model.Credentials;
 
 import java.util.List;
 
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 
@@ -25,5 +29,10 @@ public interface Endpoints {
 
     @GET("/restaurants/{id}")
     Call<RestaurantMenu> getRestaurantMenu(@Path("id") String user);
+
+    @POST("/users/sign_in.json")
+    Call<LoginAnswer> login(@Body Credentials credentials);
+
+
 
 }

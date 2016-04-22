@@ -1,10 +1,6 @@
 package com.example.win7.restapitest.api;
 
-import com.example.win7.restapitest.model.Group;
-import com.example.win7.restapitest.model.OrderInGroup;
-import com.example.win7.restapitest.model.RestaurantMenu;
-
-import java.util.List;
+import com.example.win7.restapitest.model.Credentials;
 
 /**
  * Created by win7 on 28/03/2016.
@@ -19,5 +15,5 @@ public interface ApiConnection {
 
     void getAllRestaurantsMenu();
 
-    void login(String email, String password);
+    void login(Credentials credentials, final OnLoginListener listener);
 }

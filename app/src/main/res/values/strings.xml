@@ -31,11 +31,13 @@
     <string name="login_goes_wrong">Nie udało się zalogować</string>
     <string name="title_activity_login">Sign in</string>
 
-    <!--Strings related to loginActivity-->
+    <!--Strings related to signUpActivity-->
     <string name="sign_up_text">Zarejestruj</string>
     <string name="password_again">Powtórz hasło</string>
     <string name="error_defferent_passwords">Hasła nie są takie same</string>
     <string name="something_goes_wrong">Nie udało się zarejestrować</string>
+
+    <!--Strings related to orderActivity-->
     <string name="wyczy_moje_posi_ki">Wyczyść moje posiłki</string>
     <string name="koszyk_jest_pusty">Koszyk jest pusty</string>
     <string name="moje_zamowienie">Moje zamowienie</string>

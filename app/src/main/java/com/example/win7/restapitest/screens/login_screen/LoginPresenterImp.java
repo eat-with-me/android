@@ -1,6 +1,9 @@
 package com.example.win7.restapitest.screens.login_screen;
 
 import com.example.win7.restapitest.api.ApiConnection;
+import com.example.win7.restapitest.api.OnDownloadFinishedListener;
+import com.example.win7.restapitest.api.OnLoginListener;
+import com.example.win7.restapitest.model.Credentials;
 import com.example.win7.restapitest.others.Factory;
 
 /**
@@ -34,9 +37,24 @@ public class LoginPresenterImp implements LoginPresenter{
         }
         else
         {
-            //loginView.showProgressBar();
-            loginView.navigateToMainActivity();
-            //apiConnection.login(email, password);
+            loginView.showProgressBar();
+            apiConnection.login(new Credentials(email, password), new OnLoginListener() {
+                @Override
+                public void onSuccess() {
+                    loginView.navigateToMainActivity();
+                }
+
+                @Override
+                public void onWrongCredentials() {
+                    loginView.showWrongCredentialMessage();
+                    loginView.hideProgressBar();
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
         }
 
 

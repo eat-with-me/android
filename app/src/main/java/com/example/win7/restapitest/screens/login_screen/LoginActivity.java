@@ -146,6 +146,12 @@ public class LoginActivity extends AppCompatActivity  implements LoginView{
         emailText.setError(null);
     }
 
+    @Override
+    public void showWrongCredentialMessage(){
+        loginGoesWrongView.setVisibility(View.VISIBLE);
+    }
+
+
 
 }
 
