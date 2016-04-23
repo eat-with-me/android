@@ -90,10 +90,6 @@ public class ApiConnectionImp implements ApiConnection {
 
         });
 
-
-
-        //mockGroups();
-
     }
 
     @Override
@@ -178,10 +174,47 @@ public class ApiConnectionImp implements ApiConnection {
                 if (statusCode == 201) {
 
                     cookie = response.headers().get("Set-Cookie");
-                    Log.d("Ciasteczko",cookie);
+
                     listener.onSuccess();
                 } else if (statusCode == 401) {
                     listener.onWrongCredentials();
+                } else {
+                    //TODO for sure here should be something
+                }
+
+            }
+
+            @Override
+
+            public void onFailure(Call<LoginAnswer> call, Throwable t) {
+
+                listener.onError();
+
+            }
+
+        });
+
+    }
+
+    @Override
+    public void signUp(Credentials credentials, final OnLoginListener listener) {
+        Call<LoginAnswer> call= api.signUp(credentials);
+        call.enqueue(new Callback<LoginAnswer>() {
+
+            @Override
+
+            public void onResponse(Call<LoginAnswer> call, Response<LoginAnswer> response) {
+
+                int statusCode = response.code();
+
+                if (statusCode == 201) {
+
+                    cookie = response.headers().get("Set-Cookie");
+                    listener.onSuccess();
+
+                } else if (statusCode == 422) {
+                    listener.onWrongCredentials();
+
                 } else {
                     //TODO for sure here should be something
                 }
@@ -214,148 +247,4 @@ public class ApiConnectionImp implements ApiConnection {
         }
 
     };
-
-    //************************************************************************************************
-
-    private void mockGroups(){
-
-        //groupsResult = new ArrayList<Group>();
-
-        Group group = new Group();
-        group.setName("Praca");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Akademik");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Praca2");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Szkoła");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Biuro");
-
-        groupsResult.add(group);
-
-        group.setName("Praca");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Akademik");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Praca2");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Szkoła");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Biuro");
-
-        groupsResult.add(group);
-
-        group.setName("Praca");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Akademik");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Praca2");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Szkoła");
-
-        groupsResult.add(group);
-
-        group = new Group();
-        group.setName("Biuro");
-
-        groupsResult.add(group);
-
-    }
-
-    private void mockOrders(){
-
-        ordersResult = new ArrayList<OrderInGroup>();
-
-        Restaurant restaurant = new Restaurant();
-        restaurant.setName("restauracja1");
-
-        OrderInGroup orderInGroup = new OrderInGroup();
-        orderInGroup.setRestaurant(restaurant);
-        orderInGroup.setClosingTime("14:45");
-
-        ordersResult.add(orderInGroup);
-
-
-        restaurant = new Restaurant();
-        restaurant.setName("restauracja2");
-
-        orderInGroup = new OrderInGroup();
-        orderInGroup.setRestaurant(restaurant);
-        orderInGroup.setClosingTime("19:45");
-
-        ordersResult.add(orderInGroup);
-
-
-        restaurant = new Restaurant();
-        restaurant.setName("restauracja2");
-
-        orderInGroup = new OrderInGroup();
-        orderInGroup.setRestaurant(restaurant);
-        orderInGroup.setClosingTime("06:55");
-
-        ordersResult.add(orderInGroup);
-
-    }
-
-//    private void mockMenu()
-//    {
-//        menuResult = new RestaurantMenu();
-//        menuResult.setName("KFC");
-//        menuResult.setCreatedAt("cerated time");
-//        menuResult.setId(3);
-//        menuResult.setPhoneNumber("345345");
-//        menuResult.setUpdatedAt("updatedAt");
-//
-//
-//        Meal meal = new Meal();
-//        meal.setName("ziemniory");
-//        meal.setPrice(3.45);
-//        menuResult.getMeals().add(meal);
-//
-//        meal = new Meal();
-//        meal.setName("Schabowy");
-//        meal.setPrice(5.57);
-//        menuResult.getMeals().add(meal);
-//
-//        meal = new Meal();
-//        meal.setName("surówka");
-//        meal.setPrice(9.56);
-//        menuResult.getMeals().add(meal);
-//
-//    }
-
 }

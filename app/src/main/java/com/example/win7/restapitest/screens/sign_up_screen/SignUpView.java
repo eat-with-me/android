@@ -33,4 +33,6 @@ public interface SignUpView {
     void showToast(String message);
 
     void resetErrors();
+
+    void showWrongCredentialMessage();
 }

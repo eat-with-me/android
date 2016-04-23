@@ -15,6 +15,9 @@ public class User {
     @SerializedName("password")
     private String password;
 
+    @SerializedName("password_confirmation")
+    private String passwordConfirmation;
+
 
     public String getEmail() {
         return email;
@@ -32,8 +35,9 @@ public class User {
         this.password = password;
     }
 
-    public User(String email, String password) {
+    public User(String email, String password, String passwordConfirmation) {
         this.email = email;
         this.password = password;
+        this.passwordConfirmation = passwordConfirmation;
     }
 }

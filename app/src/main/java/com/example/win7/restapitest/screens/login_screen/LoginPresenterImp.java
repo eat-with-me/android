@@ -38,7 +38,7 @@ public class LoginPresenterImp implements LoginPresenter{
         else
         {
             loginView.showProgressBar();
-            apiConnection.login(new Credentials(email, password), new OnLoginListener() {
+            apiConnection.login(new Credentials(email, password, ""), new OnLoginListener() {
                 @Override
                 public void onSuccess() {
                     loginView.navigateToMainActivity();

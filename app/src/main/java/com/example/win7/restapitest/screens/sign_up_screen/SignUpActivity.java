@@ -119,8 +119,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
     public void hideProgressBar(){
 
         messageView.setVisibility(View.INVISIBLE);
-        loginForm.setVisibility(View.INVISIBLE);
-        progressBar.setVisibility(View.VISIBLE);
+        loginForm.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -149,6 +149,10 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
         emailText.setError(null);
     }
 
+    @Override
+    public void showWrongCredentialMessage() {
+        somethingGoesWrong.setVisibility(View.VISIBLE);
+    }
 
 
 }

@@ -16,8 +16,8 @@ public class Credentials {
         this.user = user;
     }
 
-    public Credentials(String email, String password) {
-       user = new User(email, password);
+    public Credentials(String email, String password, String confirmPassword) {
+       user = new User(email, password, confirmPassword);
     }
 }
 

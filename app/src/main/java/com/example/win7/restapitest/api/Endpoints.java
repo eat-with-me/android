@@ -33,6 +33,10 @@ public interface Endpoints {
     @POST("/users/sign_in.json")
     Call<LoginAnswer> login(@Body Credentials credentials);
 
+    @POST("/users.json")
+    Call<LoginAnswer> signUp(@Body Credentials credentials);
+
+
 
 
 }

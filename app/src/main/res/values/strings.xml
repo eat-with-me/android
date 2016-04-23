@@ -49,4 +49,8 @@
     <!--Strings related to toolbar_main-->
     <string name="action_login">Wyloguj</string>
 
+
+    <!--Strings related to signUpActivity-->
+    <string name="wrong_email_text">Podany email jest już zajęty</string>
+
 </resources>

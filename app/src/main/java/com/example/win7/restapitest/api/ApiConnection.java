@@ -16,4 +16,6 @@ public interface ApiConnection {
     void getAllRestaurantsMenu();
 
     void login(Credentials credentials, final OnLoginListener listener);
+
+    void signUp(Credentials credentials, final OnLoginListener listener);
 }

@@ -112,8 +112,8 @@ public class LoginActivity extends AppCompatActivity  implements LoginView{
     public void hideProgressBar(){
 
         messageView.setVisibility(View.INVISIBLE);
-        loginForm.setVisibility(View.INVISIBLE);
-        progressBar.setVisibility(View.VISIBLE);
+        loginForm.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -148,6 +148,7 @@ public class LoginActivity extends AppCompatActivity  implements LoginView{
 
     @Override
     public void showWrongCredentialMessage(){
+
         loginGoesWrongView.setVisibility(View.VISIBLE);
     }
 
