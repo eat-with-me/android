@@ -1,9 +1,13 @@
 package com.example.win7.restapitest.screens.login_screen;
 
+import com.example.win7.restapitest.model.Credentials;
+import com.example.win7.restapitest.model.User;
+
 /**
  * Created by win7 on 10/04/2016.
  */
 public interface LoginView {
+
     String getEmail();
 
     String getPassword();
@@ -31,4 +35,10 @@ public interface LoginView {
     void resetErrors();
 
     void showWrongCredentialMessage();
+
+    void navigateToErrorScreen();
+
+    void saveCredentials(Credentials credentials);
+
+    Credentials getCredentials();
 }

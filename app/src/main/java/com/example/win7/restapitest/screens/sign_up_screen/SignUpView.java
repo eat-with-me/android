@@ -1,6 +1,9 @@
 package com.example.win7.restapitest.screens.sign_up_screen;
 
 
+import com.example.win7.restapitest.model.Credentials;
+import com.example.win7.restapitest.model.User;
+
 public interface SignUpView {
 
 
@@ -35,4 +38,8 @@ public interface SignUpView {
     void resetErrors();
 
     void showWrongCredentialMessage();
+
+    void navigateToErrorActivity();
+
+    void saveCredentials(Credentials credentials);
 }

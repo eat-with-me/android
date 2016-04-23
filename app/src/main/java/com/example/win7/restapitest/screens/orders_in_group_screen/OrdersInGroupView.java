@@ -7,18 +7,12 @@ import java.util.List;
 
 public interface OrdersInGroupView {
     void setEmptyView();
-
     void loadOrders(List<OrderInGroup> ordersResult);
-
     void showToast(String message);
-
     void goToRestaurantMenuActivity(String restaurantId);
-
     void showProgress();
-
     void hideProgress();
-
     void showError();
-
     void recycleViewInit();
+
 }

@@ -1,6 +1,8 @@
 package com.example.win7.restapitest.screens.sign_up_screen;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
+import com.example.win7.restapitest.model.Credentials;
+import com.example.win7.restapitest.model.User;
+import com.example.win7.restapitest.screens.error_screen.ErrorActivity;
 import com.example.win7.restapitest.screens.login_screen.LoginPresenter;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
 
@@ -63,18 +68,17 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
     }
 
     @Override
-    public String getPasswordAgain(){ return passwordAgainText.getText().toString();}
+    public String getPasswordAgain(){
+        return passwordAgainText.getText().toString();}
 
     @Override
     public void setEmptyEmailError(){
-
         String emptyEmail = getString(R.string.error_empty_field);
         emailText.setError(emptyEmail);
     }
 
     @Override
     public void setDefferentPasswordError() {
-
         String differentPasswords = getString(R.string.error_defferent_passwords);
         passwordText.setError(differentPasswords);
     }
@@ -93,7 +97,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
 
     @Override
     public void setInvalidEmailError() {
-
         String invalidEmail = getString(R.string.error_invalid_email);
         emailText.setError(invalidEmail);
 
@@ -101,7 +104,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
 
     @Override
     public void setEmailTooShortError() {
-
         String passwordTooShort = getString(R.string.error_short_password);
         passwordText.setError(passwordTooShort);
 
@@ -109,7 +111,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
 
     @Override
     public void showProgressBar(){
-
         messageView.setVisibility(View.INVISIBLE);
         loginForm.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.VISIBLE);
@@ -117,7 +118,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
 
     @Override
     public void hideProgressBar(){
-
         messageView.setVisibility(View.INVISIBLE);
         loginForm.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.INVISIBLE);
@@ -125,7 +125,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
 
     @Override
     public void showLoginGoesWrongMessage(){
-
         somethingGoesWrong.setText(R.string.something_goes_wrong);
         somethingGoesWrong.setVisibility(View.VISIBLE);
 
@@ -154,5 +153,17 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
         somethingGoesWrong.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void navigateToErrorActivity(){
+        startActivity(new Intent(this, ErrorActivity.class));
+    }
 
+    @Override
+    public void saveCredentials(Credentials credentials){
+        SharedPreferences sharedPref = this.getSharedPreferences("CREDENTIALS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("email", credentials.getEmail());
+        editor.putString("password", credentials.getPassword());
+        editor.apply();
+    }
 }

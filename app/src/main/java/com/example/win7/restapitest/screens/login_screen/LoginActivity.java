@@ -1,7 +1,9 @@
 package com.example.win7.restapitest.screens.login_screen;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +19,9 @@ import android.widget.Toast;
 
 
 import com.example.win7.restapitest.R;
+import com.example.win7.restapitest.model.Credentials;
+import com.example.win7.restapitest.model.User;
+import com.example.win7.restapitest.screens.error_screen.ErrorActivity;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.sign_up_screen.SignUpActivity;
 
@@ -47,6 +52,7 @@ public class LoginActivity extends AppCompatActivity  implements LoginView{
         loginGoesWrongView = (TextView) findViewById(R.id.login_goes_wrong);
 
         loginPresenter = new LoginPresenterImp(this);
+        loginPresenter.tryLogin();
 
     }
 
@@ -152,7 +158,32 @@ public class LoginActivity extends AppCompatActivity  implements LoginView{
         loginGoesWrongView.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void navigateToErrorScreen(){
+        startActivity(new Intent(this, ErrorActivity.class));
+    }
 
 
+    @Override
+    public void saveCredentials(Credentials credentials){
+        SharedPreferences sharedPref = this.getSharedPreferences("CREDENTIALS",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("email", credentials.getEmail());
+        editor.putString("password", credentials.getPassword());
+        editor.apply();
+    }
+
+    @Override
+    public Credentials getCredentials(){
+        SharedPreferences sharedPref = this.getSharedPreferences("CREDENTIALS",Context.MODE_PRIVATE);
+        String password = sharedPref.getString("password", "");
+        String email = sharedPref.getString("email", "");
+
+        if(password.equals("") || email.equals(""))
+            return null;
+        else
+            return new Credentials(email, password, "");
+
+    }
 }
 

@@ -5,7 +5,6 @@ package com.example.win7.restapitest.screens.login_screen;
  */
 public interface LoginPresenter {
 
-
     void onClickLogin();
 
     void onCLickSignUp();
@@ -15,4 +14,6 @@ public interface LoginPresenter {
     boolean isEmailValid(String email);
 
     boolean isPasswordCorrect(String password);
+
+    void tryLogin();
 }

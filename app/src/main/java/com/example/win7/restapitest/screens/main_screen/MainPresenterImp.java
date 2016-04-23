@@ -1,5 +1,7 @@
 package com.example.win7.restapitest.screens.main_screen;
 
+import android.util.Log;
+
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.Group;
@@ -42,6 +44,7 @@ public class MainPresenterImp implements MainPresenter {
 
                 if(groupsResult.isEmpty()){
                     mainView.setEmptyView();
+
                 }
                 else{
 
@@ -51,6 +54,7 @@ public class MainPresenterImp implements MainPresenter {
 
             @Override
             public void onError() {
+
                 mainView.showError();
             }
         });

@@ -4,11 +4,10 @@ import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.api.OnLoginListener;
 import com.example.win7.restapitest.model.Credentials;
+import com.example.win7.restapitest.model.User;
 import com.example.win7.restapitest.others.Factory;
 
-/**
- * Created by win7 on 10/04/2016.
- */
+
 public class LoginPresenterImp implements LoginPresenter{
 
     private LoginView loginView;
@@ -24,8 +23,8 @@ public class LoginPresenterImp implements LoginPresenter{
     @Override
     public void onClickLogin() {
 
-        String email = loginView.getEmail();
-        String password = loginView.getPassword();
+        final String email = loginView.getEmail();
+        final String password = loginView.getPassword();
 
         loginView.resetErrors();
 
@@ -41,6 +40,8 @@ public class LoginPresenterImp implements LoginPresenter{
             apiConnection.login(new Credentials(email, password, ""), new OnLoginListener() {
                 @Override
                 public void onSuccess() {
+
+                    loginView.saveCredentials(new Credentials(email,password,""));
                     loginView.navigateToMainActivity();
                 }
 
@@ -52,7 +53,8 @@ public class LoginPresenterImp implements LoginPresenter{
 
                 @Override
                 public void onError() {
-
+                    loginView.hideProgressBar();
+                    loginView.navigateToErrorScreen();
                 }
             });
         }
@@ -110,6 +112,35 @@ public class LoginPresenterImp implements LoginPresenter{
                 return true;
             }
 
+    }
+
+    @Override
+    public void tryLogin() {
+        loginView.showProgressBar();
+        Credentials credentials = loginView.getCredentials();
+
+        if(credentials == null) {
+            loginView.hideProgressBar();
+            return;
+        }
+        else {
+            apiConnection.login(credentials, new OnLoginListener() {
+                @Override
+                public void onSuccess() {
+                    loginView.navigateToMainActivity();
+                }
+
+                @Override
+                public void onWrongCredentials() {
+                    loginView.hideProgressBar();
+                }
+
+                @Override
+                public void onError() {
+                    loginView.hideProgressBar();
+                }
+            });
+        }
     }
 
 }

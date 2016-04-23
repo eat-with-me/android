@@ -102,10 +102,6 @@ public  class MainActivity extends MyActivity implements MainView {
         recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void showToast(String message){
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void goToOrdersInGroupActivity(String groupId) {
@@ -145,7 +141,7 @@ public  class MainActivity extends MyActivity implements MainView {
         messageTextView.setText(noInternet);
         messageTextView.setVisibility(View.VISIBLE);
 
-    }
+   }
 
 
 

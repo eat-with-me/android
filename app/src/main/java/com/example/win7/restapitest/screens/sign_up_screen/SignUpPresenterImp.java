@@ -7,9 +7,7 @@ import com.example.win7.restapitest.model.User;
 import com.example.win7.restapitest.others.Factory;
 import com.example.win7.restapitest.screens.login_screen.LoginView;
 
-/**
- * Created by win7 on 10/04/2016.
- */
+
 public class SignUpPresenterImp implements SignUpPresenter {
 
     private SignUpView signUpView;
@@ -27,8 +25,8 @@ public class SignUpPresenterImp implements SignUpPresenter {
     @Override
     public void onClickSignUp() {
 
-        String email = signUpView.getEmail();
-        String password = signUpView.getPassword();
+        final String email = signUpView.getEmail();
+        final String password = signUpView.getPassword();
         String secondPassword = signUpView.getPasswordAgain();
 
 
@@ -50,6 +48,7 @@ public class SignUpPresenterImp implements SignUpPresenter {
             apiConnection.signUp(new Credentials(email, password, secondPassword), new OnLoginListener() {
                 @Override
                 public void onSuccess() {
+                    signUpView.saveCredentials(new Credentials(email, password, ""));
                     signUpView.navigateToMainActivity();
                 }
 
@@ -63,7 +62,8 @@ public class SignUpPresenterImp implements SignUpPresenter {
 
                 @Override
                 public void onError() {
-
+                    signUpView.hideProgressBar();
+                    signUpView.navigateToErrorActivity();
                 }
             });
         }

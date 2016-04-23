@@ -2,14 +2,10 @@ package com.example.win7.restapitest.screens.restaurant_menu_screen;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -101,12 +97,6 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         adapter = new MenuAdapter(menuResult);
         recyclerView.setAdapter(adapter);
     }
-
-    @Override
-    public void showToast(String message){
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
 
 
     @Override

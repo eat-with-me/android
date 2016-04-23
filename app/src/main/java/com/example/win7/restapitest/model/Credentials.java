@@ -19,6 +19,14 @@ public class Credentials {
     public Credentials(String email, String password, String confirmPassword) {
        user = new User(email, password, confirmPassword);
     }
+
+    public String getPassword(){
+        return user.getPassword();
+    }
+
+    public String getEmail(){
+        return user.getEmail();
+    }
 }
 
 

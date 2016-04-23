@@ -27,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiConnectionImp implements ApiConnection {
 
-    public String cookie = "";
+    private String cookie = "";
 
 
     //TODO zrobić coś z listami

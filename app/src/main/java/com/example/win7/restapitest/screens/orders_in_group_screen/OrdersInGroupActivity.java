@@ -103,10 +103,6 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void showToast(String message){
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void goToRestaurantMenuActivity(String restaurantId) {

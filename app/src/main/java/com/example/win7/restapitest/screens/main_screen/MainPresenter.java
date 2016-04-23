@@ -5,13 +5,9 @@ package com.example.win7.restapitest.screens.main_screen;
  */
 public interface MainPresenter {
     void onDestroy();
-
     void onResume();
-
     void getGroups();
-
     void onClickGroup(int position);
-
     void onClickNewGroup();
 
 
