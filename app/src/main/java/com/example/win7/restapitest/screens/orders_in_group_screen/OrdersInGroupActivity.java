@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
+import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.others.ClickListener;
@@ -25,7 +26,7 @@ import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMen
 
 import java.util.List;
 
-public class OrdersInGroupActivity extends AppCompatActivity implements OrdersInGroupView{
+public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupView{
 
 
     private RecyclerView recyclerView;
@@ -73,12 +74,6 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
     @Override
     protected void onDestroy(){
@@ -158,21 +153,6 @@ public class OrdersInGroupActivity extends AppCompatActivity implements OrdersIn
 
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.action_login:
-                showToast("TODO");
-                return true;
-
-            default:
-
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
 
     public void recycleViewInit(){
 

@@ -20,11 +20,12 @@ import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
+import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.order_screen.OrderFragmentActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
-public class RestaurantMenuActivity extends AppCompatActivity  implements RestaurantMenuView{
+public class RestaurantMenuActivity extends MyActivity implements RestaurantMenuView{
 
 
     private RecyclerView recyclerView;
@@ -73,13 +74,6 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
     @Override
     protected void onDestroy(){
@@ -176,20 +170,6 @@ public class RestaurantMenuActivity extends AppCompatActivity  implements Restau
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.action_login:
-                showToast("TODO");
-                return true;
-
-            default:
-
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
 
     private void recycleViewInit() {
 

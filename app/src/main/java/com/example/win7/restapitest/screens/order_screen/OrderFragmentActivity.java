@@ -9,19 +9,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.Order;
+import com.example.win7.restapitest.others.MyActivity;
 
 ;
 
 /**
  * Created by Mateusz on 2016-04-19.
  */
-public class OrderFragmentActivity extends AppCompatActivity implements OrderView {
+public class OrderFragmentActivity extends MyActivity implements OrderView {
 
     private RecyclerView recyclerViewMyOrder;
     private RecyclerView.Adapter adapter;
@@ -41,6 +43,10 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
         recyclerViewMyOrder = (RecyclerView) findViewById(R.id.my_meals_in_order);
         bMyOrder = (Button) findViewById(R.id.bMyOrder);
         bOtherOrders = (Button) findViewById(R.id.bOtherOrders);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
 
         FragmentManager fm1 = getSupportFragmentManager();
         addShowHideListener(R.id.bMyOrder, fm1.findFragmentById(R.id.my_order_fragment));
