@@ -11,26 +11,28 @@ import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.model.Credentials;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by win7 on 28/03/2016.
- */
+
 public class ApiConnectionImp implements ApiConnection {
 
-
+    public String cookie = "";
 
 
     //TODO zrobić coś z listami
 
-    private final String BASE_URL = "http://eat24.herokuapp.com/";
+    private final String BASE_URL = "http://eat24.herokuapp.com";
 
     private List<Group> groupsResult = new ArrayList<Group>();
     private List<OrderInGroup> ordersResult = new ArrayList<OrderInGroup>();
@@ -42,10 +44,18 @@ public class ApiConnectionImp implements ApiConnection {
 
     public ApiConnectionImp(){
 
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+
+        builder.interceptors().add(interceptor);
+
+        OkHttpClient client = builder.build();
+
+
          retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                 .baseUrl(BASE_URL)
+                 .addConverterFactory(GsonConverterFactory.create())
+                 .client(client)
+                 .build();
 
 
         api = retrofit.create(Endpoints.class);
@@ -73,6 +83,7 @@ public class ApiConnectionImp implements ApiConnection {
 
             public void onFailure(Call<List<Group>> call, Throwable t) {
 
+                Log.d("Message from error",t.getMessage());
                 listener.onError();
 
             }
@@ -165,11 +176,14 @@ public class ApiConnectionImp implements ApiConnection {
                 int statusCode = response.code();
 
                 if (statusCode == 201) {
+
+                    cookie = response.headers().get("Set-Cookie");
+                    Log.d("Ciasteczko",cookie);
                     listener.onSuccess();
                 } else if (statusCode == 401) {
                     listener.onWrongCredentials();
                 } else {
-                    //TODO for sure here should be some something
+                    //TODO for sure here should be something
                 }
 
             }
@@ -186,6 +200,20 @@ public class ApiConnectionImp implements ApiConnection {
 
     }
 
+
+    Interceptor interceptor = new Interceptor() {
+
+        @Override
+
+        public okhttp3.Response intercept(Chain chain) throws IOException {
+
+            Request newRequest = chain.request().newBuilder().addHeader("cookie", cookie).build();
+
+            return chain.proceed(newRequest);
+
+        }
+
+    };
 
     //************************************************************************************************
 
