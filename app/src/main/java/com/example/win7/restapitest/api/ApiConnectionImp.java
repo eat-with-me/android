@@ -3,13 +3,11 @@ package com.example.win7.restapitest.api;
 
 import android.util.Log;
 
+import com.example.win7.restapitest.model.Credentials;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.LoginAnswer;
 import com.example.win7.restapitest.model.OrderInGroup;
-import com.example.win7.restapitest.model.Restaurant;
 import com.example.win7.restapitest.model.RestaurantMenu;
-import com.example.win7.restapitest.model.Credentials;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -155,7 +153,21 @@ public class ApiConnectionImp implements ApiConnection {
     }
 
     @Override
-    public void getAllRestaurantsMenu() {
+    public void getAllRestaurantsMenu(final OnDownloadFinishedListener listener) {
+        Call<List<RestaurantMenu>> call = api.getAllRestaurantsMenu();
+        call.enqueue(new Callback<List<RestaurantMenu>>(){
+            @Override
+            public void onResponse(Call<List<RestaurantMenu>> call, Response<List<RestaurantMenu>> response) {
+                int statusCode = response.code();
+                List<RestaurantMenu> allRestaurantResult = response.body();
+                listener.onSuccess(allRestaurantResult);
+            }
+
+            @Override
+            public void onFailure(Call<List<RestaurantMenu>> call, Throwable t) {
+                listener.onError();
+            }
+        });
 
     }
 

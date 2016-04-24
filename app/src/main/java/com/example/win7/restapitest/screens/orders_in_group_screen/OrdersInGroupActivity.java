@@ -1,27 +1,23 @@
 package com.example.win7.restapitest.screens.orders_in_group_screen;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
-import com.example.win7.restapitest.others.MyActivity;
-import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.others.ClickListener;
+import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
+import com.example.win7.restapitest.screens.main_screen.MainActivity;
+import com.example.win7.restapitest.screens.new_order_in_group_screen.NewOrderInGroupActivity;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 
 import java.util.List;
@@ -34,7 +30,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
     private TextView messageTextView;
     private Button button;
     private ProgressBar progressBar;
-
+    private String groupId;
     private OrdersInGroupPresenter ordersInGroupPresenter;
 
     public static final String RESTAURANT_ID = "restaurantId" ;
@@ -56,7 +52,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         ordersInGroupPresenter = new OrdersInGroupPresenterImp(this);
 
         Intent intent = getIntent();
-        String groupId = intent.getStringExtra(MainActivity.GROUP_ID);
+        groupId = intent.getStringExtra(MainActivity.GROUP_ID);
 
         showProgress();
         recycleViewInit();
@@ -66,7 +62,9 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
     public void onClickNewOrder(View v)
     {
-        ordersInGroupPresenter.onClickNewOrder();
+        Intent intent = new Intent(this, NewOrderInGroupActivity.class);
+        intent.putExtra(MainActivity.GROUP_ID, groupId);
+        startActivity(intent);
     }
 
 

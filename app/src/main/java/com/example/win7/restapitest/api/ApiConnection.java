@@ -13,7 +13,7 @@ public interface ApiConnection {
 
     void getRestaurantMenu(String restaurantId, final OnDownloadFinishedListener listener);
 
-    void getAllRestaurantsMenu();
+    void getAllRestaurantsMenu(final OnDownloadFinishedListener listener);
 
     void login(Credentials credentials, final OnLoginListener listener);
 

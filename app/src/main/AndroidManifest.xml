@@ -22,6 +22,7 @@
         <activity android:name=".screens.orders_in_group_screen.OrdersInGroupActivity" />
         <activity android:name=".screens.restaurant_menu_screen.RestaurantMenuActivity" />
         <activity android:name=".screens.order_screen.OrderFragmentActivity" />
+        <activity android:name=".screens.new_order_in_group_screen.NewOrderInGroupActivity"/>
         <activity android:name=".screens.main_screen.MainActivity">
 
             <!-- <intent-filter> -->

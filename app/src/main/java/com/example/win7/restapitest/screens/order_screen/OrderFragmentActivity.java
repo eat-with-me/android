@@ -69,14 +69,6 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
 
         orderPresenter = new OrderPresenterImp(this);
 
-
-
-
-
-
-
-
-
 //        if(order.getMeals().isEmpty()){
 //            setEmptyMyOrderView();
 //        }
