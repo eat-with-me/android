@@ -17,6 +17,7 @@ import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
+import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.order_screen.OrderFragmentActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
@@ -30,6 +31,8 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
     private TextView totalProducts;
     private RelativeLayout relativeLayout;
     private ProgressBar progressBar;
+    private String restaurantId;
+    private String groupId;
 
     private RestaurantMenuPresenter restaurantMenuPresenter;
     private static  final  int ORDER_ACTIVITY_REQUEST_CODE = 1;
@@ -53,8 +56,8 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         restaurantMenuPresenter = new RestaurantMenuPresenterImp(this);
 
         Intent intent = getIntent();
-        String restaurantId = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_ID);
-
+        restaurantId = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_ID);
+        groupId = intent.getStringExtra(MainActivity.GROUP_ID);
         showProgress();
 
         recycleViewInit();
@@ -147,6 +150,8 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
 
         Intent intent = new Intent(this, OrderFragmentActivity.class);
         intent.putExtra("order", restaurantMenuPresenter.getOrder());
+        intent.putExtra(MainActivity.GROUP_ID,groupId);
+        intent.putExtra(OrdersInGroupActivity.RESTAURANT_ID,restaurantId);
 
         startActivityForResult(intent,ORDER_ACTIVITY_REQUEST_CODE);
     }

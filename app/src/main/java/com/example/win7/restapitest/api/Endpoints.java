@@ -5,6 +5,7 @@ import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.LoginAnswer;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Purchase;
+import com.example.win7.restapitest.model.Purchasers;
 import com.example.win7.restapitest.model.RestaurantMenu;
 
 import java.util.List;
@@ -30,6 +31,9 @@ public interface Endpoints {
     @GET("/restaurants/{id}")
     Call<RestaurantMenu> getRestaurantMenu(@Path("id") String user);
 
+    @GET("/groups/{group_id}/orders/{order_id}")
+    Call<List<Purchasers>> getPurchasers(@Path("group_id") int group_id, @Path("order_id") int order_id);
+
     @POST("/users/sign_in.json")
     Call<LoginAnswer> login(@Body Credentials credentials);
 
@@ -37,7 +41,7 @@ public interface Endpoints {
     Call<LoginAnswer> signUp(@Body Credentials credentials);
 
     @POST("/groups/{group_id}/purchasers")
-    Call<Purchase> purchase(@Path("groups") Integer id, @Body Purchase purchase);
+    Call<Purchase> purchase(@Path("group_id") int group_id, @Body Purchase purchase);
 
 
 

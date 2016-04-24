@@ -102,6 +102,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
     public void goToRestaurantMenuActivity(String restaurantId) {
 
         Intent intent = new Intent(this, RestaurantMenuActivity.class);
+        intent.putExtra(MainActivity.GROUP_ID,groupId);
         intent.putExtra(RESTAURANT_ID, restaurantId);
         startActivity(intent);
 

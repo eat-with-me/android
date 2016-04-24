@@ -7,6 +7,8 @@ import com.example.win7.restapitest.model.Credentials;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.LoginAnswer;
 import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.Purchase;
+import com.example.win7.restapitest.model.Purchasers;
 import com.example.win7.restapitest.model.RestaurantMenu;
 
 import java.io.IOException;
@@ -36,7 +38,7 @@ public class ApiConnectionImp implements ApiConnection {
     private List<OrderInGroup> ordersResult = new ArrayList<OrderInGroup>();
     private RestaurantMenu menuResult = new RestaurantMenu();
     private List<RestaurantMenu>  allRestaurantsMenuResult = new ArrayList<RestaurantMenu>();
-
+    private List<Purchasers> purchasers = new ArrayList<Purchasers>();
     private Retrofit retrofit;
     private Endpoints api;
 
@@ -170,6 +172,45 @@ public class ApiConnectionImp implements ApiConnection {
         });
 
     }
+
+    @Override
+    public void sendPurchase(Purchase purchase, String groupId) {
+
+        Call<Purchase> call = api.purchase(Integer.parseInt(groupId),purchase);
+        call.enqueue((new Callback<Purchase>() {
+            @Override
+            public void onResponse(Call<Purchase> call, Response<Purchase> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Purchase> call, Throwable t) {
+
+            }
+        }));
+
+    }
+
+    @Override
+    public void getPurchasers(String group_id, String order_id, final OnDownloadFinishedListener listener) {
+        Call<List<Purchasers>> call = api.getPurchasers(Integer.parseInt(group_id),Integer.parseInt(order_id));
+        call.enqueue(new Callback<List<Purchasers>>() {
+            @Override
+            public void onResponse(Call<List<Purchasers>> call, Response<List<Purchasers>> response) {
+                listener.onSuccess(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Purchasers>> call, Throwable t) {
+
+            }
+        });
+
+
+
+    }
+
 
     @Override
     public void login(final Credentials credentials, final OnLoginListener listener) {

@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.win7.restapitest.R;
-import com.example.win7.restapitest.model.Meal;
 import com.example.win7.restapitest.model.Order;
 
 /**
@@ -29,27 +28,28 @@ public class OtherOrderFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.other_orders_view, container, false);
         //TODO
-        order = new Order();
-        for(int i=0; i<7; i++){
-            String imie = "TODO";
-
-            Meal meal = new Meal(imie,10.50);
-            order.add(meal);
-        }
-
-        adapter = new OrderAdapter(order,getActivity());
+//        order = new Order();
+//        for(int i=0; i<7; i++){
+//            String imie = "TODO";
+//
+//            Meal meal = new Meal(imie,10.50);
+//            order.add(meal);
+//        }
+//
+//        adapter = new OrderAdapter(order,getActivity());
 
         return view;
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         recyclerViewMyOrder = (RecyclerView) getView().findViewById(R.id.other_meals_in_order);
         recyclerViewMyOrder.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerViewMyOrder.setLayoutManager(layoutManager);
         recyclerViewMyOrder.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewMyOrder.setAdapter(adapter);
+
 
 
     }

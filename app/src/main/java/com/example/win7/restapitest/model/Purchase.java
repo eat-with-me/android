@@ -10,7 +10,12 @@ public class Purchase {
     @SerializedName("id")
     String id;
 
-    @SerializedName("asd")
-    String asd;
+    @SerializedName("meals")
+    Integer[] meals;
+
+    public Purchase(String id, Integer[] meals){
+        this.id=id;
+        this.meals=meals;
+    }
 
 }

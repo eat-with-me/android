@@ -18,8 +18,12 @@ import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.Order;
+import com.example.win7.restapitest.model.Purchase;
+import com.example.win7.restapitest.model.Purchasers;
+import com.example.win7.restapitest.screens.main_screen.MainActivity;
+import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
-;
+;import java.util.List;
 
 /**
  * Created by Mateusz on 2016-04-19.
@@ -29,11 +33,15 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
     private RecyclerView recyclerViewMyOrder;
     private RecyclerView recyclerViewOtherOrder;
     private RecyclerView.Adapter adapter;
+    private RecyclerView.Adapter otherOrdersAdapter;
     private TextView myOrderIsEmpty;
     private TextView otherOrderIsEmpty;
     private OrderPresenter orderPresenter;
     private Button bMyOrder;
     private Button bOtherOrders;
+    private Button bAccept;
+    private String groupId;
+    private String restaurantId;
 
     private Order order;
     @Override
@@ -42,21 +50,16 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
         setContentView(R.layout.activity_basket);
         Intent intent = getIntent();
         order = intent.getParcelableExtra("order");
-//        MyOrderFragment myOrderFragment = new MyOrderFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelable("order",getIntent().getParcelableExtra("order"));
-//        myOrderFragment.setArguments(bundle);
+        restaurantId = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_ID);
+        groupId = intent.getStringExtra(MainActivity.GROUP_ID);
+
         adapter = new OrderAdapter(order,getBaseContext());
         myOrderIsEmpty = (TextView) findViewById(R.id.my_empty_basket_text);
         otherOrderIsEmpty = (TextView) findViewById(R.id.other_empty_basket_text);
         bOtherOrders = (Button) findViewById(R.id.bOtherOrders);
+        bAccept = (Button) findViewById(R.id.bAccept);
 
-        recyclerViewMyOrder = (RecyclerView) findViewById(R.id.my_meals_in_order);
-        recyclerViewMyOrder.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerViewMyOrder.setLayoutManager(layoutManager);
-        recyclerViewMyOrder.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewMyOrder.setAdapter(adapter);
+        recyclerViewOtherOrder = (RecyclerView) findViewById(R.id.other_meals_in_order);
 
         FragmentManager fm2 = getSupportFragmentManager();
 //        Fragment myOrderFragment = fm2.findFragmentById(R.id.my_order_fragment);
@@ -68,10 +71,12 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
         addShowHideListener(R.id.bMyOrder, R.id.bOtherOrders, fm2.findFragmentById(R.id.my_order_fragment), fm2.findFragmentById(R.id.other_orders_fragment));
 
         orderPresenter = new OrderPresenterImp(this);
-
+        recyclerViewInit();
+        getPurchasers();
 //        if(order.getMeals().isEmpty()){
 //            setEmptyMyOrderView();
 //        }
+
 
     }
 
@@ -92,6 +97,11 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
         otherOrderIsEmpty.setVisibility(View.VISIBLE);
 
     }
+    public void getPurchasers(){
+        orderPresenter.getPurchasers(groupId,restaurantId);
+
+    }
+
 
     @Override
     public void onClickAcceptOrder(View view) {
@@ -100,9 +110,17 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
         {
             tablica[i] = order.getMeals().get(i).getId();
         }
+        Purchase purchase = new Purchase(restaurantId,tablica);
+        orderPresenter.onClickAccept(purchase,groupId);
 
+    }
 
+    @Override
+    public void setPurchasers(List<Purchasers> purchasers) {
 
+otherOrdersAdapter = new PurchaserAdapter(purchasers);
+        showToast(purchasers.get(0).getUser().getEmail());
+        recyclerViewOtherOrder.setAdapter(otherOrdersAdapter);
     }
 
     @Override
@@ -155,5 +173,13 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
                 }
             });
         }
+    }
+    public void recyclerViewInit(){
+        recyclerViewMyOrder = (RecyclerView) findViewById(R.id.my_meals_in_order);
+        recyclerViewMyOrder.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerViewMyOrder.setLayoutManager(layoutManager);
+        recyclerViewMyOrder.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewMyOrder.setAdapter(adapter);
     }
 }
