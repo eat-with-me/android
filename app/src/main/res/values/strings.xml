@@ -53,5 +53,6 @@
 
     <!--Strings related to signUpActivity-->
     <string name="wrong_email_text">Podany email jest już zajęty</string>
+    <string name="akceptuj_zam_wienie">Akceptuj zamówienie</string>
 
 </resources>

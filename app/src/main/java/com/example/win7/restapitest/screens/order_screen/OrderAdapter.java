@@ -1,5 +1,6 @@
 package com.example.win7.restapitest.screens.order_screen;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,45 @@ import com.example.win7.restapitest.model.Order;
 /**
  * Created by Mateusz on 2016-04-12.
  */
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
     public Order order;
+    private Context mContext;
+
+
+    public OrderAdapter(Order order, Context mContext) {
+        this.order = order;
+        this.mContext = mContext;
+    }
+
+
+    @Override
+    public OrderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                      int viewType) {
+
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.order_row, parent, false);
+
+
+        return new ViewHolder(view);
+    }
+
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Meal meal = order.getMeals().get(position);
+
+        holder.dish.setText(meal.getName());
+        holder.price.setText(String.format("%.2f", meal.getPrice()));
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+
+        return order.getMeals().size();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -37,52 +74,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
 
         @Override
         public void onClick(View v) {
-            if(v.equals(cross))
-            {
+            if (v.equals(cross)) {
                 Meal meal = order.getMeals().get(getAdapterPosition());
                 order.delete(meal);
                 notifyDataSetChanged();
-                if(order.getMeals().isEmpty())
-                {
-
-                    //TODO setEmptyView()
+                if (mContext instanceof OrderFragmentActivity && order.getMeals().isEmpty()) {
+                    ((OrderFragmentActivity) mContext).setEmptyMyOrderView();
                 }
             }
         }
-    }
-
-
-    public OrderAdapter(Order order) {
-        this.order = order;
-    }
-
-    @Override
-    public OrderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                     int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_order, parent, false);
-
-
-        return new ViewHolder(view);
-    }
-
-
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Meal meal = order.getMeals().get(position);
-
-        holder.dish.setText(meal.getName());
-        holder.price.setText(String.format("%.2f",meal.getPrice()));
-
-
-
-    }
-
-    @Override
-    public int getItemCount() {
-
-        return order.getMeals().size();
     }
 }

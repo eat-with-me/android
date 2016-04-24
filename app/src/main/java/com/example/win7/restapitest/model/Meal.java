@@ -25,7 +25,11 @@ public class Meal implements Parcelable {
     @SerializedName("updated_at")
     private String updatedAt;
 
-
+    public Meal(String name, Double price)
+    {
+        this.name=name;
+        this.price = price;
+    }
     protected Meal(Parcel in) {
         name = in.readString();
         createdAt = in.readString();

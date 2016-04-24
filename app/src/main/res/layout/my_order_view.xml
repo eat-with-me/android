@@ -2,23 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/windowBackground"
-    tools:context=".screens.order_screen.OrderActivity">
+    tools:context=".screens.order_screen.OrderFragmentActivity">
 
     <TextView
         android:id="@+id/my_empty_basket_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:visibility="gone"
         android:textColor="@color/text"
         android:text="@string/koszyk_jest_pusty"
         android:textSize="20dp"
         android:textStyle="bold"
         android:gravity="center"/>
-
-
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_meals_in_order"
