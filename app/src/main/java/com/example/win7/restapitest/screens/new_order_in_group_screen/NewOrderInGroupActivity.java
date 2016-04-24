@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.Factory;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
+import com.example.win7.restapitest.screens.restaurant_menu_screen.MenuAdapter;
 
 import java.util.List;
 
@@ -31,10 +33,13 @@ import java.util.List;
 public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrderInGroupView {
 
     private RecyclerView recyclerView;
+    private RecyclerView restaurantMenuRecycler;
     private RecyclerView.Adapter adapter;
+    private RecyclerView.Adapter adapter2;
     private TextView messageTextView;
     private ProgressBar progressBar;
     private ApiConnection apiConnection;
+    private Button button;
     List<RestaurantMenu> restaurantsResult = null;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +47,10 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
         setContentView(R.layout.activity_new_order_in_group);
 
         this.apiConnection = Factory.getApiConnection();
+        button = (Button) findViewById(R.id.button2);
         messageTextView = (TextView) findViewById(R.id.empty_view);
         recyclerView = (RecyclerView) findViewById(R.id.restaurants_recycler);
+        restaurantMenuRecycler = (RecyclerView) findViewById(R.id.restaurants_menu_recycler);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -53,6 +60,7 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
 
         showProgress();
 
+//        restaurantMenuRecyclerInit();
         recycleViewInit();
 //        mockRestaurants();
         getRestaurants();
@@ -75,6 +83,10 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
         adapter = new RestaurantsAdapter(restaurantsResult);
         recyclerView.setAdapter(adapter);
 
+    }
+    public void loadRestaurantMenu(RestaurantMenu restaurantMenu){
+        adapter2 = new MenuAdapter(restaurantMenu);
+        restaurantMenuRecycler.setAdapter(adapter2);
     }
 //    public void mockRestaurants() {
 //        List<Restaurant> mockedRes = new ArrayList<>();
@@ -152,6 +164,7 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
             @Override
             public void onClick(View view, int position) {
 
+                loadRestaurantMenu(restaurantsResult.get(position));
 
 
             }
@@ -163,4 +176,25 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
         }));
 
     }
+    public void OnClickShowDetails(View view)
+    {
+        if(getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment).isHidden()){
+
+            getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment)).commit();
+            getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentById(R.id.restaurants_fragment)).commit();
+        }
+        else{
+            getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentById(R.id.restaurants_fragment)).commit();
+            getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment)).commit();
+        }
+
+    }
+//    public void restaurantMenuRecyclerInit()
+//    {
+//        restaurantMenuRecycler.setHasFixedSize(true);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//
+//    }
 }

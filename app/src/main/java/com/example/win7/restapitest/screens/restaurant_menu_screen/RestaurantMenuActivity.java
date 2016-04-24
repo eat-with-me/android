@@ -147,6 +147,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
 
         Intent intent = new Intent(this, OrderFragmentActivity.class);
         intent.putExtra("order", restaurantMenuPresenter.getOrder());
+
         startActivityForResult(intent,ORDER_ACTIVITY_REQUEST_CODE);
     }
 

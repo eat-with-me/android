@@ -1,13 +1,13 @@
 package com.example.win7.restapitest.api;
 
+import com.example.win7.restapitest.model.Credentials;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.LoginAnswer;
 import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.Purchase;
 import com.example.win7.restapitest.model.RestaurantMenu;
-import com.example.win7.restapitest.model.Credentials;
 
 import java.util.List;
-
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -35,6 +35,9 @@ public interface Endpoints {
 
     @POST("/users.json")
     Call<LoginAnswer> signUp(@Body Credentials credentials);
+
+    @POST("/groups/{group_id}/purchasers")
+    Call<Purchase> purchase(@Path("groups") Integer id, @Body Purchase purchase);
 
 
 

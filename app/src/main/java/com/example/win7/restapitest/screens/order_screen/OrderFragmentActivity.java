@@ -94,7 +94,14 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
     }
 
     @Override
-    public void onClickCleanMyOrder(View view) {
+    public void onClickAcceptOrder(View view) {
+        Integer[] tablica = new Integer[order.getMeals().size()];
+        for (int i = 0; i < order.getMeals().size(); i++)
+        {
+            tablica[i] = order.getMeals().get(i).getId();
+        }
+
+
 
     }
 

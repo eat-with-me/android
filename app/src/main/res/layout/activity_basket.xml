@@ -63,6 +63,7 @@
         android:background="@color/colorAccept"
         android:textColor="@color/text"
         android:textStyle="bold"
+        android:onClick="onClickAcceptOrder"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
