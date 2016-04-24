@@ -61,7 +61,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
                                                      int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.order_row, parent, false);
+                .inflate(R.layout.row_order, parent, false);
 
 
         return new ViewHolder(view);

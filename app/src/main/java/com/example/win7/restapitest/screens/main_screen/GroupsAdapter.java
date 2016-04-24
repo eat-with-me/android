@@ -37,7 +37,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
                                                    int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.group_list_row, parent, false);
+                .inflate(R.layout.row_group_list, parent, false);
 
         return new ViewHolder(view);
     }

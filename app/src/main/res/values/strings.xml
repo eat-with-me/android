@@ -19,6 +19,7 @@
     <!--Strings related to OrdersInGroupActivity-->
     <string name="no_orders_available">Brak aktywnych zamówień</string>
     <string name="button_new_order">Nowe zamówienie</string>
+    <string name="closing_time_text">Czas do zakończenia zamówienaia:</string>
 
     <!--Strings related to loginActivity-->
     <string name="button_create_account">Utwórz konto</string>

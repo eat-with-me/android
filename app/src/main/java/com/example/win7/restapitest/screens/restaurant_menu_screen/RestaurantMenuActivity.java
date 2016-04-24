@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.Order;

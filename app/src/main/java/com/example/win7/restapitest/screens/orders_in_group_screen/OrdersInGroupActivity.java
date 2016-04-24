@@ -59,11 +59,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         String groupId = intent.getStringExtra(MainActivity.GROUP_ID);
 
         showProgress();
-
-
         recycleViewInit();
-
-
         ordersInGroupPresenter.getOrders(groupId);
 
     }
