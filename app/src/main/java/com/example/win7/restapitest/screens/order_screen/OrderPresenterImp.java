@@ -3,6 +3,7 @@ package com.example.win7.restapitest.screens.order_screen;
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.FinalOrder;
+import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Purchaser;
 import com.example.win7.restapitest.others.Factory;
 
@@ -29,33 +30,22 @@ public class OrderPresenterImp implements OrderPresenter {
     }
 
     @Override
-    public void getGroupOrder(String groupId) {
-
-    }
-
-    @Override
-    public void onClickCleanMyOrder() {
-
-    }
-
-    @Override
     public void onClickAccept(FinalOrder finalOrder, String groupId) {
         apiConnection.sendPurchase(finalOrder, groupId);
     }
 
     @Override
     public void getPurchasers(String group_ip, String order_id) {
-        apiConnection.getPurchasers(group_ip,order_id,new OnDownloadFinishedListener<List<Purchaser>>() {
+        apiConnection.getPurchasers(group_ip,order_id,new OnDownloadFinishedListener<OrderInGroup>() {
             @Override
-            public void onSuccess(List<Purchaser> arg) {
-//                result = arg;
-                if(arg.isEmpty())
+            public void onSuccess(OrderInGroup arg) {
+                if(arg!=null)
                 {
-                    orderView.setEmptyOtherOrderView();
+                    orderView.setPurchasers(arg.getPurchasers());
                 }
                 else {
                     orderView.setEmptyOtherOrderView();
-//                    orderView.setPurchasers(arg);
+
                 }
 
             }

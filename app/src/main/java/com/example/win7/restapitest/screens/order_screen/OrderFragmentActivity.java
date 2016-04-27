@@ -49,11 +49,13 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
+
         Intent intent = getIntent();
         order = intent.getParcelableExtra("order");
         restaurantId = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_ID);
         groupId = intent.getStringExtra(MainActivity.GROUP_ID);
 
+        orderPresenter = new OrderPresenterImp(this);
         adapter = new OrderAdapter(order,getBaseContext());
         myOrderIsEmpty = (TextView) findViewById(R.id.my_empty_basket_text);
         otherOrderIsEmpty = (TextView) findViewById(R.id.other_empty_basket_text);
@@ -63,22 +65,14 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
         recyclerViewOtherOrder = (RecyclerView) findViewById(R.id.other_meals_in_order);
 
         FragmentManager fm2 = getSupportFragmentManager();
-//        Fragment myOrderFragment = fm2.findFragmentById(R.id.my_order_fragment);
         Fragment otherOrdersFragment = fm2.findFragmentById(R.id.other_orders_fragment);
         FragmentTransaction trans = fm2.beginTransaction();
-//        trans.replace(R.id.my_order_fragment, myOrderFragment);
         trans.hide(otherOrdersFragment).commit();
 
         addShowHideListener(R.id.bMyOrder, R.id.bOtherOrders, fm2.findFragmentById(R.id.my_order_fragment), fm2.findFragmentById(R.id.other_orders_fragment));
 
-        orderPresenter = new OrderPresenterImp(this);
         recyclerViewInit();
         getPurchasers();
-//        if(order.getMeals().isEmpty()){
-//            setEmptyMyOrderView();
-//        }
-
-
     }
 
     public Order getOrder()
@@ -88,13 +82,12 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
 
     @Override
     public void setEmptyMyOrderView() {
-//        recyclerViewMyOrder.setVisibility(View.GONE);
+        recyclerViewMyOrder.setVisibility(View.GONE);
         myOrderIsEmpty.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void setEmptyOtherOrderView() {
-
         otherOrderIsEmpty.setVisibility(View.VISIBLE);
         recyclerViewOtherOrder.setVisibility(View.GONE);
 
@@ -117,15 +110,18 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
         Purchase purchase = new Purchase(Integer.parseInt(restaurantId),tablica);
         FinalOrder finalOrder = new FinalOrder(purchase);
         orderPresenter.onClickAccept(finalOrder,groupId);
-
+        getPurchasers();
     }
 
     @Override
     public void setPurchasers(List<Purchaser> purchasers) {
 
         otherOrdersAdapter = new PurchaserAdapter(purchasers);
-        showToast(purchasers.get(0).getUser().getEmail());
         recyclerViewOtherOrder.setAdapter(otherOrdersAdapter);
+
+        otherOrderIsEmpty.setVisibility(View.GONE);
+        recyclerViewOtherOrder.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -153,9 +149,6 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
                     ft.hide(otherOrdersFragment);
                     if (myOrderFragment.isHidden()) {
                         ft.show(myOrderFragment);
-
-
-//                        button.setForeground(getDrawable(R.drawable.ic_keyboard_arrow_up_white_18dp));
                     }
 
                     ft.commit();
@@ -170,8 +163,6 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
                     ft.hide(myOrderFragment);
                     if (otherOrdersFragment.isHidden()) {
                         ft.show(otherOrdersFragment);
-
-//                        button.setForeground(getDrawable(R.drawable.ic_keyboard_arrow_up_white_18dp));
                     }
                     ft.commit();
 

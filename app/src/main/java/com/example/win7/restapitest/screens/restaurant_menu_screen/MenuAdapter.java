@@ -27,6 +27,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
             price = (TextView) view.findViewById(R.id.price);
         }
 
+
     }
 
 

@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 // /groups/<id>/orders
@@ -37,7 +38,7 @@ public class OrderInGroup {
     private Restaurant restaurant;
 
     @SerializedName("purchasers")
-    private Purchaser[] purchasers;
+    private List<Purchaser> purchasers;
 
 
     public String getId() {
@@ -148,6 +149,13 @@ public class OrderInGroup {
         return result;
     }
 
+    public List<Purchaser> getPurchasers() {
+        return purchasers;
+    }
+
+    public void setPurchasers(List<Purchaser> purchasers) {
+        this.purchasers = purchasers;
+    }
 }
 
 

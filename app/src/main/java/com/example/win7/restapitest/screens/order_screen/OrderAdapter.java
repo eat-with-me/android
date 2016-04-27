@@ -35,7 +35,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.order_row, parent, false);
 
-
         return new ViewHolder(view);
     }
 
@@ -46,8 +45,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
         holder.dish.setText(meal.getName());
         holder.price.setText(String.format("%.2f", meal.getPrice()));
-
-
     }
 
     @Override

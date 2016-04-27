@@ -194,21 +194,17 @@ public class ApiConnectionImp implements ApiConnection {
 
     @Override
     public void getPurchasers(String group_id, String order_id, final OnDownloadFinishedListener listener) {
-        Log.d("OmSuccess",group_id + "OOOOOOOOOOOOOOOOOOOOOOOO" + order_id);
-        Call<List<Purchaser>> call = api.getPurchasers(Integer.parseInt(group_id),Integer.parseInt(order_id));
-        call.enqueue(new Callback<List<Purchaser>>() {
+        Call<OrderInGroup> call = api.getPurchasers(Integer.parseInt(group_id),Integer.parseInt(order_id));
+        call.enqueue(new Callback<OrderInGroup>() {
             @Override
-            public void onResponse(Call<List<Purchaser>> call, Response<List<Purchaser>> response) {
+            public void onResponse(Call<OrderInGroup> call, Response<OrderInGroup> response) {
 
                 listener.onSuccess(response.body());
-                Log.d("OnSuccess","OKOKOKOKOKOKOKOK");
-
             }
 
             @Override
-            public void onFailure(Call<List<Purchaser>> call, Throwable t) {
-                Log.d("JESTEMQQQQQQQQQQQ",t.toString());
-
+            public void onFailure(Call<OrderInGroup> call, Throwable t) {
+                listener.onError();
             }
         });
 

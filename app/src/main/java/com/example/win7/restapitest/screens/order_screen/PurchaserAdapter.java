@@ -17,17 +17,23 @@ import java.util.List;
 public class PurchaserAdapter extends RecyclerView.Adapter<PurchaserAdapter.ViewHolder> {
 
     private List<Purchaser> purchasers;
+    Double amount;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView email;
+        public TextView meals;
+        public TextView charge;
         public ViewHolder(View itemView) {
             super(itemView);
             email = (TextView) itemView.findViewById(R.id.purchaser_email);
-
+            meals = (TextView) itemView.findViewById(R.id.purchaser_meals);
+            charge = (TextView) itemView.findViewById(R.id.purchaser_charge);
         }
     }
     public PurchaserAdapter(List<Purchaser> purchasers){
         this.purchasers=purchasers;
+        this.amount = 0.0;
+
     }
     @Override
     public PurchaserAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -41,12 +47,18 @@ public class PurchaserAdapter extends RecyclerView.Adapter<PurchaserAdapter.View
     public void onBindViewHolder(PurchaserAdapter.ViewHolder holder, int position) {
         Purchaser purchaser = purchasers.get(position);
         holder.email.setText(purchaser.getUser().getEmail());
+        for(int i=0; i<purchaser.getMeals().size(); i++) {
+            amount += purchaser.getMeals().get(i).getPrice();
+            holder.meals.setText(holder.meals.getText() + purchaser.getMeals().get(i).getName() + "\n");
+        }
+
+        holder.charge.setText(String.format("%.2f",amount));
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return purchasers.size();
     }
 
 

@@ -27,16 +27,6 @@ public class OtherOrderFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.other_orders_view, container, false);
-        //TODO
-//        order = new Order();
-//        for(int i=0; i<7; i++){
-//            String imie = "TODO";
-//
-//            Meal meal = new Meal(imie,10.50);
-//            order.add(meal);
-//        }
-//
-//        adapter = new OrderAdapter(order,getActivity());
 
         return view;
     }

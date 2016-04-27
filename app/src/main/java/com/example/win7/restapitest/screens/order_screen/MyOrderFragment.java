@@ -19,15 +19,10 @@ public class MyOrderFragment extends Fragment {
     Order order;
     OrderAdapter adapter;
 
-
-
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.my_order_view, container, false);
-
-
 
         return view;
     }
@@ -35,9 +30,5 @@ public class MyOrderFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
-
-
     }
 }

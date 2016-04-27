@@ -9,10 +9,6 @@ public interface OrderPresenter {
 
     void onClickMeal(int position);
 
-    void getGroupOrder(String groupId);
-
-    void onClickCleanMyOrder();
-
     void onClickAccept(FinalOrder finalOrder, String groupId);
 
     void getPurchasers(String group_ip, String order_id);
