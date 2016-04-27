@@ -17,9 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
+import com.example.win7.restapitest.model.FinalOrder;
 import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.model.Purchase;
-import com.example.win7.restapitest.model.Purchasers;
+import com.example.win7.restapitest.model.Purchaser;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
@@ -95,6 +96,7 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
     public void setEmptyOtherOrderView() {
 
         otherOrderIsEmpty.setVisibility(View.VISIBLE);
+        recyclerViewOtherOrder.setVisibility(View.GONE);
 
     }
     public void getPurchasers(){
@@ -106,19 +108,22 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
     @Override
     public void onClickAcceptOrder(View view) {
         Integer[] tablica = new Integer[order.getMeals().size()];
+
         for (int i = 0; i < order.getMeals().size(); i++)
         {
             tablica[i] = order.getMeals().get(i).getId();
         }
-        Purchase purchase = new Purchase(restaurantId,tablica);
-        orderPresenter.onClickAccept(purchase,groupId);
+
+        Purchase purchase = new Purchase(Integer.parseInt(restaurantId),tablica);
+        FinalOrder finalOrder = new FinalOrder(purchase);
+        orderPresenter.onClickAccept(finalOrder,groupId);
 
     }
 
     @Override
-    public void setPurchasers(List<Purchasers> purchasers) {
+    public void setPurchasers(List<Purchaser> purchasers) {
 
-otherOrdersAdapter = new PurchaserAdapter(purchasers);
+        otherOrdersAdapter = new PurchaserAdapter(purchasers);
         showToast(purchasers.get(0).getUser().getEmail());
         recyclerViewOtherOrder.setAdapter(otherOrdersAdapter);
     }

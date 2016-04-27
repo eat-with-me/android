@@ -10,6 +10,8 @@ import java.util.ArrayList;
  */
 public class Order implements Parcelable{
 
+
+
     private ArrayList<Meal> meals;
     private double totalPrice;
 

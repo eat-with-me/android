@@ -1,5 +1,7 @@
 package com.example.win7.restapitest.screens.orders_in_group_screen;
 
+import android.util.Log;
+
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.OrderInGroup;
@@ -39,9 +41,10 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
 
                 if(ordersResult.isEmpty()){
                     ordersInGroupView.setEmptyView();
+                    Log.d("OmSuccess","isEmpty");
                 }
                 else{
-
+                    Log.d("OmSuccess","isnotEmpty");
                     ordersInGroupView.loadOrders(ordersResult);
                 }
             }

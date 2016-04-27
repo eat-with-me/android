@@ -2,7 +2,7 @@ package com.example.win7.restapitest.screens.order_screen;
 
 import android.view.View;
 
-import com.example.win7.restapitest.model.Purchasers;
+import com.example.win7.restapitest.model.Purchaser;
 
 import java.util.List;
 
@@ -14,6 +14,6 @@ public interface OrderView {
     void setEmptyMyOrderView();
     void setEmptyOtherOrderView();
     void onClickAcceptOrder(View view);
-    public void setPurchasers(List<Purchasers> purchasers);
+    public void setPurchasers(List<Purchaser> purchasers);
     void showToast(String message);
 }

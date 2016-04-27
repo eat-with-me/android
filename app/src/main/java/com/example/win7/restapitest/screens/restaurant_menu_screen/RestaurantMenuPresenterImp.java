@@ -35,7 +35,7 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
 
         setTotalPriceAndNumberOfProducts();
 
-        restaurantMenuView.showToast("Dodano do koszyka");
+        restaurantMenuView.showToast("Dodano do koszyka "+menuResult.getMeals().get(position).getId());
 
 
     }

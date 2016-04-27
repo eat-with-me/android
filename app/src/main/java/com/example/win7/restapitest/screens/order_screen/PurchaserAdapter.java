@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
-import com.example.win7.restapitest.model.Purchasers;
+import com.example.win7.restapitest.model.Purchaser;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class PurchaserAdapter extends RecyclerView.Adapter<PurchaserAdapter.ViewHolder> {
 
-    private List<Purchasers> purchasers;
+    private List<Purchaser> purchasers;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView email;
@@ -26,7 +26,7 @@ public class PurchaserAdapter extends RecyclerView.Adapter<PurchaserAdapter.View
 
         }
     }
-    public PurchaserAdapter(List<Purchasers> purchasers){
+    public PurchaserAdapter(List<Purchaser> purchasers){
         this.purchasers=purchasers;
     }
     @Override
@@ -39,7 +39,7 @@ public class PurchaserAdapter extends RecyclerView.Adapter<PurchaserAdapter.View
 
     @Override
     public void onBindViewHolder(PurchaserAdapter.ViewHolder holder, int position) {
-        Purchasers purchaser = purchasers.get(position);
+        Purchaser purchaser = purchasers.get(position);
         holder.email.setText(purchaser.getUser().getEmail());
 
     }

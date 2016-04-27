@@ -36,6 +36,9 @@ public class OrderInGroup {
     @SerializedName("restaurant")
     private Restaurant restaurant;
 
+    @SerializedName("purchasers")
+    private Purchaser[] purchasers;
+
 
     public String getId() {
         return id;

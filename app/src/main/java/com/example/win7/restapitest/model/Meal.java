@@ -31,10 +31,12 @@ public class Meal implements Parcelable {
         this.price = price;
     }
     protected Meal(Parcel in) {
+
         name = in.readString();
         createdAt = in.readString();
         updatedAt = in.readString();
         price = in.readDouble();
+        id = in.readInt();
     }
 
     public static final Creator<Meal> CREATOR = new Creator<Meal>() {
@@ -104,9 +106,11 @@ public class Meal implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
         dest.writeString(name);
         dest.writeString(createdAt);
         dest.writeString(updatedAt);
         dest.writeDouble(price);
+        dest.writeInt(id);
     }
 }

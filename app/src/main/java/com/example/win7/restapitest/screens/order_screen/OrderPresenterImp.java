@@ -2,8 +2,8 @@ package com.example.win7.restapitest.screens.order_screen;
 
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
-import com.example.win7.restapitest.model.Purchase;
-import com.example.win7.restapitest.model.Purchasers;
+import com.example.win7.restapitest.model.FinalOrder;
+import com.example.win7.restapitest.model.Purchaser;
 import com.example.win7.restapitest.others.Factory;
 
 import java.util.List;
@@ -15,7 +15,8 @@ public class OrderPresenterImp implements OrderPresenter {
 
     private OrderView orderView;
     private ApiConnection apiConnection;
-    private List<Purchasers> result;
+    private List<Purchaser> result;
+
 
     public OrderPresenterImp(OrderView orderView) {
         this.orderView = orderView;
@@ -38,16 +39,24 @@ public class OrderPresenterImp implements OrderPresenter {
     }
 
     @Override
-    public void onClickAccept(Purchase purchase, String groupId) {
-        apiConnection.sendPurchase(purchase, groupId);
+    public void onClickAccept(FinalOrder finalOrder, String groupId) {
+        apiConnection.sendPurchase(finalOrder, groupId);
     }
 
     @Override
     public void getPurchasers(String group_ip, String order_id) {
-        apiConnection.getPurchasers(group_ip,order_id,new OnDownloadFinishedListener<List<Purchasers>>() {
+        apiConnection.getPurchasers(group_ip,order_id,new OnDownloadFinishedListener<List<Purchaser>>() {
             @Override
-            public void onSuccess(List<Purchasers> arg) {
+            public void onSuccess(List<Purchaser> arg) {
 //                result = arg;
+                if(arg.isEmpty())
+                {
+                    orderView.setEmptyOtherOrderView();
+                }
+                else {
+                    orderView.setEmptyOtherOrderView();
+//                    orderView.setPurchasers(arg);
+                }
 
             }
 

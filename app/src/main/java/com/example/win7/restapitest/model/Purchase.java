@@ -8,12 +8,12 @@ import com.google.gson.annotations.SerializedName;
 public class Purchase {
 
     @SerializedName("id")
-    String id;
+    Integer id;
 
     @SerializedName("meals")
-    Integer[] meals;
+    Integer [] meals;
 
-    public Purchase(String id, Integer[] meals){
+    public Purchase(Integer id, Integer[] meals){
         this.id=id;
         this.meals=meals;
     }

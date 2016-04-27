@@ -5,12 +5,14 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by Mateusz on 2016-04-24.
  */
-public class Purchasers {
+public class Purchaser {
 
     @SerializedName("id")
     Integer id;
     @SerializedName("user_id")
     Integer user_id;
+    @SerializedName("meals")
+    Meal[] meals;
     @SerializedName("user")
     User user;
 
