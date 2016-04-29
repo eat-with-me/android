@@ -25,10 +25,24 @@ public class Meal implements Parcelable {
     @SerializedName("updated_at")
     private String updatedAt;
 
+    @SerializedName("amount")
+    private Integer amount;
+
     public Meal(String name, Double price)
     {
         this.name=name;
         this.price = price;
+        this.amount=0;
+    }
+    public Meal(Meal otherMeal)
+    {
+        this.id = otherMeal.getId();
+        this.name = otherMeal.getName();
+        this.price = otherMeal.getPrice();
+        this.restaurantId = otherMeal.getRestaurantId();
+        this.createdAt = otherMeal.getCreatedAt();
+        this.updatedAt = otherMeal.getUpdatedAt();
+        this.amount = 1;
     }
     protected Meal(Parcel in) {
 
@@ -37,6 +51,7 @@ public class Meal implements Parcelable {
         updatedAt = in.readString();
         price = in.readDouble();
         id = in.readInt();
+        amount = in.readInt();
     }
 
     public static final Creator<Meal> CREATOR = new Creator<Meal>() {
@@ -112,5 +127,17 @@ public class Meal implements Parcelable {
         dest.writeString(updatedAt);
         dest.writeDouble(price);
         dest.writeInt(id);
+        dest.writeInt(amount);
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+    public void incAmount(){
+        this.amount+=1;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 }

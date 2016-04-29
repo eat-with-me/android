@@ -30,18 +30,43 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
     @Override
     public void onClickMeal(int position) {
 
-        Meal meal = menuResult.getMeals().get(position);
-        order.add(meal);
+        Meal meal = new Meal(menuResult.getMeals().get(position));
+        boolean jest = false;
+        if (!order.getMeals().isEmpty()) {
+
+
+                for (int i = 0; i < order.getMeals().size(); i++) {
+                    if (order.getMeals().get(i).getId().equals(meal.getId())) {
+                        order.getMeals().get(i).incAmount();
+                        order.incTotalPrice(meal.getPrice());
+                        order.incNumberOfProducts();
+                        restaurantMenuView.showToast("Dodano do koszyka " + menuResult.getMeals().get(position).getId());
+                        jest = true;
+                    }
+                }
+                if(!jest)
+                {
+                    order.add(meal);
+                    restaurantMenuView.showToast("Dodano do koszyka " + menuResult.getMeals().get(position).getId());
+                }
+
+
+
+
+        } else {
+
+            order.add(meal);
+            restaurantMenuView.showToast("Dodano do koszyka " + menuResult.getMeals().get(position).getId());
+        }
 
         setTotalPriceAndNumberOfProducts();
 
-        restaurantMenuView.showToast("Dodano do koszyka "+menuResult.getMeals().get(position).getId());
-
 
     }
-    public void setTotalPriceAndNumberOfProducts(){
+
+    public void setTotalPriceAndNumberOfProducts() {
         Double totalPrice = order.getTotalPrice();
-        Integer totalProducts = order.getNumberOfOrderedMeals();
+        Integer totalProducts = order.getNumberOfProducts();
 
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         String totalPriceStr = decimalFormat.format(totalPrice);
@@ -59,10 +84,9 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
                 menuResult = arg;
                 restaurantMenuView.hideProgress();
 
-                if(menuResult.isEmpty()){
+                if (menuResult.isEmpty()) {
                     restaurantMenuView.setEmptyView();
-                }
-                else{
+                } else {
 
                     restaurantMenuView.loadMenu(menuResult);
                 }
@@ -100,7 +124,10 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
     public Order getOrder() {
         return order;
     }
-    public void setOrder(Order order){this.order = order;}
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
 
 }

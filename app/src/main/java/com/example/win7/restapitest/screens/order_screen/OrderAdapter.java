@@ -45,6 +45,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
         holder.dish.setText(meal.getName());
         holder.price.setText(String.format("%.2f", meal.getPrice()));
+        holder.amount.setText(String.format("%d",meal.getAmount()));
     }
 
     @Override
@@ -57,6 +58,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
         public TextView dish;
         public TextView price;
+        public TextView amount;
         public ImageButton cross;
 
 
@@ -64,6 +66,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             super(view);
             dish = (TextView) view.findViewById(R.id.dish);
             price = (TextView) view.findViewById(R.id.price);
+            amount = (TextView) view.findViewById(R.id.amount);
             cross = (ImageButton) view.findViewById(R.id.cross);
             cross.setOnClickListener(this);
         }

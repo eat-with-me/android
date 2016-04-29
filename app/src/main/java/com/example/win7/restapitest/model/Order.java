@@ -14,15 +14,18 @@ public class Order implements Parcelable{
 
     private ArrayList<Meal> meals;
     private double totalPrice;
+    private Integer numberOfProducts;
 
     public Order()
     {
         meals = new ArrayList<Meal>();
         totalPrice = 0;
+        numberOfProducts = 0;
     }
     protected Order(Parcel in) {
         meals = in.createTypedArrayList(Meal.CREATOR);
         totalPrice = in.readDouble();
+        numberOfProducts = in.readInt();
     }
 
     public static final Creator<Order> CREATOR = new Creator<Order>() {
@@ -41,16 +44,18 @@ public class Order implements Parcelable{
 
         meals.add(meal);
         totalPrice += meal.getPrice();
+        numberOfProducts++;
     }
 
     public void delete(Meal meal){
 
         if(meals.remove(meal)){
-            totalPrice -= meal.getPrice();
+            numberOfProducts-=meal.getAmount();
+            totalPrice -= meal.getPrice()*meal.getAmount();
         }
 
     }
-    public void changeTotalPrice(double a){totalPrice -= a;}
+    public void incTotalPrice(double a){totalPrice += a;}
     public double getTotalPrice(){return totalPrice;  }
     public void setTotalPrice(Double totalPrice){this.totalPrice = totalPrice;}
 
@@ -67,5 +72,13 @@ public class Order implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(meals);
         dest.writeDouble(totalPrice);
+        dest.writeInt(numberOfProducts);
+    }
+
+    public Integer getNumberOfProducts() {
+        return numberOfProducts;
+    }
+    public void incNumberOfProducts()   {
+        numberOfProducts++;
     }
 }
