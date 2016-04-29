@@ -17,8 +17,8 @@ public class Purchaser {
     String created_at;
     @SerializedName("updated_at")
     String updated_at;
-    @SerializedName("meals")
-    List<Meal> meals;
+    @SerializedName("meals_lists")
+    List<MealsList> meals_lists;
     @SerializedName("user")
     User user;
 
@@ -54,19 +54,19 @@ public class Purchaser {
         this.updated_at = updated_at;
     }
 
-    public List<Meal> getMeals() {
-        return meals;
-    }
-
-    public void setMeals(List<Meal> meals) {
-        this.meals = meals;
-    }
-
     public String getCreated_at() {
         return created_at;
     }
 
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
+    }
+
+    public List<MealsList> getMeals_list() {
+        return meals_lists;
+    }
+
+    public void setMeals_list(List<MealsList> meals_list) {
+        this.meals_lists = meals_list;
     }
 }

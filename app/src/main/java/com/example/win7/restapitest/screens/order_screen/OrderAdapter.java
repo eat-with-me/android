@@ -45,7 +45,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
         holder.dish.setText(meal.getName());
         holder.price.setText(String.format("%.2f", meal.getPrice()));
-        holder.amount.setText(String.format("%d",meal.getAmount()));
+        holder.amount.setText("Ilość: " + String.format("%d",meal.getAmount()));
     }
 
     @Override

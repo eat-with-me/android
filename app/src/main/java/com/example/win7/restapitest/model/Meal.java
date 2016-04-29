@@ -7,6 +7,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Meal implements Parcelable {
 
+    @SerializedName("meal_id")
+    private Integer meal_id;
+
     @SerializedName("id")
     private Integer id;
 
@@ -43,6 +46,7 @@ public class Meal implements Parcelable {
         this.createdAt = otherMeal.getCreatedAt();
         this.updatedAt = otherMeal.getUpdatedAt();
         this.amount = 1;
+        this.meal_id = otherMeal.getId();
     }
     protected Meal(Parcel in) {
 
@@ -52,6 +56,7 @@ public class Meal implements Parcelable {
         price = in.readDouble();
         id = in.readInt();
         amount = in.readInt();
+        meal_id = in.readInt();
     }
 
     public static final Creator<Meal> CREATOR = new Creator<Meal>() {
@@ -72,6 +77,7 @@ public class Meal implements Parcelable {
 
     public void setId(Integer id) {
         this.id = id;
+
     }
 
     public String getName() {
@@ -128,6 +134,7 @@ public class Meal implements Parcelable {
         dest.writeDouble(price);
         dest.writeInt(id);
         dest.writeInt(amount);
+        dest.writeInt(meal_id);
     }
 
     public Integer getAmount() {
@@ -139,5 +146,13 @@ public class Meal implements Parcelable {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public Integer getMeal_id() {
+        return meal_id;
+    }
+
+    public void setMeal_id(Integer meal_id) {
+        this.meal_id = meal_id;
     }
 }

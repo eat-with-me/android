@@ -31,6 +31,7 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
     public void onClickMeal(int position) {
 
         Meal meal = new Meal(menuResult.getMeals().get(position));
+        meal.setMeal_id(menuResult.getMeals().get(position).getId());
         boolean jest = false;
         if (!order.getMeals().isEmpty()) {
 
