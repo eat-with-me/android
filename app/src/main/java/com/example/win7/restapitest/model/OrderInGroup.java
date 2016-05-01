@@ -41,6 +41,8 @@ public class OrderInGroup {
     private List<Purchaser> purchasers;
 
 
+
+
     public String getId() {
         return id;
     }
@@ -93,7 +95,11 @@ public class OrderInGroup {
         this.restaurant = restaurant;
     }
 
-    public String getClosingTimeShort() {
+    public String getClosingTimeShort(){
+        return closingTime.substring(11,16);
+    }
+
+    public String getTimeToClose() {
 
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String closingTime = convertClosingTime();
@@ -155,6 +161,11 @@ public class OrderInGroup {
 
     public void setPurchasers(List<Purchaser> purchasers) {
         this.purchasers = purchasers;
+    }
+
+    public String getNumberOfPurchasers(){
+
+       return String.valueOf(purchasers.size());
     }
 }
 

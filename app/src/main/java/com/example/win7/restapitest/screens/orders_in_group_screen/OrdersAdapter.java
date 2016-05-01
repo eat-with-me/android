@@ -21,12 +21,14 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
         public TextView restaurantName;
         public TextView closingTime;
+        public TextView numberOfOrders;
         public View view;
 
         public ViewHolder(View view) {
             super(view);
             restaurantName = (TextView) view.findViewById(R.id.restaurant_name);
             closingTime = (TextView) view.findViewById((R.id.closing_time));
+            numberOfOrders = (TextView) view.findViewById(R.id.number_of_orders);
             this.view = view;
 
         }
@@ -50,6 +52,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         OrderInGroup order = orders.get(position);
         holder.restaurantName.setText(order.getRestaurant().getName());
         holder.closingTime.setText(order.getClosingTimeShort());
+        holder.numberOfOrders.setText(order.getNumberOfPurchasers());
         holder.view.setClickable(false);
     }
 

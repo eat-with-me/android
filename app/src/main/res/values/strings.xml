@@ -19,7 +19,8 @@
     <!--Strings related to OrdersInGroupActivity-->
     <string name="no_orders_available">Brak aktywnych zamówień</string>
     <string name="button_new_order">Nowe zamówienie</string>
-    <string name="closing_time_text">Czas do zakończenia zamówienaia:</string>
+    <string name="closing_time_text">Godzina zakończenia:</string>
+    <string name="number_of_order">Liczba zamówień:"</string>
 
     <!--Strings related to loginActivity-->
     <string name="button_create_account">Utwórz konto</string>
@@ -56,9 +57,13 @@
     <string name="akceptuj_zam_wienie">Akceptuj zamówienie</string>
     <string name="brak_restauracji">Brak restauracji</string>
     <string name="prompt_new_group">Nazwa nowej grupy</string>
-    <string name="dialog_message">Sprawdz swoje połączzenie z internetem i spróbuj ponownie</string>
+
+
+
+    <!--Strings related to alertDialog-->
     <string name="dialog_title">Błąd sieci</string>
     <string name="try_again">Ponów</string>
     <string name="close">Zamknij</string>
+    <string name="dialog_message">Sprawdz swoje połączenie z internetem i spróbuj ponownie</string>
 
 </resources>
