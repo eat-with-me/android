@@ -26,6 +26,7 @@ import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
+import com.example.win7.restapitest.screens.new_group_screen.NewGroupActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
 import java.util.List;
@@ -111,6 +112,7 @@ public  class MainActivity extends MyActivity implements MainView {
         startActivity(intent);
     }
 
+
     @Override
     public void showProgress() {
 
@@ -141,10 +143,12 @@ public  class MainActivity extends MyActivity implements MainView {
         messageTextView.setText(noInternet);
         messageTextView.setVisibility(View.VISIBLE);
 
-   }
-
-
-
+    }
+    @Override
+    public void navigateToNewGroupActivity() {
+        Intent intent = new Intent(this, NewGroupActivity.class);
+        startActivity(intent);
+    }
 
 
     private void recycleViewInit(){

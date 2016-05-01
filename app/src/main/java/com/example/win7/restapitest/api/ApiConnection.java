@@ -2,6 +2,7 @@ package com.example.win7.restapitest.api;
 
 import com.example.win7.restapitest.model.Credentials;
 import com.example.win7.restapitest.model.FinalOrder;
+import com.example.win7.restapitest.model.GroupName;
 
 /**
  * Created by win7 on 28/03/2016.
@@ -23,4 +24,6 @@ public interface ApiConnection {
     void login(Credentials credentials, final OnLoginListener listener);
 
     void signUp(Credentials credentials, final OnLoginListener listener);
+
+    void createNewGroup(GroupName groupName, OnDownloadFinishedListener listener);
 }

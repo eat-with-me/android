@@ -3,6 +3,7 @@ package com.example.win7.restapitest.api;
 import com.example.win7.restapitest.model.Credentials;
 import com.example.win7.restapitest.model.FinalOrder;
 import com.example.win7.restapitest.model.Group;
+import com.example.win7.restapitest.model.GroupName;
 import com.example.win7.restapitest.model.LoginAnswer;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.RestaurantMenu;
@@ -42,7 +43,6 @@ public interface Endpoints {
     @POST("/groups/{group_id}/purchasers")
     Call<FinalOrder> purchase(@Path("group_id") int group_id, @Body FinalOrder finalOrder);
 
-
-
-
+    @POST("/groups")
+    Call<Group> createNewGroup(@Body GroupName groupName);
 }

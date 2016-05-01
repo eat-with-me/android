@@ -12,7 +12,6 @@ import java.util.List;
 
 public class MainPresenterImp implements MainPresenter {
 
-
     private MainView mainView;
     private ApiConnection apiConnection;
 
@@ -72,7 +71,7 @@ public class MainPresenterImp implements MainPresenter {
 
     @Override
     public void onClickNewGroup(){
-        mainView.showToast("New group is selected");
+        mainView.navigateToNewGroupActivity();
     }
 
  }

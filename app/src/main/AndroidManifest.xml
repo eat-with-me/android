@@ -22,7 +22,7 @@
         <activity android:name=".screens.orders_in_group_screen.OrdersInGroupActivity" />
         <activity android:name=".screens.restaurant_menu_screen.RestaurantMenuActivity" />
         <activity android:name=".screens.order_screen.OrderFragmentActivity" />
-        <activity android:name=".screens.new_order_in_group_screen.NewOrderInGroupActivity"/>
+        <activity android:name=".screens.new_order_in_group_screen.NewOrderInGroupActivity" />
         <activity android:name=".screens.main_screen.MainActivity">
 
             <!-- <intent-filter> -->
@@ -33,7 +33,8 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".screens.sign_up_screen.SignUpActivity" />
-        <activity android:name=".screens.error_screen.ErrorActivity"></activity>
+        <activity android:name=".screens.error_screen.ErrorActivity" />
+        <activity android:name=".screens.new_group_screen.NewGroupActivity"></activity>
     </application>
 
 </manifest> <!-- .screens.main_screen.MainActivity" -->

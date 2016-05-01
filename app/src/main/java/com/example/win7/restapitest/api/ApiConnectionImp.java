@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.win7.restapitest.model.Credentials;
 import com.example.win7.restapitest.model.FinalOrder;
 import com.example.win7.restapitest.model.Group;
+import com.example.win7.restapitest.model.GroupName;
 import com.example.win7.restapitest.model.LoginAnswer;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Purchaser;
@@ -278,6 +279,32 @@ public class ApiConnectionImp implements ApiConnection {
             @Override
 
             public void onFailure(Call<LoginAnswer> call, Throwable t) {
+
+                listener.onError();
+
+            }
+
+        });
+
+    }
+
+
+    @Override
+    public void createNewGroup(GroupName groupName, final OnDownloadFinishedListener listener) {
+        Call<Group> call= api.createNewGroup(groupName);
+        call.enqueue(new Callback<Group>() {
+
+            @Override
+
+            public void onResponse(Call<Group> call, Response<Group> response) {
+
+                    Group group = response.body();
+                    listener.onSuccess(group);
+            }
+
+            @Override
+
+            public void onFailure(Call<Group> call, Throwable t) {
 
                 listener.onError();
 
