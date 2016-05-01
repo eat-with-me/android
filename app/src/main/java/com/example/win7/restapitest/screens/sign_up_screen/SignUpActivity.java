@@ -3,10 +3,8 @@ package com.example.win7.restapitest.screens.sign_up_screen;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -15,12 +13,10 @@ import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.Credentials;
-import com.example.win7.restapitest.model.User;
-import com.example.win7.restapitest.screens.error_screen.ErrorActivity;
-import com.example.win7.restapitest.screens.login_screen.LoginPresenter;
+import com.example.win7.restapitest.others.MyBaseActivity;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
 
-public class SignUpActivity extends AppCompatActivity implements SignUpView {
+public class SignUpActivity extends MyBaseActivity implements SignUpView {
 
 
     private ProgressBar progressBar;
@@ -54,6 +50,18 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
 
     public void onClickSignUp(View v){
         signUpPresenter.onClickSignUp();
+    }
+
+
+    @Override
+    public void refresh() {
+        signUpPresenter.onClickSignUp();
+    }
+
+    @Override
+    public void close() {
+        moveTaskToBack(true);
+        hideProgressBar();
     }
 
 
@@ -153,10 +161,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
         somethingGoesWrong.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void navigateToErrorActivity(){
-        startActivity(new Intent(this, ErrorActivity.class));
-    }
 
     @Override
     public void saveCredentials(Credentials credentials){

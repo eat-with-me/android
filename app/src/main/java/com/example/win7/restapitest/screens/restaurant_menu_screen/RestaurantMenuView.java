@@ -27,4 +27,6 @@ public interface RestaurantMenuView {
     void showError();
 
     void navigateToOrderActivity();
+
+    void showAlertDialog();
 }

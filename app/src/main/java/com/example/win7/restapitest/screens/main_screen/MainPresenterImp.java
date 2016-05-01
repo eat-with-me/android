@@ -54,7 +54,7 @@ public class MainPresenterImp implements MainPresenter {
             @Override
             public void onError() {
 
-                mainView.showError();
+                mainView.showAlertDialog();
             }
         });
 

@@ -60,7 +60,8 @@ public class NewGroupPresenterImp implements NewGroupPresenter {
 
                 @Override
                 public void onError() {
-                    newGroupView.showToast("Grupa nie utworzona");
+
+                    newGroupView.showAlertDialog();
                 }
             });
         }

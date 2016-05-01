@@ -39,7 +39,7 @@ public interface SignUpView {
 
     void showWrongCredentialMessage();
 
-    void navigateToErrorActivity();
-
     void saveCredentials(Credentials credentials);
+
+    void showAlertDialog();
 }

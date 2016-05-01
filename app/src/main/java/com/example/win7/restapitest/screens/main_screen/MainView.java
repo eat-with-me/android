@@ -24,4 +24,6 @@ public interface MainView {
     void showError();
 
     void navigateToNewGroupActivity();
+
+    void showAlertDialog();
 }

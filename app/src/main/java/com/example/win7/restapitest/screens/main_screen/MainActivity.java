@@ -88,6 +88,9 @@ public  class MainActivity extends MyActivity implements MainView {
         super.onResume();
         mainPresenter.onResume();
 
+        showProgress();
+        mainPresenter.getGroups();
+
     }
 
     @Override

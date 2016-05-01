@@ -62,8 +62,11 @@ public class SignUpPresenterImp implements SignUpPresenter {
 
                 @Override
                 public void onError() {
-                    signUpView.hideProgressBar();
-                    signUpView.navigateToErrorActivity();
+
+                    signUpView.showAlertDialog();
+
+//                    signUpView.hideProgressBar();
+//                    signUpView.navigateToErrorActivity();
                 }
             });
         }

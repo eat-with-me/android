@@ -2,8 +2,10 @@ package com.example.win7.restapitest.screens.login_screen;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,13 +22,12 @@ import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.Credentials;
-import com.example.win7.restapitest.model.User;
-import com.example.win7.restapitest.screens.error_screen.ErrorActivity;
+import com.example.win7.restapitest.others.MyBaseActivity;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.sign_up_screen.SignUpActivity;
 
 
-public class LoginActivity extends AppCompatActivity  implements LoginView{
+public class LoginActivity extends MyBaseActivity implements LoginView{
 
 
     private ProgressBar progressBar;
@@ -56,6 +57,16 @@ public class LoginActivity extends AppCompatActivity  implements LoginView{
 
     }
 
+    @Override
+    public void refresh() {
+        loginPresenter.onClickLogin();
+    }
+
+    @Override
+    public void close() {
+        moveTaskToBack(true);
+        hideProgressBar();
+    }
 
     public void onClickLogin(View v) {
 
@@ -141,10 +152,7 @@ public class LoginActivity extends AppCompatActivity  implements LoginView{
         startActivity(new Intent(this, SignUpActivity.class));
     }
 
-    @Override
-    public void showToast(String message){
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
+
 
     @Override
     public void resetErrors() {
@@ -157,12 +165,6 @@ public class LoginActivity extends AppCompatActivity  implements LoginView{
 
         loginGoesWrongView.setVisibility(View.VISIBLE);
     }
-
-    @Override
-    public void navigateToErrorScreen(){
-        startActivity(new Intent(this, ErrorActivity.class));
-    }
-
 
     @Override
     public void saveCredentials(Credentials credentials){
@@ -185,5 +187,7 @@ public class LoginActivity extends AppCompatActivity  implements LoginView{
             return new Credentials(email, password, "");
 
     }
+
+
 }
 

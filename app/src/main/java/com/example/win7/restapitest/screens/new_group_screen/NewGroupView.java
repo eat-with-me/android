@@ -19,4 +19,6 @@ public interface NewGroupView {
     void showToast(String message);
 
     void cleanTextField();
+
+    void showAlertDialog();
 }

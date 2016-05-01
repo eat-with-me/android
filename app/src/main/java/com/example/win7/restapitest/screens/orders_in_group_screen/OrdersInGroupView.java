@@ -23,4 +23,5 @@ public interface OrdersInGroupView {
 
     void recycleViewInit();
 
+    void showAlertDialog();
 }

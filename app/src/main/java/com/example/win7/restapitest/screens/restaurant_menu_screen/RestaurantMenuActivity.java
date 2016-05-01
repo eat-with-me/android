@@ -84,6 +84,8 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         super.onResume();
         restaurantMenuPresenter.onResume();
 
+        showProgress();
+        restaurantMenuPresenter.getMenu(restaurantId);
     }
 
     @Override

@@ -41,17 +41,17 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
 
                 if(ordersResult.isEmpty()){
                     ordersInGroupView.setEmptyView();
-                    Log.d("OmSuccess","isEmpty");
+
                 }
                 else{
-                    Log.d("OmSuccess","isnotEmpty");
+
                     ordersInGroupView.loadOrders(ordersResult);
                 }
             }
 
             @Override
             public void onError() {
-                ordersInGroupView.showError();
+                ordersInGroupView.showAlertDialog();
             }
         });
     }

@@ -58,6 +58,7 @@ public class NewGroupActivity extends MyActivity implements NewGroupView {
     protected void onResume(){
         super.onResume();
         newGroupPresenter.onResume();
+        hideProgress();
 
     }
 

@@ -80,6 +80,8 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         super.onResume();
         ordersInGroupPresenter.onResume();
 
+        showProgress();
+        ordersInGroupPresenter.getOrders(groupId);
     }
 
     @Override

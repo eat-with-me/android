@@ -56,5 +56,9 @@
     <string name="akceptuj_zam_wienie">Akceptuj zamówienie</string>
     <string name="brak_restauracji">Brak restauracji</string>
     <string name="prompt_new_group">Nazwa nowej grupy</string>
+    <string name="dialog_message">Sprawdz swoje połączzenie z internetem i spróbuj ponownie</string>
+    <string name="dialog_title">Błąd sieci</string>
+    <string name="try_again">Ponów</string>
+    <string name="close">Zamknij</string>
 
 </resources>

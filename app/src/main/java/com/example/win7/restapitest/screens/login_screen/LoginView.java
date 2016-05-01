@@ -36,9 +36,9 @@ public interface LoginView {
 
     void showWrongCredentialMessage();
 
-    void navigateToErrorScreen();
-
     void saveCredentials(Credentials credentials);
 
     Credentials getCredentials();
+
+    void showAlertDialog();
 }

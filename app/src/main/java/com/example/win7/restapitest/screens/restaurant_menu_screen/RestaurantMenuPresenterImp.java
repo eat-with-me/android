@@ -95,7 +95,7 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
 
             @Override
             public void onError() {
-                restaurantMenuView.showError();
+                restaurantMenuView.showAlertDialog();
             }
         });
 
