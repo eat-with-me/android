@@ -314,6 +314,12 @@ public class ApiConnectionImp implements ApiConnection {
 
     }
 
+    @Override
+    public void closeSession() {
+        //TODO close session on server
+        cookie = "";
+    }
+
 
     Interceptor interceptor = new Interceptor() {
 

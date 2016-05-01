@@ -26,4 +26,6 @@ public interface ApiConnection {
     void signUp(Credentials credentials, final OnLoginListener listener);
 
     void createNewGroup(GroupName groupName, OnDownloadFinishedListener listener);
+
+    void closeSession();
 }

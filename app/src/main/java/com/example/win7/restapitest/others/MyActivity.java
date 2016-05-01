@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.win7.restapitest.R;
+import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.screens.error_screen.ErrorActivity;
 import com.example.win7.restapitest.screens.login_screen.LoginActivity;
 
@@ -50,6 +51,8 @@ public abstract class MyActivity extends AppCompatActivity {
     private void signOut(){
 
         //TODO finish session on server
+        ApiConnection apiConnection = Factory.getApiConnection();
+        apiConnection.closeSession();
         navigateToLoginActivity();
         removeAllCredentials();
 
