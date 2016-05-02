@@ -45,4 +45,7 @@ public interface Endpoints {
 
     @POST("/groups")
     Call<Group> createNewGroup(@Body GroupName groupName);
+
+    @POST("/groups/{group_id}/orders")
+    Call<OrderInGroup> createNewOrder(@Body OrderInGroup orderInGroup, @Path("group_id") int group_id);
 }

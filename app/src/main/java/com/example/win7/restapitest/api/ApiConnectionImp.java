@@ -315,6 +315,12 @@ public class ApiConnectionImp implements ApiConnection {
     }
 
     @Override
+    public void createNewOrder(OrderInGroup orderInGroup) {
+        api.createNewOrder(orderInGroup,orderInGroup.getGroupId());
+    }
+
+
+    @Override
     public void closeSession() {
         //TODO close session on server
         cookie = "";

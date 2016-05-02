@@ -1,5 +1,6 @@
 package com.example.win7.restapitest.screens.new_order_in_group_screen;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,14 +11,16 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.api.ApiConnection;
-import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.Factory;
@@ -25,6 +28,7 @@ import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.MenuAdapter;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -41,6 +45,10 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
     private ApiConnection apiConnection;
     private Button button;
     List<RestaurantMenu> restaurantsResult = null;
+    private EditText time;
+    private NewOrderPresenter newOrderPresenter;
+    private String groupId;
+    private RestaurantMenu selectedRestaurant;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +57,17 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
         this.apiConnection = Factory.getApiConnection();
         button = (Button) findViewById(R.id.button2);
         messageTextView = (TextView) findViewById(R.id.empty_view);
+        time = (EditText) findViewById(R.id.timeEditText);
         recyclerView = (RecyclerView) findViewById(R.id.restaurants_recycler);
         restaurantMenuRecycler = (RecyclerView) findViewById(R.id.restaurants_menu_recycler);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        newOrderPresenter = new NewOrderPresenterImpl(this);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.include);
         setSupportActionBar(myToolbar);
 
         Intent intent = getIntent();
-        String groupId = intent.getStringExtra(MainActivity.GROUP_ID);
+        groupId = intent.getStringExtra(MainActivity.GROUP_ID);
 
         showProgress();
 
@@ -80,6 +91,7 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
 
     @Override
     public void loadRestaurants(List<RestaurantMenu> restaurantsResult) {
+        this.restaurantsResult = restaurantsResult;
         adapter = new RestaurantsAdapter(restaurantsResult);
         recyclerView.setAdapter(adapter);
 
@@ -126,28 +138,9 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
     public void showError() {
 
     }
-    public void getRestaurants() {
-
-        apiConnection.getAllRestaurantsMenu(new OnDownloadFinishedListener<List<RestaurantMenu>>() {
-            @Override
-            public void onSuccess(List<RestaurantMenu> list) {
-                restaurantsResult = list;
-                hideProgress();
-
-                if(restaurantsResult.isEmpty()){
-                    setEmptyView();
-                }
-                else{
-
-                    loadRestaurants(restaurantsResult);
-                }
-            }
-
-            @Override
-            public void onError() {
-                showError();
-            }
-        });
+    public void getRestaurants()
+    {
+        newOrderPresenter.getRestaurants();
     }
 
     @Override
@@ -164,7 +157,9 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
             @Override
             public void onClick(View view, int position) {
 
-                loadRestaurantMenu(restaurantsResult.get(position));
+                selectedRestaurant = restaurantsResult.get(position);
+                loadRestaurantMenu(selectedRestaurant);
+
 
 
             }
@@ -176,17 +171,32 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
         }));
 
     }
-    public void OnClickShowDetails(View view)
+    public void onClickAccept(View view)
     {
-        if(getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment).isHidden()){
+        Log.d("onClickAccept", "groupId:"+groupId + " selectedRestaurant:" + selectedRestaurant.getId() + " Time:" + time.getText().toString());
+        newOrderPresenter.OnClickAccept(groupId,selectedRestaurant.getId(),time.getText().toString());
+    }
+    public void OnClickShowDetails(View view) {
+        if (getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment).isHidden()) {
 
             getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment)).commit();
             getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentById(R.id.restaurants_fragment)).commit();
-        }
-        else{
+        } else {
             getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentById(R.id.restaurants_fragment)).commit();
             getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment)).commit();
         }
+    }
+    public void showTimePickerDialog(View v) {
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minutes = calendar.get(Calendar.MINUTE);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,TimePickerDialog.THEME_HOLO_LIGHT, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                time.setText("" + hourOfDay + ":" + minute);
+            }
+        },hour,minutes,true);
+        timePickerDialog.show();
 
     }
 //    public void restaurantMenuRecyclerInit()
