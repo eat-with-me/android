@@ -34,6 +34,8 @@ public class PersonsInGroupActivity extends MyActivity {
     private String groupId;
     private List<User> users;
 
+    private static final String baseLink = "eat24.herokuapp.com/join/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +126,7 @@ public class PersonsInGroupActivity extends MyActivity {
                 for(Group group : list){
                     if(group.getId().equals(groupId)){
                         users = group.getUsers();
-                        break;
+                           break;
                     }
                 }
 

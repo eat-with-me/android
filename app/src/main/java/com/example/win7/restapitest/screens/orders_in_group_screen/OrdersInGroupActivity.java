@@ -1,7 +1,13 @@
 package com.example.win7.restapitest.screens.orders_in_group_screen;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +21,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
+import com.example.win7.restapitest.api.ApiConnection;
+import com.example.win7.restapitest.api.ApiConnectionImp;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.others.ClickListener;
@@ -35,6 +43,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
     public static final String RESTAURANT_ID = "restaurantId" ;
     public static final String GROUP = "group" ;
 
+ 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private TextView messageTextView;
@@ -42,6 +51,8 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
     private ProgressBar progressBar;
     private Group group;
     private OrdersInGroupPresenter ordersInGroupPresenter;
+
+    private AlertDialog linkDialog;
 
 
     @Override
@@ -75,6 +86,8 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         myToolbar.setTitle(group.getName());
         setSupportActionBar(myToolbar);
+
+        initLinkDialog();
 
         showProgress();
         recycleViewInit();
@@ -224,11 +237,51 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         }));
     }
 
+
+    private void initLinkDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        String token = group.getToken();
+        String baseUrl = ApiConnectionImp.BASE_URL;
+        final String link = baseUrl + token;
+
+        builder.setTitle(R.string.link_dialog_title)
+                .setMessage(link);
+
+        builder.setNegativeButton(R.string.copy, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                copyToClipboard(link);
+                showToast(getString(R.string.copy_to_clipboard));
+            }
+        });
+
+
+        linkDialog = builder.create();
+
+    }
+
+    private void copyToClipboard(String somethingToCopy) {
+
+        ClipboardManager clipboard = (ClipboardManager)
+                getSystemService(Context.CLIPBOARD_SERVICE);
+        Uri copyUri = Uri.parse(somethingToCopy);
+        ClipData clip = ClipData.newUri(getContentResolver(),"URI",copyUri);
+        clipboard.setPrimaryClip(clip);
+
+    }
+
+
     @Override
     public void navigateToPersonsInGroupActivity() {
         Intent intent = new Intent(this, PersonsInGroupActivity.class);
         intent.putExtra(GROUP, group);
         startActivity(intent);
+    }
+
+    @Override
+    public void showLinkDialog() {
+        linkDialog.show();
     }
 
 }

@@ -17,6 +17,8 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
     private OrdersInGroupView ordersInGroupView;
     private ApiConnection apiConnection;
 
+
+
     List<OrderInGroup> ordersResult = null;
 
     public OrdersInGroupPresenterImp(OrdersInGroupView ordersInGroupView) {
@@ -91,6 +93,8 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
 
     @Override
     public void onClickAddPersonToGroup() {
+
+        ordersInGroupView.showLinkDialog();
 
     }
 

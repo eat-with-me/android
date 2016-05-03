@@ -31,4 +31,6 @@ public interface OrdersInGroupView {
     void showAlertDialog();
 
     void navigateToPersonsInGroupActivity();
+
+    void showLinkDialog();
 }

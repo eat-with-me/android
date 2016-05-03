@@ -70,4 +70,9 @@
     <string name="group">Grupa</string>
     <string name="add_to_group">Dodaj do grupy</string>
 
+    <!--Strings related to linkDialog-->
+    <string name="copy">Kopiuj</string>
+    <string name="link_dialog_title">Prześlij ten link znajomym aby mogli dołączyć do grupy</string>
+    <string name="copy_to_clipboard">Skopiowano do schowka</string>
+
 </resources>
