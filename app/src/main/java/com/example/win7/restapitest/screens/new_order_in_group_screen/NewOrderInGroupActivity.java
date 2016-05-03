@@ -24,8 +24,10 @@ import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.Factory;
+import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
+import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.MenuAdapter;
 
 import java.util.Calendar;
@@ -34,7 +36,7 @@ import java.util.List;
 /**
  * Created by Mateusz on 2016-04-20.
  */
-public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrderInGroupView {
+public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGroupView {
 
     private RecyclerView recyclerView;
     private RecyclerView restaurantMenuRecycler;
@@ -64,10 +66,11 @@ public class NewOrderInGroupActivity extends AppCompatActivity implements NewOrd
         newOrderPresenter = new NewOrderPresenterImpl(this);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.include);
+        myToolbar.setTitle(getString(R.string.new_order));
         setSupportActionBar(myToolbar);
 
         Intent intent = getIntent();
-        groupId = intent.getStringExtra(MainActivity.GROUP_ID);
+        groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
 
         showProgress();
 

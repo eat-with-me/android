@@ -3,9 +3,10 @@ package com.example.win7.restapitest.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
 
-public class Restaurant {
+public class Restaurant implements Serializable {
 
     @SerializedName("id")
     private String id;

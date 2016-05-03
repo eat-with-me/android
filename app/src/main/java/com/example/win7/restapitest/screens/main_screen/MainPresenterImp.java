@@ -64,8 +64,7 @@ public class MainPresenterImp implements MainPresenter {
     public void onClickGroup(int position){
 
         Group group = groupsResult.get(position);
-        String groupId = group.getId();
-        mainView.goToOrdersInGroupActivity(groupId);
+        mainView.goToOrdersInGroupActivity(group);
 
     }
 

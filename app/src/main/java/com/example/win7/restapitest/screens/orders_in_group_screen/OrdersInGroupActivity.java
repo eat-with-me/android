@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
+import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.MyActivity;
@@ -25,12 +26,15 @@ import java.util.List;
 public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupView{
 
 
+    public static final String GROUP_ID = "groupId" ;
+    public static final String RESTAURANT_NAME = "restaurantName";
+
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private TextView messageTextView;
     private Button button;
     private ProgressBar progressBar;
-    private String groupId;
+    private Group group;
     private OrdersInGroupPresenter ordersInGroupPresenter;
 
     public static final String RESTAURANT_ID = "restaurantId" ;
@@ -52,18 +56,18 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         ordersInGroupPresenter = new OrdersInGroupPresenterImp(this);
 
         Intent intent = getIntent();
-        groupId = intent.getStringExtra(MainActivity.GROUP_ID);
+        group = (Group)intent.getSerializableExtra(MainActivity.GROUP);
 
         showProgress();
         recycleViewInit();
-        ordersInGroupPresenter.getOrders(groupId);
+        ordersInGroupPresenter.getOrders(group.getId());
 
     }
 
     public void onClickNewOrder(View v)
     {
         Intent intent = new Intent(this, NewOrderInGroupActivity.class);
-        intent.putExtra(MainActivity.GROUP_ID, groupId);
+        intent.putExtra(MainActivity.GROUP, group.getId());
         startActivity(intent);
     }
 
@@ -81,7 +85,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         ordersInGroupPresenter.onResume();
 
         showProgress();
-        ordersInGroupPresenter.getOrders(groupId);
+        ordersInGroupPresenter.getOrders(group.getId());
     }
 
     @Override
@@ -101,11 +105,12 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
 
     @Override
-    public void goToRestaurantMenuActivity(String restaurantId) {
+    public void goToRestaurantMenuActivity(String restaurantId, String restaurantName) {
 
         Intent intent = new Intent(this, RestaurantMenuActivity.class);
-        intent.putExtra(MainActivity.GROUP_ID,groupId);
+        intent.putExtra(OrdersInGroupActivity.GROUP_ID,group.getId());
         intent.putExtra(RESTAURANT_ID, restaurantId);
+        intent.putExtra(RESTAURANT_NAME,restaurantName);
         startActivity(intent);
 
     }

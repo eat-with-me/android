@@ -26,8 +26,9 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
     @Override
     public void onClickOrder(int position) {
         OrderInGroup order = ordersResult.get(position);
-        String orderId = order.getId();
-        ordersInGroupView.goToRestaurantMenuActivity(orderId);
+        String orderId = order.getId();//TODO check it
+        String restaurantName = order.getRestaurant().getName();
+        ordersInGroupView.goToRestaurantMenuActivity(orderId,restaurantName);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

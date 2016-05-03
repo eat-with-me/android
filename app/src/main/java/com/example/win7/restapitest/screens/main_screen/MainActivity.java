@@ -35,7 +35,7 @@ import java.util.List;
 public  class MainActivity extends MyActivity implements MainView {
 
 
-    public static final String GROUP_ID = "groupId" ;
+    public static final String GROUP = "groupObject" ;
 
     private RecyclerView recyclerView;
     private TextView messageTextView;
@@ -109,10 +109,10 @@ public  class MainActivity extends MyActivity implements MainView {
 
 
     @Override
-    public void goToOrdersInGroupActivity(String groupId) {
+    public void goToOrdersInGroupActivity(Group group) {
 
         Intent intent = new Intent(this, OrdersInGroupActivity.class);
-        intent.putExtra(GROUP_ID, groupId);
+        intent.putExtra(GROUP, group);
         startActivity(intent);
     }
 

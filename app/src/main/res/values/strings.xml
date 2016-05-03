@@ -66,5 +66,7 @@
     <string name="close">Zamknij</string>
     <string name="dialog_message">Sprawdz swoje połączenie z internetem i spróbuj ponownie</string>
     <string name="akceptuj">Akceptuj</string>
+    <string name="new_order">Nowe zamówienie</string>
+    <string name="new_group">Nowa grupa</string>
 
 </resources>

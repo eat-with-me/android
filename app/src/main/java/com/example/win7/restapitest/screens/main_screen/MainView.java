@@ -15,7 +15,7 @@ public interface MainView {
 
     void showToast(String message);
 
-    void goToOrdersInGroupActivity(String groupId);
+    void goToOrdersInGroupActivity(Group group);
 
     void showProgress();
 

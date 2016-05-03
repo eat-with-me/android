@@ -13,7 +13,7 @@ public interface OrdersInGroupView {
 
     void showToast(String message);
 
-    void goToRestaurantMenuActivity(String restaurantId);
+    void goToRestaurantMenuActivity(String restaurantId,String restaurantName);
 
     void showProgress();
 

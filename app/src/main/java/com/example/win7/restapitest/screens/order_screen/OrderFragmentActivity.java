@@ -53,7 +53,7 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
         Intent intent = getIntent();
         order = intent.getParcelableExtra("order");
         restaurantId = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_ID);
-        groupId = intent.getStringExtra(MainActivity.GROUP_ID);
+        groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
 
         orderPresenter = new OrderPresenterImp(this);
         adapter = new OrderAdapter(order,getBaseContext());

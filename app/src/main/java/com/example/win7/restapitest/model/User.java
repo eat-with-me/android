@@ -2,12 +2,14 @@ package com.example.win7.restapitest.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by win7 on 22/04/2016.
  */
 
 
-public class User {
+public class User implements Serializable{
 
     @SerializedName("id")
     private Integer id;

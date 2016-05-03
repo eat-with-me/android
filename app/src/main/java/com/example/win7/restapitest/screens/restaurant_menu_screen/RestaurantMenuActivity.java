@@ -33,6 +33,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
     private ProgressBar progressBar;
     private String restaurantId;
     private String groupId;
+    private String restaurantName;
 
     private RestaurantMenuPresenter restaurantMenuPresenter;
     private static  final  int ORDER_ACTIVITY_REQUEST_CODE = 1;
@@ -49,15 +50,18 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         recyclerView = (RecyclerView) findViewById(R.id.menu_list);
         relativeLayout = (RelativeLayout) findViewById(R.id.relative_layout);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-
 
         restaurantMenuPresenter = new RestaurantMenuPresenterImp(this);
 
         Intent intent = getIntent();
         restaurantId = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_ID);
-        groupId = intent.getStringExtra(MainActivity.GROUP_ID);
+        groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
+        restaurantName = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_NAME);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar.setTitle(restaurantName);
+        setSupportActionBar(myToolbar);
+
         showProgress();
 
         recycleViewInit();
@@ -152,7 +156,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
 
         Intent intent = new Intent(this, OrderFragmentActivity.class);
         intent.putExtra("order", restaurantMenuPresenter.getOrder());
-        intent.putExtra(MainActivity.GROUP_ID,groupId);
+        intent.putExtra(OrdersInGroupActivity.GROUP_ID,groupId);
         intent.putExtra(OrdersInGroupActivity.RESTAURANT_ID,restaurantId);
 
         startActivityForResult(intent,ORDER_ACTIVITY_REQUEST_CODE);

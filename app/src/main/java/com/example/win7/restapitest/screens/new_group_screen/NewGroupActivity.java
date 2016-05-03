@@ -27,6 +27,7 @@ public class NewGroupActivity extends MyActivity implements NewGroupView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_group);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar.setTitle(getString(R.string.new_group));
         setSupportActionBar(myToolbar);
 
         newGroupForm = (RelativeLayout) findViewById(R.id.new_group_layout);
