@@ -1,11 +1,16 @@
 package com.example.win7.restapitest.screens.orders_in_group_screen;
 
+import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
 
 import java.util.List;
 
 
 public interface OrdersInGroupView {
+
+    Group getGroup();
+
+    void setGroup(Group group);
 
     void setEmptyView();
 
@@ -24,4 +29,6 @@ public interface OrdersInGroupView {
     void recycleViewInit();
 
     void showAlertDialog();
+
+    void navigateToPersonsInGroupActivity();
 }

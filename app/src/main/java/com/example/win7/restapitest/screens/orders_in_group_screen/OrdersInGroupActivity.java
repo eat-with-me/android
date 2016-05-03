@@ -22,6 +22,7 @@ import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.new_order_in_group_screen.NewOrderInGroupActivity;
+import com.example.win7.restapitest.screens.persons_in_group.PersonsInGroupActivity;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 
 import java.util.List;
@@ -31,6 +32,8 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
     public static final String GROUP_ID = "groupId" ;
     public static final String RESTAURANT_NAME = "restaurantName";
+    public static final String RESTAURANT_ID = "restaurantId" ;
+    public static final String GROUP = "group" ;
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -40,7 +43,18 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
     private Group group;
     private OrdersInGroupPresenter ordersInGroupPresenter;
 
-    public static final String RESTAURANT_ID = "restaurantId" ;
+
+    @Override
+    public Group getGroup() {
+        return group;
+    }
+
+    @Override
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+
 
 
     @Override
@@ -92,12 +106,12 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
             case R.id.action_group:
 
-                showToast("Działa i to dobrze działa");
+                ordersInGroupPresenter.onClickPersonsInGroup();
                 return true;
 
             case R.id.action_add_to_group:
 
-                showToast("Działa jeszcze lepiej");
+                ordersInGroupPresenter.onClickAddPersonToGroup();
                 return true;
 
             default:
@@ -208,6 +222,13 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
             }
         }));
+    }
+
+    @Override
+    public void navigateToPersonsInGroupActivity() {
+        Intent intent = new Intent(this, PersonsInGroupActivity.class);
+        intent.putExtra(GROUP, group);
+        startActivity(intent);
     }
 
 }

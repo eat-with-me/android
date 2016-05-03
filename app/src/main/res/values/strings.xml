@@ -59,7 +59,6 @@
     <string name="prompt_new_group">Nazwa nowej grupy</string>
 
 
-
     <!--Strings related to alertDialog-->
     <string name="dialog_title">Błąd sieci</string>
     <string name="try_again">Ponów</string>
