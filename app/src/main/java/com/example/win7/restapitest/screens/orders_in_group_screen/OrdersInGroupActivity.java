@@ -87,13 +87,17 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        //super.onOptionsItemSelected(item);
 
         switch (item.getItemId()) {
 
             case R.id.action_group:
 
                 showToast("Działa i to dobrze działa");
+                return true;
+
+            case R.id.action_add_to_group:
+
+                showToast("Działa jeszcze lepiej");
                 return true;
 
             default:
