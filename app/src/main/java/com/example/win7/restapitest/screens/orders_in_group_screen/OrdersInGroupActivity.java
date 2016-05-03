@@ -6,6 +6,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -49,14 +52,15 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         recyclerView = (RecyclerView) findViewById(R.id.list_of_orders);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         button = (Button) findViewById(R.id.button);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-
 
         ordersInGroupPresenter = new OrdersInGroupPresenterImp(this);
 
         Intent intent = getIntent();
         group = (Group)intent.getSerializableExtra(MainActivity.GROUP);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar.setTitle(group.getName());
+        setSupportActionBar(myToolbar);
 
         showProgress();
         recycleViewInit();
@@ -71,6 +75,33 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         startActivity(intent);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_group, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()) {
+
+            case R.id.action_group:
+
+                showToast("Działa i to dobrze działa");
+                return true;
+
+            default:
+
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
 
 
     @Override
