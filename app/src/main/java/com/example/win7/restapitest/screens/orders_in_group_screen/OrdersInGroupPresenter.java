@@ -12,4 +12,8 @@ public interface OrdersInGroupPresenter {
     void onDestroy();
 
     void onResume();
+
+    void onClickPersonsInGroup();
+
+    void onClickAddPersonToGroup();
 }

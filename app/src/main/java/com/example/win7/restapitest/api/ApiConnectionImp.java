@@ -34,7 +34,7 @@ public class ApiConnectionImp implements ApiConnection {
 
     //TODO zrobić coś z listami
 
-    private final String BASE_URL = "http://eat24.herokuapp.com/";
+    public static final String BASE_URL = "http://eat24.herokuapp.com/";
 
     private List<Group> groupsResult = new ArrayList<Group>();
     private List<OrderInGroup> ordersResult = new ArrayList<OrderInGroup>();

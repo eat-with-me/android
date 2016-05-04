@@ -59,7 +59,6 @@
     <string name="prompt_new_group">Nazwa nowej grupy</string>
 
 
-
     <!--Strings related to alertDialog-->
     <string name="dialog_title">Błąd sieci</string>
     <string name="try_again">Ponów</string>
@@ -70,5 +69,12 @@
     <string name="new_group">Nowa grupa</string>
     <string name="group">Grupa</string>
     <string name="choose_time">Wybierz godzinę</string>
+    <string name="add_to_group">Dodaj do grupy</string>
+
+    <!--Strings related to linkDialog-->
+    <string name="copy">Kopiuj</string>
+    <string name="link_dialog_title">Prześlij ten link znajomym aby mogli dołączyć do grupy</string>
+    <string name="copy_to_clipboard">Skopiowano do schowka</string>
+
 
 </resources>

@@ -34,7 +34,8 @@
         </activity>
         <activity android:name=".screens.sign_up_screen.SignUpActivity" />
         <activity android:name=".screens.error_screen.ErrorActivity" />
-        <activity android:name=".screens.new_group_screen.NewGroupActivity"></activity>
+        <activity android:name=".screens.new_group_screen.NewGroupActivity" />
+        <activity android:name=".screens.persons_in_group.PersonsInGroupActivity"></activity>
     </application>
 
 </manifest> <!-- .screens.main_screen.MainActivity" -->
