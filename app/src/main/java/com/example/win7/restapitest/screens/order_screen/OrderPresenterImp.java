@@ -53,7 +53,7 @@ public class OrderPresenterImp implements OrderPresenter {
         apiConnection.getPurchasers(group_ip,order_id,new OnDownloadFinishedListener<OrderInGroup>() {
             @Override
             public void onSuccess(OrderInGroup arg) {
-                if(arg!=null)
+                if(!arg.getPurchasers().isEmpty())
                 {
                     orderView.setPurchasers(arg.getPurchasers());
                 }

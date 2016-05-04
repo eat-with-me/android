@@ -17,7 +17,6 @@ import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
-import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.order_screen.OrderFragmentActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
@@ -34,6 +33,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
     private String restaurantId;
     private String groupId;
     private String restaurantName;
+    private String orderId;
 
     private RestaurantMenuPresenter restaurantMenuPresenter;
     private static  final  int ORDER_ACTIVITY_REQUEST_CODE = 1;
@@ -57,6 +57,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         restaurantId = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_ID);
         groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
         restaurantName = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_NAME);
+        orderId = intent.getStringExtra(OrdersInGroupActivity.ORDER_ID);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         myToolbar.setTitle(restaurantName);
@@ -158,6 +159,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         intent.putExtra("order", restaurantMenuPresenter.getOrder());
         intent.putExtra(OrdersInGroupActivity.GROUP_ID,groupId);
         intent.putExtra(OrdersInGroupActivity.RESTAURANT_ID,restaurantId);
+        intent.putExtra(OrdersInGroupActivity.ORDER_ID, orderId);
 
         startActivityForResult(intent,ORDER_ACTIVITY_REQUEST_CODE);
     }

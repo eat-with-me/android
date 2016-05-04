@@ -30,7 +30,8 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
         OrderInGroup order = ordersResult.get(position);
         String restaurantId = order.getRestaurantId();//TODO check it
         String restaurantName = order.getRestaurant().getName();
-        ordersInGroupView.goToRestaurantMenuActivity(restaurantId,restaurantName);
+        String orderId = order.getId();
+        ordersInGroupView.goToRestaurantMenuActivity(restaurantId,restaurantName,orderId);
     }
 
     @Override

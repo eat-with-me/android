@@ -18,7 +18,7 @@ public interface OrdersInGroupView {
 
     void showToast(String message);
 
-    void goToRestaurantMenuActivity(String restaurantId,String restaurantName);
+    void goToRestaurantMenuActivity(String restaurantId,String restaurantName, String orderId);
 
     void showProgress();
 

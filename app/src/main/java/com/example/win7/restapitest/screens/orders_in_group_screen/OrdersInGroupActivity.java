@@ -22,7 +22,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
-import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.ApiConnectionImp;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
@@ -43,6 +42,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
     public static final String RESTAURANT_NAME = "restaurantName";
     public static final String RESTAURANT_ID = "restaurantId" ;
     public static final String GROUP = "group" ;
+    public static final String ORDER_ID = "orderId";
 
  
     private RecyclerView recyclerView;
@@ -169,12 +169,13 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
 
     @Override
-    public void goToRestaurantMenuActivity(String restaurantId, String restaurantName) {
+    public void goToRestaurantMenuActivity(String restaurantId, String restaurantName, String orderId) {
 
         Intent intent = new Intent(this, RestaurantMenuActivity.class);
         intent.putExtra(OrdersInGroupActivity.GROUP_ID,group.getId());
         intent.putExtra(RESTAURANT_ID, restaurantId);
         intent.putExtra(RESTAURANT_NAME,restaurantName);
+        intent.putExtra(ORDER_ID,orderId);
         startActivity(intent);
 
     }

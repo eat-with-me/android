@@ -21,10 +21,11 @@ import com.example.win7.restapitest.model.FinalOrder;
 import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.model.Purchase;
 import com.example.win7.restapitest.model.Purchaser;
-import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
-;import java.util.List;
+import java.util.List;
+
+;
 
 /**
  * Created by Mateusz on 2016-04-19.
@@ -43,7 +44,7 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
     private Button bAccept;
     private String groupId;
     private String restaurantId;
-
+    private String orderId;
     private Order order;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
         order = intent.getParcelableExtra("order");
         restaurantId = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_ID);
         groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
+        orderId = intent.getStringExtra(OrdersInGroupActivity.ORDER_ID);
 
         orderPresenter = new OrderPresenterImp(this);
         adapter = new OrderAdapter(order,getBaseContext());
@@ -93,7 +95,7 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
 
     }
     public void getPurchasers(){
-        orderPresenter.getPurchasers(groupId,restaurantId);
+        orderPresenter.getPurchasers(groupId,orderId);
 
     }
 
@@ -102,7 +104,7 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
     public void onClickAcceptOrder(View view) {
 
 
-        Purchase purchase = new Purchase(Integer.parseInt(restaurantId),order.getMeals());
+        Purchase purchase = new Purchase(Integer.parseInt(orderId),order.getMeals());
         FinalOrder finalOrder = new FinalOrder(purchase);
         orderPresenter.onClickAccept(finalOrder,groupId);
         getPurchasers();
