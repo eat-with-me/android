@@ -15,6 +15,22 @@ public class Purchase {
     @SerializedName("meals")
     List<Meal> meals;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<Meal> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
+    }
+
     public Purchase(Integer id, List<Meal> meals){
         this.id=id;
         this.meals=meals;

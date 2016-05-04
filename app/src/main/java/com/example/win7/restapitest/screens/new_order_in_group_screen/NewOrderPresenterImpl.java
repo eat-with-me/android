@@ -2,7 +2,7 @@ package com.example.win7.restapitest.screens.new_order_in_group_screen;
 
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
-import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.NewOrderInGroup;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.Factory;
 
@@ -23,12 +23,21 @@ public class NewOrderPresenterImpl implements NewOrderPresenter {
     }
 
     @Override
-    public void OnClickAccept(String groupId, int restaurantId, String time) {
-        OrderInGroup newOrder = new OrderInGroup();
-        newOrder.setGroupId(Integer.parseInt(groupId));
-        newOrder.setRestaurantId(String.format("%d",restaurantId));
-        newOrder.setClosingTime(time);
-        apiConnection.createNewOrder(newOrder);
+    public void OnClickAccept(String groupId, NewOrderInGroup newOrderInGroup) {
+
+        apiConnection.createNewOrder(newOrderInGroup, groupId, new OnDownloadFinishedListener<NewOrderInGroup>() {
+            @Override
+            public void onSuccess(NewOrderInGroup arg) {
+                newOrderInGroupActivity.showToast("Dodano nowe zamówienie");
+                newOrderInGroupActivity.clearNewOrder();
+
+            }
+
+            @Override
+            public void onError() {
+                newOrderInGroupActivity.showAlertDialog();
+            }
+        });
 
 
     }
@@ -42,10 +51,9 @@ public class NewOrderPresenterImpl implements NewOrderPresenter {
                 restaurantsResult = list;
                 newOrderInGroupActivity.hideProgress();
 
-                if(restaurantsResult.isEmpty()){
+                if (restaurantsResult.isEmpty()) {
                     newOrderInGroupActivity.setEmptyView();
-                }
-                else{
+                } else {
 
                     newOrderInGroupActivity.loadRestaurants(restaurantsResult);
                 }
@@ -57,4 +65,5 @@ public class NewOrderPresenterImpl implements NewOrderPresenter {
             }
         });
     }
+
 }

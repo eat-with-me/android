@@ -1,7 +1,5 @@
 package com.example.win7.restapitest.screens.orders_in_group_screen;
 
-import android.util.Log;
-
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.OrderInGroup;
@@ -26,9 +24,9 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
     @Override
     public void onClickOrder(int position) {
         OrderInGroup order = ordersResult.get(position);
-        String orderId = order.getId();//TODO check it
+        String restaurantId = order.getRestaurantId();//TODO check it
         String restaurantName = order.getRestaurant().getName();
-        ordersInGroupView.goToRestaurantMenuActivity(orderId,restaurantName);
+        ordersInGroupView.goToRestaurantMenuActivity(restaurantId,restaurantName);
     }
 
     @Override

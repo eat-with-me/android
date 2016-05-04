@@ -69,5 +69,6 @@
     <string name="new_order">Nowe zamówienie</string>
     <string name="new_group">Nowa grupa</string>
     <string name="group">Grupa</string>
+    <string name="choose_time">Wybierz godzinę</string>
 
 </resources>

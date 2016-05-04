@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -58,6 +57,10 @@ public class OrderInGroup {
 
     public void setClosingTime(String closingTime) {
         this.closingTime = closingTime;
+    }
+
+    public String getNormalClsingTime(){
+        return closingTime;
     }
 
     public String getRestaurantId() {

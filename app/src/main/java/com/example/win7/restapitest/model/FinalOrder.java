@@ -13,4 +13,12 @@ public class FinalOrder {
     public FinalOrder(Purchase order){
         this.order = order;
     }
+
+    public Purchase getOrder() {
+        return order;
+    }
+
+    public void setOrder(Purchase order) {
+        this.order = order;
+    }
 }

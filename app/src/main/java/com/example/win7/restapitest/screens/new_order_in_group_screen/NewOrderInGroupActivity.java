@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,12 +20,12 @@ import android.widget.TimePicker;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.api.ApiConnection;
+import com.example.win7.restapitest.model.NewOrderInGroup;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.Factory;
 import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
-import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.MenuAdapter;
 
@@ -51,6 +50,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
     private NewOrderPresenter newOrderPresenter;
     private String groupId;
     private RestaurantMenu selectedRestaurant;
+    private NewOrderInGroup newOrder;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +71,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
 
         Intent intent = getIntent();
         groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
-
+        Log.d("groupID", groupId);
         showProgress();
 
 //        restaurantMenuRecyclerInit();
@@ -176,8 +176,19 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
     }
     public void onClickAccept(View view)
     {
-        Log.d("onClickAccept", "groupId:"+groupId + " selectedRestaurant:" + selectedRestaurant.getId() + " Time:" + time.getText().toString());
-        newOrderPresenter.OnClickAccept(groupId,selectedRestaurant.getId(),time.getText().toString());
+        if(!isTimeCorrect())
+        {
+            return;
+        }
+        else  if(selectedRestaurant==null)
+        {
+            return;
+        }
+        else {
+            newOrder = new NewOrderInGroup(selectedRestaurant.getId(), time.getText().toString());
+            Log.d("onClickAccept", "groupId:" + groupId + " selectedRestaurant:" + selectedRestaurant.getId() + " Time:" + time.getText().toString());
+            newOrderPresenter.OnClickAccept(groupId, newOrder);
+        }
     }
     public void OnClickShowDetails(View view) {
         if (getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment).isHidden()) {
@@ -197,11 +208,29 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 time.setText("" + hourOfDay + ":" + minute);
+                time.setError(null);
             }
         },hour,minutes,true);
         timePickerDialog.show();
 
     }
+    public boolean isTimeCorrect() {
+        if(time.getText().toString().isEmpty()){
+            time.setError(getString(R.string.choose_time));
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    public void clearNewOrder()
+    {
+        time.setText("");
+        newOrder = null;
+        time.setError(null);
+
+    }
+
 //    public void restaurantMenuRecyclerInit()
 //    {
 //        restaurantMenuRecycler.setHasFixedSize(true);

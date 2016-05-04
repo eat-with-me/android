@@ -5,6 +5,7 @@ import com.example.win7.restapitest.model.FinalOrder;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.GroupName;
 import com.example.win7.restapitest.model.LoginAnswer;
+import com.example.win7.restapitest.model.NewOrderInGroup;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.RestaurantMenu;
 
@@ -47,5 +48,5 @@ public interface Endpoints {
     Call<Group> createNewGroup(@Body GroupName groupName);
 
     @POST("/groups/{group_id}/orders")
-    Call<OrderInGroup> createNewOrder(@Body OrderInGroup orderInGroup, @Path("group_id") int group_id);
+    Call<NewOrderInGroup> createNewOrder(@Body NewOrderInGroup orderInGroup, @Path("group_id") Integer group_id);
 }

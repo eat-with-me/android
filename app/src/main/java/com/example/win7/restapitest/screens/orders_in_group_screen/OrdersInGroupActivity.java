@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -71,7 +72,8 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
     public void onClickNewOrder(View v)
     {
         Intent intent = new Intent(this, NewOrderInGroupActivity.class);
-        intent.putExtra(MainActivity.GROUP, group.getId());
+        Log.d("GROUPID", group.getId());
+        intent.putExtra(GROUP_ID, group.getId());
         startActivity(intent);
     }
 
