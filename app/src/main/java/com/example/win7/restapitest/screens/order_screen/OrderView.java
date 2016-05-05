@@ -14,6 +14,7 @@ public interface OrderView {
     void setEmptyMyOrderView();
     void setEmptyOtherOrderView();
     void onClickAcceptOrder(View view);
-    public void setPurchasers(List<Purchaser> purchasers);
+    void setPurchasers(List<Purchaser> purchasers);
     void showToast(String message);
+    void getPurchasers();
 }

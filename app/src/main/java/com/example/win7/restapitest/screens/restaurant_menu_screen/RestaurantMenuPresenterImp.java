@@ -40,7 +40,7 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
                     if (order.getMeals().get(i).getId().equals(meal.getId())) {
                         order.getMeals().get(i).incAmount();
                         order.incTotalPrice(meal.getPrice());
-                        order.incNumberOfProducts();
+
                         restaurantMenuView.showToast("Dodano do koszyka " + menuResult.getMeals().get(position).getId());
                         jest = true;
                     }

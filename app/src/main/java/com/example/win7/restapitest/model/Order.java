@@ -3,7 +3,6 @@ package com.example.win7.restapitest.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -44,8 +43,8 @@ public class Order implements Parcelable{
     public void add(Meal meal){
 
         meals.add(meal);
-        totalPrice += meal.getPrice();
-        numberOfProducts++;
+        incTotalPrice(meal.getPrice());
+
     }
 
     public void delete(Meal meal){
@@ -56,7 +55,15 @@ public class Order implements Parcelable{
         }
 
     }
-    public void incTotalPrice(double a){totalPrice += a;}
+
+    public void incTotalPrice(double a){
+        totalPrice += a;
+        numberOfProducts++;
+    }
+    public void decTotalPrice(double a){
+        totalPrice -= a;
+        numberOfProducts--;
+    }
     public double getTotalPrice(){return totalPrice;  }
     public void setTotalPrice(Double totalPrice){this.totalPrice = totalPrice;}
 
@@ -79,7 +86,5 @@ public class Order implements Parcelable{
     public Integer getNumberOfProducts() {
         return numberOfProducts;
     }
-    public void incNumberOfProducts()   {
-        numberOfProducts++;
-    }
+
 }

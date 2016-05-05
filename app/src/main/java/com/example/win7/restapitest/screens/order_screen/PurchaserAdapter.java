@@ -49,10 +49,12 @@ public class PurchaserAdapter extends RecyclerView.Adapter<PurchaserAdapter.View
         holder.email.setText(purchaser.getUser().getEmail());
         for(int i=0; i<purchaser.getMeals_list().size(); i++) {
             amount += purchaser.getMeals_list().get(i).getMeal().getPrice()*purchaser.getMeals_list().get(i).getAmount();
+
             holder.meals.setText(holder.meals.getText() +
                     String.format("%d",purchaser.getMeals_list().get(i).getAmount()) + "x\t\t" +
                     purchaser.getMeals_list().get(i).getMeal().getName() +
                     "\n");
+
         }
 
         holder.charge.setText(String.format("%.2f",amount));

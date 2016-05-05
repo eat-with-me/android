@@ -143,6 +143,7 @@ public class Meal implements Parcelable {
     public void incAmount(){
         this.amount+=1;
     }
+    public void decAmount() { this.amount-=1; }
 
     public void setAmount(Integer amount) {
         this.amount = amount;

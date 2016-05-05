@@ -10,16 +10,16 @@ import java.util.List;
 public class Purchase {
 
     @SerializedName("id")
-    Integer id;
+    String id;
 
     @SerializedName("meals")
     List<Meal> meals;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -31,7 +31,7 @@ public class Purchase {
         this.meals = meals;
     }
 
-    public Purchase(Integer id, List<Meal> meals){
+    public Purchase(String id, List<Meal> meals){
         this.id=id;
         this.meals=meals;
     }

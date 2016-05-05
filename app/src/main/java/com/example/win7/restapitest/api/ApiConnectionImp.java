@@ -183,12 +183,13 @@ public class ApiConnectionImp implements ApiConnection {
         call.enqueue((new Callback<FinalOrder>() {
             @Override
             public void onResponse(Call<FinalOrder> call, Response<FinalOrder> response) {
-
+                listener.onSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call<FinalOrder> call, Throwable t) {
-                Log.d("onFailure",t.getCause().getMessage());
+
+                listener.onError();
             }
         }));
 
@@ -329,6 +330,7 @@ public class ApiConnectionImp implements ApiConnection {
 
             @Override
             public void onFailure(Call<NewOrderInGroup> call, Throwable t) {
+                Log.d("onFailura",t.getMessage());
                 listener.onError();
             }
         });

@@ -2,6 +2,7 @@ package com.example.win7.restapitest.screens.order_screen;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         Meal meal = order.getMeals().get(position);
 
         holder.dish.setText(meal.getName());
-        holder.price.setText(String.format("%.2f", meal.getPrice()));
+        holder.price.setText(String.format("%.2f", meal.getPrice()*meal.getAmount()));
         holder.amount.setText("Ilość: " + String.format("%d",meal.getAmount()));
     }
 
@@ -60,6 +61,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         public TextView price;
         public TextView amount;
         public ImageButton cross;
+        public ImageButton plus;
+        public ImageButton minus;
 
 
         public ViewHolder(View view) {
@@ -67,20 +70,50 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             dish = (TextView) view.findViewById(R.id.dish);
             price = (TextView) view.findViewById(R.id.price);
             amount = (TextView) view.findViewById(R.id.amount);
-            cross = (ImageButton) view.findViewById(R.id.cross);
+            cross = (ImageButton) view.findViewById(R.id.delete);
             cross.setOnClickListener(this);
+            plus = (ImageButton) view.findViewById(R.id.plus);
+            plus.setOnClickListener(this);
+            minus = (ImageButton) view.findViewById(R.id.minus);
+            minus.setOnClickListener(this);
+
         }
 
 
         @Override
         public void onClick(View v) {
+
+            int position = getAdapterPosition();
+            Meal meal = order.getMeals().get(position);
+            Log.d("number of products", ""+order.getNumberOfProducts());
             if (v.equals(cross)) {
-                Meal meal = order.getMeals().get(getAdapterPosition());
+
                 order.delete(meal);
                 notifyDataSetChanged();
                 if (mContext instanceof OrderFragmentActivity && order.getMeals().isEmpty()) {
                     ((OrderFragmentActivity) mContext).setEmptyMyOrderView();
                 }
+            }
+            if (v.equals(plus)){
+                meal.incAmount();
+                order.incTotalPrice(meal.getPrice());
+                notifyDataSetChanged();
+            }
+            if(v.equals(minus)){
+                if(meal.getAmount()==1){
+                    order.delete(meal);
+                    notifyDataSetChanged();
+                    if (mContext instanceof OrderFragmentActivity && order.getMeals().isEmpty()) {
+                        ((OrderFragmentActivity) mContext).setEmptyMyOrderView();
+                    }
+                }
+                else
+                {
+                    meal.decAmount();
+                    order.decTotalPrice(meal.getPrice());
+                    notifyDataSetChanged();
+                }
+
             }
         }
     }

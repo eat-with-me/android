@@ -33,16 +33,18 @@ public class OrderPresenterImp implements OrderPresenter {
 
     @Override
     public void onClickAccept(FinalOrder finalOrder, String groupId) {
-        Log.d("onClickAccept", ""+groupId+" "+finalOrder.getOrder().getId()+ " " + finalOrder.getOrder().getMeals().size());
+
         apiConnection.sendPurchase(finalOrder, groupId, new OnDownloadFinishedListener<FinalOrder>() {
             @Override
             public void onSuccess(FinalOrder arg) {
+
 
             }
 
             @Override
             public void onError() {
-
+                orderView.getPurchasers();
+                orderView.showToast("Twoje zamówienie zostało przyjęte");
 
             }
         });
