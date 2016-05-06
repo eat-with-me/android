@@ -3,11 +3,14 @@ package com.example.win7.restapitest.screens.restaurant_menu_screen;
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.Meal;
+import com.example.win7.restapitest.model.MealCategory;
 import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.Factory;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by win7 on 02/04/2016.
@@ -88,8 +91,8 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
                 if (menuResult.isEmpty()) {
                     restaurantMenuView.setEmptyView();
                 } else {
-
-                    restaurantMenuView.loadMenu(menuResult);
+                    ArrayList<MealCategory> menu = createCorrectMenu(menuResult);
+                    restaurantMenuView.loadMenu(menu);
                 }
             }
 
@@ -99,6 +102,45 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
             }
         });
 
+
+    }
+
+    //TODO move this function from here
+    private ArrayList<MealCategory> createCorrectMenu(RestaurantMenu menuResult) {
+
+        List<MealCategory> correctMenu = new ArrayList<>();
+        List<Meal> meals = menuResult.getMeals();
+        boolean found = false;
+
+        for(Meal meal : meals){
+
+           int categoryId = meal.getMealType().getId();
+
+            for(MealCategory mealCategory : correctMenu){
+
+                found = false;
+
+                if(mealCategory.getId() == categoryId){
+
+                    mealCategory.getMeals().add(meal);
+                    found = true;
+                    break;
+                }
+
+            }
+
+            if(!found){
+
+                MealCategory category = new MealCategory();
+                category.setId(categoryId);
+                category.setName(meal.getMealType().getName());
+                category.getMeals().add(meal);
+                correctMenu.add(category);
+            }
+
+        }
+
+        return (ArrayList<MealCategory>) correctMenu;
 
     }
 

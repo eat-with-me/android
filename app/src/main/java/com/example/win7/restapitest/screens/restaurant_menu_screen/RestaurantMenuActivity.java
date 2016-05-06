@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
+import com.example.win7.restapitest.model.MealCategory;
 import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
@@ -19,6 +20,8 @@ import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.order_screen.OrderFragmentActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
+
+import java.util.List;
 
 public class RestaurantMenuActivity extends MyActivity implements RestaurantMenuView{
 
@@ -101,9 +104,9 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
 
 
     @Override
-    public void loadMenu(RestaurantMenu menuResult)
+    public void loadMenu(List<MealCategory> menu)
     {
-        adapter = new MenuAdapter(menuResult);
+        adapter = new MenuAdapter(this,menu);
         recyclerView.setAdapter(adapter);
     }
 
