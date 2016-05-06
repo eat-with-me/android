@@ -1,5 +1,6 @@
 package com.example.win7.restapitest.screens.restaurant_menu_screen;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,5 +18,20 @@ public class MenuParentViewHolder extends ParentViewHolder {
         super(itemView);
 
         categoryName = (TextView) itemView.findViewById(R.id.category_name);
+
+
+
     }
+
+    @Override
+    public void onClick(View v) {
+        if (isExpanded()) {
+            collapseView();
+        } else {
+            expandView();
+        }
+    }
+
+
+
 }

@@ -22,7 +22,7 @@ public class MenuAdapter extends ExpandableRecyclerAdapter<MenuParentViewHolder,
 
     private LayoutInflater mInflator;
 
-//**************************************************************************************************
+
 
     public MenuAdapter(Context context, List<? extends ParentListItem> parentItemList) {
         super(parentItemList);
@@ -40,6 +40,10 @@ public class MenuAdapter extends ExpandableRecyclerAdapter<MenuParentViewHolder,
     @Override
     public MenuChildViewHolder onCreateChildViewHolder(ViewGroup childViewGroup) {
         View childView = mInflator.inflate(R.layout.row_menu_child, childViewGroup, false);
+
+
+
+
         return new MenuChildViewHolder(childView);
     }
 
@@ -57,7 +61,7 @@ public class MenuAdapter extends ExpandableRecyclerAdapter<MenuParentViewHolder,
         childViewHolder.price.setText(meal.getPrice().toString());
     }
 
-    //**************************************************************************************************
+
 
 
 

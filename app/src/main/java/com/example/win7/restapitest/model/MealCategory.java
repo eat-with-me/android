@@ -46,6 +46,6 @@ public class MealCategory implements ParentListItem {
 
     @Override
     public boolean isInitiallyExpanded() {
-        return false;
+        return true;
     }
 }

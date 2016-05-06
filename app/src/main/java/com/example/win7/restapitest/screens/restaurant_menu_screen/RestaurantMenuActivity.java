@@ -107,6 +107,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
     public void loadMenu(List<MealCategory> menu)
     {
         adapter = new MenuAdapter(this,menu);
+
         recyclerView.setAdapter(adapter);
     }
 
@@ -185,19 +186,19 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         //recyclerView.setAdapter(adapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-
-                restaurantMenuPresenter.onClickMeal(position);
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
+//
+//        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
+//            @Override
+//            public void onClick(View view, int position) {
+//
+//                restaurantMenuPresenter.onClickMeal(position);
+//            }
+//
+//            @Override
+//            public void onLongClick(View view, int position) {
+//
+//            }
+//        }));
 
     }
 }
