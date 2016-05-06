@@ -38,11 +38,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Button"
+            android:background="#FFFFFF"
             android:id="@+id/expand_button"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_expand_more_black_24dp" />
+            android:src="@drawable/ic_expand_more_black_36dp" />
 
     </RelativeLayout>
 
