@@ -103,7 +103,7 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
     @Override
     public void onClickAcceptOrder(View view) {
 
-        if(!order.getMeals().isEmpty())
+        if(order.getNumberOfProducts()!=0 )
         {
             Purchase purchase = new Purchase(orderId,order.getMeals());
             FinalOrder finalOrder = new FinalOrder(purchase);

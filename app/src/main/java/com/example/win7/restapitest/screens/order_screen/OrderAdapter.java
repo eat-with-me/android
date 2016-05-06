@@ -2,7 +2,6 @@ package com.example.win7.restapitest.screens.order_screen;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,14 +84,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
             int position = getAdapterPosition();
             Meal meal = order.getMeals().get(position);
-            Log.d("number of products", ""+order.getNumberOfProducts());
+
             if (v.equals(cross)) {
 
-                order.delete(meal);
-                notifyDataSetChanged();
-                if (mContext instanceof OrderFragmentActivity && order.getMeals().isEmpty()) {
-                    ((OrderFragmentActivity) mContext).setEmptyMyOrderView();
-                }
+                deleteFromBasket(meal);
             }
             if (v.equals(plus)){
                 meal.incAmount();
@@ -100,12 +95,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 notifyDataSetChanged();
             }
             if(v.equals(minus)){
-                if(meal.getAmount()==1){
-                    order.delete(meal);
-                    notifyDataSetChanged();
-                    if (mContext instanceof OrderFragmentActivity && order.getMeals().isEmpty()) {
-                        ((OrderFragmentActivity) mContext).setEmptyMyOrderView();
-                    }
+                if(meal.getAmount()==0){
+                    deleteFromBasket(meal);
                 }
                 else
                 {
@@ -114,6 +105,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                     notifyDataSetChanged();
                 }
 
+            }
+        }
+        private void deleteFromBasket(Meal meal) {
+            order.delete(meal);
+            notifyDataSetChanged();
+            if (mContext instanceof OrderFragmentActivity && order.getMeals().isEmpty()) {
+                ((OrderFragmentActivity) mContext).setEmptyMyOrderView();
             }
         }
     }

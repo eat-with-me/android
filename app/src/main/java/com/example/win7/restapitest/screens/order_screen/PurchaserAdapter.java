@@ -17,7 +17,7 @@ import java.util.List;
 public class PurchaserAdapter extends RecyclerView.Adapter<PurchaserAdapter.ViewHolder> {
 
     private List<Purchaser> purchasers;
-    Double amount;
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView email;
@@ -32,7 +32,7 @@ public class PurchaserAdapter extends RecyclerView.Adapter<PurchaserAdapter.View
     }
     public PurchaserAdapter(List<Purchaser> purchasers){
         this.purchasers=purchasers;
-        this.amount = 0.0;
+
 
     }
     @Override
@@ -47,6 +47,7 @@ public class PurchaserAdapter extends RecyclerView.Adapter<PurchaserAdapter.View
     public void onBindViewHolder(PurchaserAdapter.ViewHolder holder, int position) {
         Purchaser purchaser = purchasers.get(position);
         holder.email.setText(purchaser.getUser().getEmail());
+        Double amount = 0.0;
         for(int i=0; i<purchaser.getMeals_list().size(); i++) {
             amount += purchaser.getMeals_list().get(i).getMeal().getPrice()*purchaser.getMeals_list().get(i).getAmount();
 
