@@ -40,4 +40,10 @@ public class MenuParentViewHolder extends ParentViewHolder {
         return false;
     }
 
+    @Override
+    public void onExpansionToggled(boolean  expanded){
+        Log.d("expad","działa");
+
+    }
+
 }
