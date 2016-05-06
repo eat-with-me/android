@@ -1,7 +1,5 @@
 package com.example.win7.restapitest.screens.order_screen;
 
-import android.util.Log;
-
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.FinalOrder;
@@ -37,14 +35,14 @@ public class OrderPresenterImp implements OrderPresenter {
         apiConnection.sendPurchase(finalOrder, groupId, new OnDownloadFinishedListener<FinalOrder>() {
             @Override
             public void onSuccess(FinalOrder arg) {
-
-
+                orderView.getPurchasers();
+                orderView.showToast("Twoje zamówienie zostało przyjęte");
             }
 
             @Override
             public void onError() {
-                orderView.getPurchasers();
-                orderView.showToast("Twoje zamówienie zostało przyjęte");
+
+                orderView.showToast("Coś poszło nie tak");
 
             }
         });

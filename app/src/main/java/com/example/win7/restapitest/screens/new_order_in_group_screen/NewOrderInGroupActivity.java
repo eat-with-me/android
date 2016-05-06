@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -45,24 +46,27 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
     private ProgressBar progressBar;
     private ApiConnection apiConnection;
     private Button button;
+    private ImageButton arrow;
     List<RestaurantMenu> restaurantsResult = null;
     private EditText time;
     private NewOrderPresenter newOrderPresenter;
     private String groupId;
     private RestaurantMenu selectedRestaurant;
     private NewOrderInGroup newOrder;
+    private Fragment restaurantMenuFragment;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order_in_group);
 
         this.apiConnection = Factory.getApiConnection();
-        button = (Button) findViewById(R.id.button2);
+
         messageTextView = (TextView) findViewById(R.id.empty_view);
         time = (EditText) findViewById(R.id.timeEditText);
         recyclerView = (RecyclerView) findViewById(R.id.restaurants_recycler);
         restaurantMenuRecycler = (RecyclerView) findViewById(R.id.restaurants_menu_recycler);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        arrow = (ImageButton) findViewById(R.id.arrow_button);
         newOrderPresenter = new NewOrderPresenterImpl(this);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.include);
@@ -71,17 +75,15 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
 
         Intent intent = getIntent();
         groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
-        Log.d("groupID", groupId);
         showProgress();
 
-//        restaurantMenuRecyclerInit();
         recycleViewInit();
-//        mockRestaurants();
+
         getRestaurants();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment restaurantMenuFragment = fragmentManager.findFragmentById(R.id.restaurants_menu_fragment);
+        restaurantMenuFragment = fragmentManager.findFragmentById(R.id.restaurants_menu_fragment);
         fragmentTransaction.hide(restaurantMenuFragment);
         fragmentTransaction.commit();
     }
@@ -95,7 +97,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
     @Override
     public void loadRestaurants(List<RestaurantMenu> restaurantsResult) {
         this.restaurantsResult = restaurantsResult;
-        adapter = new RestaurantsAdapter(restaurantsResult);
+        adapter = new RestaurantsAdapter(restaurantsResult,this);
         recyclerView.setAdapter(adapter);
 
     }
@@ -103,18 +105,6 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         adapter2 = new MenuAdapter(restaurantMenu);
         restaurantMenuRecycler.setAdapter(adapter2);
     }
-//    public void mockRestaurants() {
-//        List<Restaurant> mockedRes = new ArrayList<>();
-//        for(int i=0; i<3;i++)
-//        {
-//            Restaurant res = new Restaurant();
-//            res.setName("res"+i);
-//            mockedRes.add(i,res);
-//        }
-//        adapter = new RestaurantsAdapter(mockedRes);
-//        recyclerView.setAdapter(adapter);
-//        hideProgress();
-//    }
 
     public void showProgress() {
 
@@ -151,7 +141,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
 
 
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
@@ -160,8 +150,10 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
             @Override
             public void onClick(View view, int position) {
 
+
                 selectedRestaurant = restaurantsResult.get(position);
                 loadRestaurantMenu(selectedRestaurant);
+
 
 
 
@@ -190,14 +182,9 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
             newOrderPresenter.OnClickAccept(groupId, newOrder);
         }
     }
-    public void OnClickShowDetails(View view) {
+    public void onClickShowDetails() {
         if (getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment).isHidden()) {
-
-            getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment)).commit();
-            getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentById(R.id.restaurants_fragment)).commit();
-        } else {
-            getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentById(R.id.restaurants_fragment)).commit();
-            getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment)).commit();
+            getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment)).addToBackStack(null).commit();
         }
     }
     public void showTimePickerDialog(View v) {

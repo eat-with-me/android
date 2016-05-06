@@ -85,6 +85,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             int position = getAdapterPosition();
             Meal meal = order.getMeals().get(position);
 
+
             if (v.equals(cross)) {
 
                 deleteFromBasket(meal);
@@ -95,7 +96,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 notifyDataSetChanged();
             }
             if(v.equals(minus)){
-                if(meal.getAmount()==0){
+                if(meal.getAmount()==1){
                     deleteFromBasket(meal);
                 }
                 else
