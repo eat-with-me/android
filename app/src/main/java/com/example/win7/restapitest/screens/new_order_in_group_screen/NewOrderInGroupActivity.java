@@ -100,7 +100,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
 
     }
     public void loadRestaurantMenu(RestaurantMenu restaurantMenu){
-        adapter2 = new MenuAdapter(restaurantMenu);
+        //adapter2 = new MenuAdapter(restaurantMenu);
         restaurantMenuRecycler.setAdapter(adapter2);
     }
 //    public void mockRestaurants() {
