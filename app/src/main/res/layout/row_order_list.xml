@@ -15,9 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true"
-
+        android:id="@+id/row_order_layout"
         android:clickable="true"
-        android:background="#FFFFFF"
         android:orientation="vertical">
 
         <TextView
@@ -92,7 +91,8 @@
             android:text="@string/number_of_order"
             android:layout_alignBottom="@+id/imageView"
             android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView" />
+            android:layout_toEndOf="@+id/imageView"
+            android:textColor="@color/secondary_text" />
 
         <TextView
             android:layout_width="wrap_content"

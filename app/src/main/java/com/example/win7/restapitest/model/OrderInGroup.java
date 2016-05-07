@@ -42,7 +42,6 @@ public class OrderInGroup {
 
 
 
-
     public String getId() {
         return id;
     }
@@ -99,6 +98,13 @@ public class OrderInGroup {
         this.restaurant = restaurant;
     }
 
+
+
+    public boolean isActual(){
+
+        return ((getTimeToCloseInMilliseconds() - 60000) > 0);
+    }
+
     public String getClosingHour(){
         getClosingDate();
         return closingTime.substring(11,16);
@@ -151,6 +157,8 @@ public class OrderInGroup {
         return getClosingDate() + getClosingHour();
     }
 
+
+
     public long getTime(){
         java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String closingTime = convertClosingTime();
@@ -167,6 +175,13 @@ public class OrderInGroup {
 
     public String getTimeToClose() {
 
+
+        long diff = getTimeToCloseInMilliseconds();
+
+        return countTimeDifference(diff);
+    }
+
+    private long getTimeToCloseInMilliseconds (){
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String closingTime = convertClosingTime();
         Log.d("currentTime",currentTime);
@@ -186,11 +201,7 @@ public class OrderInGroup {
             e.printStackTrace();
         }
 
-        long diff = clTime.getTime() - crTime.getTime();
-
-        Log.d("diff", String.valueOf(diff));
-
-        return countTimeDifference(diff);
+        return clTime.getTime() - crTime.getTime();
     }
 
     private String convertClosingTime(){

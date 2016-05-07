@@ -42,7 +42,7 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
             @Override
             public void onSuccess(List<OrderInGroup> list) {
                 ordersResult = list;
-                
+
                 if(ordersResult.isEmpty()){
                     ordersInGroupView.setEmptyView();
 
