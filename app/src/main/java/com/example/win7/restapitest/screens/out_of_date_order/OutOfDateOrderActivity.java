@@ -1,7 +1,6 @@
 package com.example.win7.restapitest.screens.out_of_date_order;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,19 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
-import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
-import com.example.win7.restapitest.model.Purchaser;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
-import com.example.win7.restapitest.screens.main_screen.GroupsAdapter;
-import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
-
-import java.util.List;
 
 public class OutOfDateOrderActivity extends MyActivity implements OutOfDateOrderView {
 
@@ -31,6 +25,13 @@ public class OutOfDateOrderActivity extends MyActivity implements OutOfDateOrder
     private RelativeLayout relativeLayout;
     private ProgressBar progressBar;
     private OrderInGroup orderInGroup;
+
+    private TextView restaurantName;
+    private TextView closingTime;
+    private TextView numberOfOrders;
+    private TextView restaurantNumber;
+    private TextView allOrdersCost;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,19 @@ public class OutOfDateOrderActivity extends MyActivity implements OutOfDateOrder
         relativeLayout = (RelativeLayout) findViewById(R.id.relative_layout);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         outOfDateOrderPresenter = new OutOfDateOrderPresenterImp(this);
+
+        restaurantName = (TextView) findViewById(R.id.restaurant_name);
+
+        closingTime = (TextView) findViewById(R.id.closing_time);
+
+        numberOfOrders = (TextView) findViewById(R.id.number_of_orders);
+
+        restaurantNumber = (TextView) findViewById(R.id.restaurant_number);
+
+        allOrdersCost = (TextView) findViewById(R.id.total_price_all_orders);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar.setTitle(getString(R.string.order_closed));
         setSupportActionBar(myToolbar);
 
         recycleViewInit();
@@ -101,17 +114,13 @@ public class OutOfDateOrderActivity extends MyActivity implements OutOfDateOrder
         RecyclerView.Adapter adapter = new PurchaserAdapter(order.getPurchasers());
         recyclerView.setAdapter(adapter);
 
-        String restaurantName = order.getRestaurant().getName();
-        String closingTime = order.getClosingTimeFormated();
-        String numberOfOrders = order.getNumberOfPurchasers();
-        String restaurantNumber = order.getRestaurant().getPhoneNumber();
-        String totalPrice = order.getTotalPrice();
+        restaurantName.setText(order.getRestaurant().getName());
+        closingTime.setText(order.getClosingTimeFormated());
+        numberOfOrders.setText(order.getNumberOfPurchasers());
+        restaurantNumber.setText(order.getRestaurant().getPhoneNumber());
+        allOrdersCost.setText(order.getTotalPrice());
         //TODO owner
         //delivery cost
-
-
-
-
 
     }
 }

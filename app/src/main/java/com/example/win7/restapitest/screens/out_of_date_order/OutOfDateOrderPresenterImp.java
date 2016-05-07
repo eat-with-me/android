@@ -26,6 +26,7 @@ public class OutOfDateOrderPresenterImp implements OutOfDateOrderPresenter {
             public void onSuccess(OrderInGroup order) {
 
                 outOfDateOrderView.loadOrder(order);
+                outOfDateOrderView.hideProgress();
 
             }
 
