@@ -1,16 +1,17 @@
 package com.example.win7.restapitest.screens.new_order_in_group_screen;
 
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,6 +55,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
     private RestaurantMenu selectedRestaurant;
     private NewOrderInGroup newOrder;
     private Fragment restaurantMenuFragment;
+    private AlertDialog dialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,13 +151,8 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-
-
                 selectedRestaurant = restaurantsResult.get(position);
                 loadRestaurantMenu(selectedRestaurant);
-
-
-
 
             }
 
@@ -168,18 +165,20 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
     }
     public void onClickAccept(View view)
     {
+
         if(!isTimeCorrect())
         {
+            showToast("Wybierz godzinę");
             return;
         }
         else  if(selectedRestaurant==null)
         {
+            showToast("Wybierz restauracje");
             return;
         }
         else {
-            newOrder = new NewOrderInGroup(selectedRestaurant.getId(), time.getText().toString());
-            Log.d("onClickAccept", "groupId:" + groupId + " selectedRestaurant:" + selectedRestaurant.getId() + " Time:" + time.getText().toString());
-            newOrderPresenter.OnClickAccept(groupId, newOrder);
+            initDialog();
+            dialog.show();
         }
     }
     public void onClickShowDetails() {
@@ -215,6 +214,32 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         time.setText("");
         newOrder = null;
         time.setError(null);
+
+    }
+    private void initDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        final String choice = "Wybrałeś: \n\n   " + time.getText().toString() + "\n   " + selectedRestaurant.getName();
+
+        builder.setTitle(R.string.new_order)
+                .setMessage(choice);
+
+        builder.setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        builder.setPositiveButton(R.string.akceptuj, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                newOrder = new NewOrderInGroup(selectedRestaurant.getId(), time.getText().toString());
+                newOrderPresenter.OnClickAccept(groupId, newOrder);
+            }
+        });
+
+
+        dialog = builder.create();
 
     }
 
