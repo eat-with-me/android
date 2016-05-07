@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,7 +15,7 @@ import java.util.List;
 
 // /groups/<id>/orders
 
-public class OrderInGroup {
+public class OrderInGroup implements Serializable {
 
 
     @SerializedName("id")
@@ -32,13 +34,13 @@ public class OrderInGroup {
     private String updatedAt;
 
     @SerializedName("group_id")
-    private Integer groupId;
+    private String groupId;
 
     @SerializedName("restaurant")
     private Restaurant restaurant;
 
     @SerializedName("purchasers")
-    private List<Purchaser> purchasers;
+    private List<Purchaser> purchasers ;
 
 
 
@@ -78,11 +80,11 @@ public class OrderInGroup {
         this.updatedAt = updatedAt;
     }
 
-    public Integer getGroupId() {
+    public String getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(Integer groupId) {
+    public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
 
@@ -90,9 +92,11 @@ public class OrderInGroup {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {  this.createdAt = createdAt; }
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt; }
 
-    public Restaurant getRestaurant() { return restaurant; }
+    public Restaurant getRestaurant() {
+        return restaurant; }
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
@@ -129,7 +133,7 @@ public class OrderInGroup {
             case 3 :    month = "marca,";
                         break;
             case 4 :    month = "kwietnia,";
-                         break;
+                        break;
             case 5 :    month = "maja,";
                         break;
             case 6 :    month = "czerwca,";
@@ -243,6 +247,23 @@ public class OrderInGroup {
     public String getNumberOfPurchasers(){
 
        return String.valueOf(purchasers.size());
+    }
+
+    public String getTotalPrice(){
+
+        double totalPrice = 0;
+
+        for(Purchaser purchaser : purchasers){
+
+            totalPrice += purchaser.getTotalPrice();
+
+        }
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        String price = decimalFormat.format(totalPrice);
+
+        return price;
+
     }
 }
 

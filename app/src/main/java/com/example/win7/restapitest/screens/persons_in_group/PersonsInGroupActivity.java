@@ -27,7 +27,8 @@ import java.util.List;
 
 public class PersonsInGroupActivity extends MyActivity {
 
-    //TODO use NVP, download only one group
+    //TODO use NVP, download only one group GET /groups/:id
+
     private ApiConnection apiConnection = Factory.getApiConnection();
     private RecyclerView recyclerView;
     private ProgressBar progressBar;

@@ -35,5 +35,5 @@ public interface OrdersInGroupView {
 
     void showLinkDialog();
 
-    void navigateToOutOfDateOrderAcivity();
+    void navigateToOutOfDateOrderActivity(OrderInGroup order);
 }

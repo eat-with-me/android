@@ -2,23 +2,29 @@ package com.example.win7.restapitest.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Mateusz on 2016-04-24.
  */
-public class Purchaser {
+public class Purchaser  implements Serializable {
 
     @SerializedName("id")
     String id;
+
     @SerializedName("user_id")
     String user_id;
+
     @SerializedName("created_at")
     String created_at;
+
     @SerializedName("updated_at")
     String updated_at;
+
     @SerializedName("meals_lists")
     List<MealsList> meals_lists;
+
     @SerializedName("user")
     User user;
 
@@ -68,5 +74,18 @@ public class Purchaser {
 
     public void setMeals_list(List<MealsList> meals_list) {
         this.meals_lists = meals_list;
+    }
+
+    public double getTotalPrice(){
+
+        double totalPrice = 0;
+
+        for(MealsList mealList : meals_lists){
+
+            totalPrice += mealList.getAmount() * mealList.getMeal().getPrice();
+
+        }
+
+        return totalPrice;
     }
 }

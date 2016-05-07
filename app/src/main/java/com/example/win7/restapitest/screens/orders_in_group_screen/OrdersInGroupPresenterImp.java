@@ -16,8 +16,6 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
     private OrdersInGroupView ordersInGroupView;
     private ApiConnection apiConnection;
 
-
-
     List<OrderInGroup> ordersResult = null;
 
     public OrdersInGroupPresenterImp(OrdersInGroupView ordersInGroupView) {
@@ -38,7 +36,7 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
             ordersInGroupView.goToRestaurantMenuActivity(restaurantId,restaurantName,orderId); //TODO definitely here is too many arguments
         }
         else{
-            ordersInGroupView.navigateToOutOfDateOrderAcivity();
+            ordersInGroupView.navigateToOutOfDateOrderActivity(order);
         }
 
 

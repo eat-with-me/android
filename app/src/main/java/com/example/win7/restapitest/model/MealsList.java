@@ -9,12 +9,16 @@ public class MealsList {
 
     @SerializedName("id")
     Integer id;
+
     @SerializedName("purchaser_id")
     Integer purchaser_id;
+
     @SerializedName("meal_id")
     Integer meal_id;
+
     @SerializedName("amount")
     Integer amount;
+
     @SerializedName("meal")
     Meal meal;
 

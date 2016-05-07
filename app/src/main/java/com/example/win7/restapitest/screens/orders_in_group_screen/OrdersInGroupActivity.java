@@ -45,6 +45,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
     public static final String RESTAURANT_ID = "restaurantId" ;
     public static final String GROUP = "group" ;
     public static final String ORDER_ID = "orderId";
+    public static final String ORDER = "order";
 
  
     private RecyclerView recyclerView;
@@ -289,9 +290,12 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
     }
 
     @Override
-    public void navigateToOutOfDateOrderAcivity() {
+    public void navigateToOutOfDateOrderActivity(OrderInGroup order) {
+
         Intent intent = new Intent(this, OutOfDateOrderActivity.class);
+        intent.putExtra(ORDER, order);
         startActivity(intent);
     }
+
 
 }
