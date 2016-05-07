@@ -1,5 +1,7 @@
 package com.example.win7.restapitest.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
@@ -13,7 +15,7 @@ import java.util.List;
 
 // /groups/<id>/orders
 
-public class OrderInGroup {
+public class OrderInGroup implements Parcelable{
 
 
     @SerializedName("id")
@@ -41,6 +43,25 @@ public class OrderInGroup {
     private List<Purchaser> purchasers;
 
 
+    protected OrderInGroup(Parcel in) {
+        id = in.readString();
+        closingTime = in.readString();
+        restaurantId = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+    }
+
+    public static final Creator<OrderInGroup> CREATOR = new Creator<OrderInGroup>() {
+        @Override
+        public OrderInGroup createFromParcel(Parcel in) {
+            return new OrderInGroup(in);
+        }
+
+        @Override
+        public OrderInGroup[] newArray(int size) {
+            return new OrderInGroup[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -243,6 +264,20 @@ public class OrderInGroup {
     public String getNumberOfPurchasers(){
 
        return String.valueOf(purchasers.size());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(closingTime);
+        dest.writeString(restaurantId);
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
     }
 }
 

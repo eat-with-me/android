@@ -173,9 +173,8 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
         Intent intent = new Intent(this, RestaurantMenuActivity.class);
         intent.putExtra(OrdersInGroupActivity.GROUP_ID,group.getId());
-        intent.putExtra(RESTAURANT_ID, order.getRestaurantId());
+        intent.putExtra("orderInGroup",order);
         intent.putExtra(RESTAURANT_NAME,order.getRestaurant().getName());
-        intent.putExtra(ORDER_ID,order.getId());
         startActivity(intent);
 
     }
