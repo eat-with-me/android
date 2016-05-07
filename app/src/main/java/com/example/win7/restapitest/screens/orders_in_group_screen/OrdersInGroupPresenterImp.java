@@ -4,6 +4,7 @@ import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.Orders;
 import com.example.win7.restapitest.model.User;
 import com.example.win7.restapitest.others.Factory;
 
@@ -41,16 +42,18 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
             @Override
             public void onSuccess(List<OrderInGroup> list) {
                 ordersResult = list;
-                ordersInGroupView.hideProgress();
-
+                
                 if(ordersResult.isEmpty()){
                     ordersInGroupView.setEmptyView();
 
                 }
                 else{
 
-                    ordersInGroupView.loadOrders(ordersResult);
+                    Orders orders = new Orders(ordersResult);
+                    orders.sortDate();
+                    ordersInGroupView.loadOrders(orders);
                 }
+                ordersInGroupView.hideProgress();
             }
 
             @Override

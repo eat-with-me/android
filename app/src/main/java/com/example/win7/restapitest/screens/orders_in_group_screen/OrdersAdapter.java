@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.Orders;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder>{
 
 
-    private List<OrderInGroup> orders;
+    private Orders orders;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -36,7 +37,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     }
 
 
-    public OrdersAdapter(List<OrderInGroup> orders) {this.orders = orders;  }
+    public OrdersAdapter(Orders orders) {this.orders = orders;  }
 
     @Override
     public OrdersAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,7 +50,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(OrdersAdapter.ViewHolder holder, int position) {
-        OrderInGroup order = orders.get(position);
+        OrderInGroup order = orders.getOrders().get(position);
         holder.restaurantName.setText(order.getRestaurant().getName());
         holder.closingTime.setText(order.getClosingTimeFormated());
         holder.numberOfOrders.setText(order.getNumberOfPurchasers());

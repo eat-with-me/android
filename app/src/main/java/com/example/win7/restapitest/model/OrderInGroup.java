@@ -151,6 +151,20 @@ public class OrderInGroup {
         return getClosingDate() + getClosingHour();
     }
 
+    public long getTime(){
+        java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String closingTime = convertClosingTime();
+        Date clTime = null;
+
+        try {
+            clTime = df.parse(closingTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return clTime.getTime();
+    }
+
     public String getTimeToClose() {
 
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());

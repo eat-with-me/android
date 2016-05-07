@@ -25,6 +25,7 @@ import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.api.ApiConnectionImp;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.Orders;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
@@ -160,10 +161,9 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
 
     @Override
-    public void loadOrders(List<OrderInGroup> ordersResult)
+    public void loadOrders(Orders orders)
     {
-
-        adapter = new OrdersAdapter(ordersResult);
+        adapter = new OrdersAdapter(orders);
         recyclerView.setAdapter(adapter);
     }
 
