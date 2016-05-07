@@ -35,8 +35,6 @@ import com.example.win7.restapitest.screens.out_of_date_order.OutOfDateOrderActi
 import com.example.win7.restapitest.screens.persons_in_group.PersonsInGroupActivity;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 
-import java.util.List;
-
 public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupView{
 
 
@@ -170,13 +168,14 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
 
     @Override
-    public void goToRestaurantMenuActivity(String restaurantId, String restaurantName, String orderId) {
+    public void goToRestaurantMenuActivity(OrderInGroup order) {
+
 
         Intent intent = new Intent(this, RestaurantMenuActivity.class);
         intent.putExtra(OrdersInGroupActivity.GROUP_ID,group.getId());
-        intent.putExtra(RESTAURANT_ID, restaurantId);
-        intent.putExtra(RESTAURANT_NAME,restaurantName);
-        intent.putExtra(ORDER_ID,orderId);
+        intent.putExtra(RESTAURANT_ID, order.getRestaurantId());
+        intent.putExtra(RESTAURANT_NAME,order.getRestaurant().getName());
+        intent.putExtra(ORDER_ID,order.getId());
         startActivity(intent);
 
     }

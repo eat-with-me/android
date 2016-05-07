@@ -56,7 +56,7 @@
             android:text="@string/akceptuj"
             android:id="@+id/bAccept"
             android:onClick="onClickAccept"
-            android:background="@color/colorAccept"
+            android:background="@color/colorButton"
             android:textColor="#ffffff"
             android:textStyle="bold" />
     </LinearLayout>

@@ -4,8 +4,6 @@ import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Orders;
 
-import java.util.List;
-
 
 public interface OrdersInGroupView {
 
@@ -19,7 +17,7 @@ public interface OrdersInGroupView {
 
     void loadOrders(Orders orders);
 
-    void goToRestaurantMenuActivity(String restaurantId, String restaurantName, String orderId);
+    void goToRestaurantMenuActivity(OrderInGroup order);
 
     void showProgress();
 
