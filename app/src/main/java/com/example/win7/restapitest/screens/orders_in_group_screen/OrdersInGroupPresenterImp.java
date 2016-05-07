@@ -29,10 +29,22 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
     @Override
     public void onClickOrder(int position) {
         OrderInGroup order = ordersResult.get(position);
-        String restaurantId = order.getRestaurantId();//TODO check it
+
         String restaurantName = order.getRestaurant().getName();
         String orderId = order.getId();
-        ordersInGroupView.goToRestaurantMenuActivity(restaurantId,restaurantName,orderId);
+
+        if(order.isActual()){
+            String restaurantId = order.getRestaurantId();//TODO check it
+            ordersInGroupView.goToRestaurantMenuActivity(restaurantId,restaurantName,orderId); //TODO definitely here is too many arguments
+        }
+        else{
+            ordersInGroupView.navigateToOutOfDateOrderAcivity();
+        }
+
+
+
+
+
     }
 
     @Override
