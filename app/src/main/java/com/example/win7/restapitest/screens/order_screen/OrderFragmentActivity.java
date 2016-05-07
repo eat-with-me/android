@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.example.win7.restapitest.model.FinalOrder;
 import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.model.Purchase;
 import com.example.win7.restapitest.model.Purchaser;
+import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
 import java.util.List;
@@ -30,7 +32,7 @@ import java.util.List;
 /**
  * Created by Mateusz on 2016-04-19.
  */
-public class OrderFragmentActivity extends AppCompatActivity implements OrderView {
+public class OrderFragmentActivity extends MyActivity implements OrderView {
 
     private RecyclerView recyclerViewMyOrder;
     private RecyclerView recyclerViewOtherOrder;
@@ -63,6 +65,9 @@ public class OrderFragmentActivity extends AppCompatActivity implements OrderVie
         otherOrderIsEmpty = (TextView) findViewById(R.id.other_empty_basket_text);
         bOtherOrders = (Button) findViewById(R.id.bOtherOrders);
         bAccept = (Button) findViewById(R.id.bAccept);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         recyclerViewOtherOrder = (RecyclerView) findViewById(R.id.other_meals_in_order);
 

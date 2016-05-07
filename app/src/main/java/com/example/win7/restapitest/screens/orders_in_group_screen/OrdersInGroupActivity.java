@@ -25,11 +25,13 @@ import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.api.ApiConnectionImp;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.Orders;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.new_order_in_group_screen.NewOrderInGroupActivity;
+import com.example.win7.restapitest.screens.out_of_date_order.OutOfDateOrderActivity;
 import com.example.win7.restapitest.screens.persons_in_group.PersonsInGroupActivity;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 
@@ -160,10 +162,9 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
 
     @Override
-    public void loadOrders(List<OrderInGroup> ordersResult)
+    public void loadOrders(Orders orders)
     {
-
-        adapter = new OrdersAdapter(ordersResult);
+        adapter = new OrdersAdapter(orders);
         recyclerView.setAdapter(adapter);
     }
 
@@ -285,6 +286,12 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
     @Override
     public void showLinkDialog() {
         linkDialog.show();
+    }
+
+    @Override
+    public void navigateToOutOfDateOrderAcivity() {
+        Intent intent = new Intent(this, OutOfDateOrderActivity.class);
+        startActivity(intent);
     }
 
 }

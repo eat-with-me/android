@@ -2,6 +2,7 @@ package com.example.win7.restapitest.screens.orders_in_group_screen;
 
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.Orders;
 
 import java.util.List;
 
@@ -14,11 +15,11 @@ public interface OrdersInGroupView {
 
     void setEmptyView();
 
-    void loadOrders(List<OrderInGroup> ordersResult);
-
     void showToast(String message);
 
-    void goToRestaurantMenuActivity(String restaurantId,String restaurantName, String orderId);
+    void loadOrders(Orders orders);
+
+    void goToRestaurantMenuActivity(String restaurantId, String restaurantName, String orderId);
 
     void showProgress();
 
@@ -33,4 +34,6 @@ public interface OrdersInGroupView {
     void navigateToPersonsInGroupActivity();
 
     void showLinkDialog();
+
+    void navigateToOutOfDateOrderAcivity();
 }

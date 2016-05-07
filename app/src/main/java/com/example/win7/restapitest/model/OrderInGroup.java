@@ -42,7 +42,6 @@ public class OrderInGroup {
 
 
 
-
     public String getId() {
         return id;
     }
@@ -99,12 +98,90 @@ public class OrderInGroup {
         this.restaurant = restaurant;
     }
 
-    public String getClosingTimeShort(){
+
+
+    public boolean isActual(){
+
+        return ((getTimeToCloseInMilliseconds() - 60000) > 0);
+    }
+
+    public String getClosingHour(){
+        getClosingDate();
         return closingTime.substring(11,16);
+    }
+
+    public String getClosingDate(){
+
+
+        String day = closingTime.substring(8,10);
+        Integer datInt = Integer.parseInt(day);
+        day = Integer.toString(datInt);
+
+        String month = closingTime.substring(5,7);
+        Integer monthInt = Integer.parseInt(month);
+
+        switch (monthInt) {
+
+            case 1 :    month = "stycznia,";
+                        break;
+            case 2 :    month = "lutego,";
+                        break;
+            case 3 :    month = "marca,";
+                        break;
+            case 4 :    month = "kwietnia,";
+                         break;
+            case 5 :    month = "maja,";
+                        break;
+            case 6 :    month = "czerwca,";
+                        break;
+            case 7 :    month = "lipca,";
+                        break;
+            case 8 :    month = "sierpnia,";
+                        break;
+            case 9 :    month = "września,";
+                        break;
+            case 10 :   month = "października,";
+                        break;
+            case 11 :   month = "listopada,";
+                        break;
+            case 12 :   month = "grudnia,";
+                        break;
+
+        }
+
+
+        return day + " " + month + " ";
+    }
+
+    public String getClosingTimeFormated(){
+        return getClosingDate() + getClosingHour();
+    }
+
+
+
+    public long getTime(){
+        java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String closingTime = convertClosingTime();
+        Date clTime = null;
+
+        try {
+            clTime = df.parse(closingTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return clTime.getTime();
     }
 
     public String getTimeToClose() {
 
+
+        long diff = getTimeToCloseInMilliseconds();
+
+        return countTimeDifference(diff);
+    }
+
+    private long getTimeToCloseInMilliseconds (){
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String closingTime = convertClosingTime();
         Log.d("currentTime",currentTime);
@@ -124,11 +201,7 @@ public class OrderInGroup {
             e.printStackTrace();
         }
 
-        long diff = clTime.getTime() - crTime.getTime();
-
-        Log.d("diff", String.valueOf(diff));
-
-        return countTimeDifference(diff);
+        return clTime.getTime() - crTime.getTime();
     }
 
     private String convertClosingTime(){

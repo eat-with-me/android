@@ -4,6 +4,7 @@ import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.Orders;
 import com.example.win7.restapitest.model.User;
 import com.example.win7.restapitest.others.Factory;
 
@@ -28,10 +29,22 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
     @Override
     public void onClickOrder(int position) {
         OrderInGroup order = ordersResult.get(position);
-        String restaurantId = order.getRestaurantId();//TODO check it
+
         String restaurantName = order.getRestaurant().getName();
         String orderId = order.getId();
-        ordersInGroupView.goToRestaurantMenuActivity(restaurantId,restaurantName,orderId);
+
+        if(order.isActual()){
+            String restaurantId = order.getRestaurantId();//TODO check it
+            ordersInGroupView.goToRestaurantMenuActivity(restaurantId,restaurantName,orderId); //TODO definitely here is too many arguments
+        }
+        else{
+            ordersInGroupView.navigateToOutOfDateOrderAcivity();
+        }
+
+
+
+
+
     }
 
     @Override
@@ -41,7 +54,6 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
             @Override
             public void onSuccess(List<OrderInGroup> list) {
                 ordersResult = list;
-                ordersInGroupView.hideProgress();
 
                 if(ordersResult.isEmpty()){
                     ordersInGroupView.setEmptyView();
@@ -49,8 +61,11 @@ public class OrdersInGroupPresenterImp implements OrdersInGroupPresenter {
                 }
                 else{
 
-                    ordersInGroupView.loadOrders(ordersResult);
+                    Orders orders = new Orders(ordersResult);
+                    orders.sortDate();
+                    ordersInGroupView.loadOrders(orders);
                 }
+                ordersInGroupView.hideProgress();
             }
 
             @Override
