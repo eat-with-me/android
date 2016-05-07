@@ -31,6 +31,9 @@ public class Meal implements Parcelable {
     @SerializedName("amount")
     private Integer amount;
 
+    @SerializedName("meal_type")
+    private MealType meal_type;
+
     public Meal(String name, Double price)
     {
         this.name=name;
@@ -155,5 +158,13 @@ public class Meal implements Parcelable {
 
     public void setMeal_id(Integer meal_id) {
         this.meal_id = meal_id;
+    }
+
+    public MealType getMeal_type() {
+        return meal_type;
+    }
+
+    public void setMeal_type(MealType meal_type) {
+        this.meal_type = meal_type;
     }
 }

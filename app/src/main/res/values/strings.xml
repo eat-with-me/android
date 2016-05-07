@@ -75,9 +75,13 @@
     <string name="copy">Kopiuj</string>
     <string name="link_dialog_title">Prześlij ten link znajomym aby mogli dołączyć do grupy</string>
     <string name="copy_to_clipboard">Skopiowano do schowka</string>
+
     <string name="total_price_all_orders_text">Cena zamówienia:</string>
     <string name="restaurant_number_text">Numer restauracji:</string>
     <string name="order_closed">Zamówienie zakończone</string>
+
+    <string name="back">Wróć</string>
+
 
 
 </resources>

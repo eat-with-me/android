@@ -1,5 +1,7 @@
 package com.example.win7.restapitest.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
@@ -14,6 +16,7 @@ import java.util.List;
 
 
 // /groups/<id>/orders
+
 
 public class OrderInGroup implements Serializable {
 
@@ -249,11 +252,12 @@ public class OrderInGroup implements Serializable {
        return String.valueOf(purchasers.size());
     }
 
-    public String getTotalPrice(){
+
+    public String getTotalPrice() {
 
         double totalPrice = 0;
 
-        for(Purchaser purchaser : purchasers){
+        for (Purchaser purchaser : purchasers) {
 
             totalPrice += purchaser.getTotalPrice();
 
@@ -263,7 +267,6 @@ public class OrderInGroup implements Serializable {
         String price = decimalFormat.format(totalPrice);
 
         return price;
-
     }
 }
 

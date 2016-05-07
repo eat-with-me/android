@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,10 +19,13 @@ import android.widget.Toast;
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.FinalOrder;
 import com.example.win7.restapitest.model.Order;
+import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Purchase;
 import com.example.win7.restapitest.model.Purchaser;
 import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
+import com.example.win7.restapitest.screens.out_of_date_order.OutOfDateOrderActivity;
+import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 
 import java.util.List;
 
@@ -48,6 +50,8 @@ public class OrderFragmentActivity extends MyActivity implements OrderView {
     private String restaurantId;
     private String orderId;
     private Order order;
+    private OrderInGroup orderInGroup;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +59,11 @@ public class OrderFragmentActivity extends MyActivity implements OrderView {
 
         Intent intent = getIntent();
         order = intent.getParcelableExtra("order");
-        restaurantId = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_ID);
+
+        orderInGroup = (OrderInGroup)intent.getSerializableExtra(RestaurantMenuActivity.ORDER);
+        restaurantId = orderInGroup.getRestaurantId();
         groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
-        orderId = intent.getStringExtra(OrdersInGroupActivity.ORDER_ID);
+        orderId = orderInGroup.getId();
 
         orderPresenter = new OrderPresenterImp(this);
         adapter = new OrderAdapter(order,getBaseContext());
@@ -108,19 +114,31 @@ public class OrderFragmentActivity extends MyActivity implements OrderView {
     @Override
     public void onClickAcceptOrder(View view) {
 
-        if(order.getNumberOfProducts()!=0 )
-        {
-            Purchase purchase = new Purchase(orderId,order.getMeals());
-            FinalOrder finalOrder = new FinalOrder(purchase);
-            orderPresenter.onClickAccept(finalOrder,groupId);
+        if(orderInGroup.isActual()){
+
+            if(order.getNumberOfProducts()!=0 )
+            {
+
+                Purchase purchase = new Purchase(orderId,order.getMeals());
+                FinalOrder finalOrder = new FinalOrder(purchase);
+                orderPresenter.onClickAccept(finalOrder,groupId);
+            }
+            else
+            {
+                showToast("Najpierw wybierz posiłki");
+            }
         }
         else
         {
-            showToast("Najpierw wybierz posiłki");
+
+            navigateToOutOfDateOrderActivity();
         }
 
     }
-
+    public void navigateToOutOfDateOrderActivity() {
+        Intent intent = new Intent(this, OutOfDateOrderActivity.class);
+        startActivity(intent);
+    }
     @Override
     public void setPurchasers(List<Purchaser> purchasers) {
 
