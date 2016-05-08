@@ -24,7 +24,6 @@ import android.widget.TextView;
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.api.ApiConnectionImp;
 import com.example.win7.restapitest.model.Group;
-import com.example.win7.restapitest.model.NewOrderInGroup;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Orders;
 import com.example.win7.restapitest.others.ClickListener;
@@ -103,7 +102,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         Intent intent = new Intent(this, NewOrderInGroupActivity.class);
         Log.d("GROUPID", group.getId());
         intent.putExtra(GROUP_ID, group.getId());
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
