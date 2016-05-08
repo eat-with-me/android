@@ -45,7 +45,27 @@ public class OrderInGroup implements Serializable {
     @SerializedName("purchasers")
     private List<Purchaser> purchasers ;
 
+    @SerializedName("owner_id")
+    private Integer ownerId;
 
+    @SerializedName("owner")
+    private Owner owner;
+
+    public Integer getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
 
     public String getId() {
         return id;

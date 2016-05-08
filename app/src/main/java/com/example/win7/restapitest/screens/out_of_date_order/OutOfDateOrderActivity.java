@@ -31,6 +31,7 @@ public class OutOfDateOrderActivity extends MyActivity implements OutOfDateOrder
     private TextView numberOfOrders;
     private TextView restaurantNumber;
     private TextView allOrdersCost;
+    private TextView ownerName;
 
 
     @Override
@@ -55,6 +56,8 @@ public class OutOfDateOrderActivity extends MyActivity implements OutOfDateOrder
         restaurantNumber = (TextView) findViewById(R.id.restaurant_number);
 
         allOrdersCost = (TextView) findViewById(R.id.total_price_all_orders);
+
+        ownerName = (TextView) findViewById(R.id.textView4);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         myToolbar.setTitle(getString(R.string.order_closed));
@@ -119,7 +122,7 @@ public class OutOfDateOrderActivity extends MyActivity implements OutOfDateOrder
         numberOfOrders.setText(order.getNumberOfPurchasers());
         restaurantNumber.setText(order.getRestaurant().getPhoneNumber());
         allOrdersCost.setText(order.getTotalPrice());
-        //TODO owner
+        ownerName.setText(order.getOwner().getEmail());
         //delivery cost
 
     }
