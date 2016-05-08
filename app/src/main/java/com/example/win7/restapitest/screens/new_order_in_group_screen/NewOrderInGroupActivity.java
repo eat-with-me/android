@@ -31,7 +31,6 @@ import com.example.win7.restapitest.others.Factory;
 import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
-import com.example.win7.restapitest.screens.restaurant_menu_screen.MenuAdapter;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 
 import java.util.Calendar;
@@ -122,8 +121,9 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         intent.putExtra(OrdersInGroupActivity.GROUP_ID,groupId);
         intent.putExtra(OrdersInGroupActivity.ORDER,order);
         intent.putExtra(OrdersInGroupActivity.RESTAURANT_NAME,order.getRestaurant().getName());
-        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
         startActivity(intent);
+        finish();
 
     }
     public void showProgress() {

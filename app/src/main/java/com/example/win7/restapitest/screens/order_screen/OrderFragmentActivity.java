@@ -63,12 +63,15 @@ public class OrderFragmentActivity extends MyActivity implements OrderView {
         setContentView(R.layout.activity_basket);
 
         Intent intent = getIntent();
-        order = intent.getParcelableExtra("order");
+
 
         orderInGroup = (OrderInGroup)intent.getSerializableExtra(RestaurantMenuActivity.ORDER);
         restaurantId = orderInGroup.getRestaurantId();
         groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
         orderId = orderInGroup.getId();
+        order = intent.getParcelableExtra("order");
+
+
 
         orderPresenter = new OrderPresenterImp(this);
         adapter = new OrderAdapter(order,getBaseContext());
@@ -166,6 +169,7 @@ public class OrderFragmentActivity extends MyActivity implements OrderView {
         String response = "resp";
         Intent resultIntent = new Intent();
         resultIntent.putExtra(response,order);
+        Log.d("orderfragmentact","" + order.getNumberOfProducts());
         setResult(RESULT_OK, resultIntent);
         super.finish();
     }
