@@ -319,6 +319,7 @@ public class ApiConnectionImp implements ApiConnection {
     @Override
     public void createNewOrder(OrderInGroup orderInGroup, String groupId, final OnDownloadFinishedListener listener) {
         Log.d("createNewOrder", "" + orderInGroup.getRestaurantId() + " " + orderInGroup.getNormalClsingTime());
+
         Call<OrderInGroup> call = api.createNewOrder(orderInGroup,Integer.parseInt(groupId));
         call.enqueue(new Callback<OrderInGroup>() {
             @Override

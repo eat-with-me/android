@@ -2,6 +2,7 @@ package com.example.win7.restapitest.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.format.DateUtils;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
@@ -133,19 +134,23 @@ public class OrderInGroup implements Serializable {
     }
 
     public String getClosingHour(){
-        getClosingDate();
-        return closingTime.substring(11,16);
+        String time  = getClosingTime2hPlus();
+        return time.substring(11,16);
     }
 
     public String getClosingDate(){
 
+        String time  = getClosingTime2hPlus();
+        //Log.d("time",time);
 
-        String day = closingTime.substring(8,10);
+        String day = time.substring(8,10);
         Integer datInt = Integer.parseInt(day);
         day = Integer.toString(datInt);
 
-        String month = closingTime.substring(5,7);
+        String month = time.substring(5,7);
         Integer monthInt = Integer.parseInt(month);
+        //Log.d("time","*"+time.substring(4,7)+"*");
+
 
         switch (monthInt) {
 
@@ -180,6 +185,32 @@ public class OrderInGroup implements Serializable {
         return day + " " + month + " ";
     }
 
+    private String getClosingTime2hPlus() {
+
+        String time = convertClosingTime();
+
+        java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date clTime = null;
+
+        try {
+
+            clTime = df.parse(time);
+
+            Calendar cal = Calendar.getInstance(); // creates calendar
+            cal.setTime(clTime); // sets calendar time/date
+            cal.add(Calendar.HOUR_OF_DAY, 2); // adds one hour
+            clTime = cal.getTime(); // returns new date object, one hour in the future
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return df.format(clTime);
+
+    }
+
+
     public String getClosingTimeFormated(){
         return getClosingDate() + getClosingHour();
     }
@@ -209,6 +240,7 @@ public class OrderInGroup implements Serializable {
     }
 
     private long getTimeToCloseInMilliseconds (){
+
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String closingTime = convertClosingTime();
         Log.d("currentTime",currentTime);
@@ -224,11 +256,17 @@ public class OrderInGroup implements Serializable {
         try {
             crTime = df.parse(currentTime);
             clTime = df.parse(closingTime);
+
+            Calendar cal = Calendar.getInstance(); // creates calendar
+            cal.setTime(clTime); // sets calendar time/date
+            cal.add(Calendar.HOUR_OF_DAY, 2); // adds one hour
+            clTime = cal.getTime(); // returns new date object, one hour in the future
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return clTime.getTime() - crTime.getTime();
+        return clTime.getTime()  - crTime.getTime();
     }
 
     private String convertClosingTime(){

@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -256,14 +257,25 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
             public void onClick(DialogInterface dialog, int which) {
                 newOrder = new OrderInGroup();
                 newOrder.setRestaurantId(selectedRestaurant.getId().toString());
-                newOrder.setClosingTime(time.getText().toString());
+                String correctTime = subtractTwoHours(time.getText().toString()); //TODO it doesn't work between 00:00 - 02:00, unlucky
+
+                newOrder.setClosingTime(correctTime);
                 newOrderPresenter.OnClickAccept(groupId, newOrder);
+
             }
         });
 
 
         dialog = builder.create();
 
+    }
+
+    private String subtractTwoHours(String s) {
+
+        String hour = s.substring(0,2);
+        Integer hourInt = Integer.parseInt(hour);
+        hourInt -= 2;
+        return hourInt.toString() + s.substring(2,5);
     }
 
     public void navigateToDisabledMenu(String id) {
@@ -275,12 +287,4 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
     }
 
 
-//    public void restaurantMenuRecyclerInit()
-//    {
-//        restaurantMenuRecycler.setHasFixedSize(true);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//
-//    }
 }
