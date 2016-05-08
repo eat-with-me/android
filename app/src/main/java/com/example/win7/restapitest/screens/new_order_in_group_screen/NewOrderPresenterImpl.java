@@ -61,7 +61,7 @@ public class NewOrderPresenterImpl implements NewOrderPresenter {
 
             @Override
             public void onError() {
-                newOrderInGroupActivity.showError();
+                newOrderInGroupActivity.showAlertDialog();
             }
         });
     }

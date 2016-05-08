@@ -56,6 +56,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
 
         restaurantMenuPresenter = new RestaurantMenuPresenterImp(this);
 
+
         Intent intent = getIntent();
         groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
         orderInGroup = (OrderInGroup) intent.getSerializableExtra(OrdersInGroupActivity.ORDER);
@@ -72,6 +73,8 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         recycleViewInit();
 
         restaurantMenuPresenter.getMenu(restaurantId);
+
+
 
     }
 
@@ -167,6 +170,10 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         startActivityForResult(intent,ORDER_ACTIVITY_REQUEST_CODE);
     }
 
+    @Override
+    public void hideButton(){
+        relativeLayout.setVisibility(View.INVISIBLE);
+    }
 
 
 

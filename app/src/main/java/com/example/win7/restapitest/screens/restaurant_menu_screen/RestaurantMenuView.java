@@ -29,4 +29,6 @@ public interface RestaurantMenuView {
     void navigateToOrderActivity();
 
     void showAlertDialog();
+
+    void hideButton();
 }
