@@ -12,6 +12,8 @@ public interface RestaurantMenuPresenter {
 
     void getMenu(String restaurantId);
 
+    void hideButton();
+
     void onClickGoToCart();
 
     void onDestroy();

@@ -42,10 +42,6 @@ public class MenuAdapter extends ExpandableRecyclerAdapter<MenuParentViewHolder,
     @Override
     public MenuChildViewHolder onCreateChildViewHolder(ViewGroup childViewGroup) {
         View childView = mInflator.inflate(R.layout.row_menu_child, childViewGroup, false);
-
-
-
-
         return new MenuChildViewHolder(childView);
     }
 

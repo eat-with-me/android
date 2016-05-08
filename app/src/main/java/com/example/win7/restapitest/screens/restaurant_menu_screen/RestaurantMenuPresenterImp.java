@@ -107,7 +107,8 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
 
     }
 
-    private void hideButton() {
+    @Override
+    public void hideButton() {
         restaurantMenuView.hideButton();
     }
 
@@ -177,7 +178,6 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
     public void setOrder(Order order) {
         this.order = order;
     }
-
 
     @Override
     public void disableMenu(){

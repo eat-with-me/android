@@ -19,7 +19,6 @@ public class MenuParentViewHolder extends ParentViewHolder {
     public TextView categoryName;
     public ImageButton button;
 
-    private View itemView;
 
     public MenuParentViewHolder(View itemView) {
         super(itemView);
@@ -27,18 +26,6 @@ public class MenuParentViewHolder extends ParentViewHolder {
         categoryName = (TextView) itemView.findViewById(R.id.category_name);
         button = (ImageButton) itemView.findViewById(R.id.expand_button);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isExpanded()) {
-                    collapseView();
-                } else {
-                    expandView();
-                }
-            }
-        });
-
-        this.itemView = itemView;
     }
 
 
@@ -52,6 +39,6 @@ public class MenuParentViewHolder extends ParentViewHolder {
 
     }
 
-   
+
 
 }
