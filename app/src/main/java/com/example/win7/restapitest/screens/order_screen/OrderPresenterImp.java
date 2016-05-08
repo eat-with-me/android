@@ -36,7 +36,8 @@ public class OrderPresenterImp implements OrderPresenter {
             @Override
             public void onSuccess(FinalOrder arg) {
                 orderView.getPurchasers();
-                orderView.showToast("Twoje zamówienie zostało przyjęte");
+
+                orderView.initDialog();
             }
 
             @Override

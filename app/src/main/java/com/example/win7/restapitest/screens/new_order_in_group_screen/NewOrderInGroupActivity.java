@@ -117,6 +117,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         intent.putExtra(OrdersInGroupActivity.GROUP_ID,groupId);
         intent.putExtra(OrdersInGroupActivity.ORDER,order);
         intent.putExtra(OrdersInGroupActivity.RESTAURANT_NAME,order.getRestaurant().getName());
+        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
         startActivity(intent);
 
     }
@@ -164,6 +165,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
             @Override
             public void onClick(View view, int position) {
                 selectedRestaurant = restaurantsResult.get(position);
+                showToast("Wybrano "+selectedRestaurant.getName());
                 loadRestaurantMenu(selectedRestaurant);
 
             }
@@ -232,7 +234,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        final String choice = "Wybrałeś: \n\n   " + time.getText().toString() + "\n   " + selectedRestaurant.getName();
+        final String choice = "Wybrałeś: \n\n   " + time.getText().toString() + "\n   " + selectedRestaurant.getName() +"\n\nPrzejdź dalej, aby złożyć zamówienie.";
 
         builder.setTitle(R.string.new_order)
                 .setMessage(choice);
@@ -242,7 +244,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
 
             }
         });
-        builder.setPositiveButton(R.string.akceptuj, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.go_to_order, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 newOrder = new OrderInGroup();

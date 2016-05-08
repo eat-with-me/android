@@ -1,16 +1,19 @@
 package com.example.win7.restapitest.screens.order_screen;
 
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Purchase;
 import com.example.win7.restapitest.model.Purchaser;
 import com.example.win7.restapitest.others.MyActivity;
+import com.example.win7.restapitest.screens.main_screen.MainActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 import com.example.win7.restapitest.screens.out_of_date_order.OutOfDateOrderActivity;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
@@ -51,6 +55,7 @@ public class OrderFragmentActivity extends MyActivity implements OrderView {
     private String orderId;
     private Order order;
     private OrderInGroup orderInGroup;
+    private AlertDialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,6 +111,7 @@ public class OrderFragmentActivity extends MyActivity implements OrderView {
 
     }
     public void getPurchasers(){
+        Log.d("getPurchasers", "groupId: " + groupId + " orderId: " + orderId);
         orderPresenter.getPurchasers(groupId,orderId);
 
     }
@@ -137,6 +143,7 @@ public class OrderFragmentActivity extends MyActivity implements OrderView {
     }
     public void navigateToOutOfDateOrderActivity() {
         Intent intent = new Intent(this, OutOfDateOrderActivity.class);
+        intent.putExtra(OrdersInGroupActivity.ORDER,orderInGroup);
         startActivity(intent);
     }
     @Override
@@ -203,5 +210,39 @@ public class OrderFragmentActivity extends MyActivity implements OrderView {
         recyclerViewMyOrder.setLayoutManager(layoutManager);
         recyclerViewMyOrder.setItemAnimator(new DefaultItemAnimator());
         recyclerViewMyOrder.setAdapter(adapter);
+    }
+    @Override
+    public void navigateToMainActivity()
+    {
+
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+    @Override
+    public void initDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        final String message = "Wróć lub zakończ i przejdź do wyboru grupy\n";
+        builder.setTitle("Twoje zamówienie zostało przyjęte")
+                .setMessage(message);
+
+        builder.setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        builder.setPositiveButton(R.string.exit, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                navigateToMainActivity();
+            }
+        });
+
+
+        dialog = builder.create();
+        dialog.show();
+
     }
 }

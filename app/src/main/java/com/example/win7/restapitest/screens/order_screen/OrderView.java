@@ -17,4 +17,6 @@ public interface OrderView {
     void setPurchasers(List<Purchaser> purchasers);
     void showToast(String message);
     void getPurchasers();
+    void navigateToMainActivity();
+    void initDialog();
 }

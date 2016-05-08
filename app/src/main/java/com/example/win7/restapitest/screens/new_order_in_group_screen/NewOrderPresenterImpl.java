@@ -28,9 +28,10 @@ public class NewOrderPresenterImpl implements NewOrderPresenter {
         apiConnection.createNewOrder(newOrderInGroup, groupId, new OnDownloadFinishedListener<OrderInGroup>() {
             @Override
             public void onSuccess(OrderInGroup arg) {
+
                 newOrderInGroupActivity.showToast("Dodano nowe zamówienie");
                 newOrderInGroupActivity.clearNewOrder();
-                newOrderInGroupActivity.goToRestaurantMenuActivity(newOrderInGroup);
+                newOrderInGroupActivity.goToRestaurantMenuActivity(arg);
 
             }
 
@@ -57,12 +58,13 @@ public class NewOrderPresenterImpl implements NewOrderPresenter {
                 } else {
 
                     newOrderInGroupActivity.loadRestaurants(restaurantsResult);
+
                 }
             }
 
             @Override
             public void onError() {
-                newOrderInGroupActivity.showError();
+                newOrderInGroupActivity.showAlertDialog();
             }
         });
     }
