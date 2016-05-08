@@ -19,4 +19,6 @@ public interface OrderView {
     void getPurchasers();
     void navigateToMainActivity();
     void initDialog();
+
+    void showAlertDialog();
 }

@@ -141,6 +141,7 @@ public class OrderFragmentActivity extends MyActivity implements OrderView {
         {
 
             navigateToOutOfDateOrderActivity();
+            showToast("Zamówienie dobiegło końca");
         }
 
     }

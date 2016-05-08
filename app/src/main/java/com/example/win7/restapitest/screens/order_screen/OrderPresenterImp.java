@@ -43,7 +43,7 @@ public class OrderPresenterImp implements OrderPresenter {
             @Override
             public void onError() {
 
-                orderView.showToast("Coś poszło nie tak");
+                orderView.showAlertDialog();
 
             }
         });
@@ -67,7 +67,7 @@ public class OrderPresenterImp implements OrderPresenter {
 
             @Override
             public void onError() {
-                orderView.showToast("error");
+                orderView.showAlertDialog();
             }
         });
     }
