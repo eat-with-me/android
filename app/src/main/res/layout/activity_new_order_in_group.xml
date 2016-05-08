@@ -57,7 +57,7 @@
             android:id="@+id/bAccept"
             android:onClick="onClickAccept"
             android:background="@color/colorButton"
-            android:textColor="#ffffff"
+            android:textColor="@color/text"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -72,10 +72,11 @@
         android:hint="Godzina zakończenia"
         android:focusable="false"
         android:onClick="showTimePickerDialog"
-        android:textColor="#FFF"
-        android:textColorHint="#FFF"
+        android:textColor="@color/text"
+        android:textColorHint="@color/text"
         android:textSize="25dp"
         android:layout_below="@+id/include"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColorHighlight="@color/text" />
 
 </RelativeLayout>

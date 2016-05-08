@@ -27,7 +27,7 @@
             android:id="@+id/category_name"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/text"
             android:text="sdfsdfsdfsdfsdf"
             android:gravity="center"
             android:layout_centerVertical="true"
