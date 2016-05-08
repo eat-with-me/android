@@ -246,7 +246,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/card_view"
-            android:layout_alignEnd="@+id/card_view" />
+            android:layout_alignEnd="@+id/card_view"
+            android:layout_below="@+id/card_view" />
 
 
 
