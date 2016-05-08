@@ -247,6 +247,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
         String token = group.getToken();
         String baseUrl = ApiConnectionImp.BASE_URL;
+
         final String link = baseUrl +"join/" + token;
 
         builder.setTitle(R.string.link_dialog_title)
