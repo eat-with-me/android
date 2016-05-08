@@ -47,13 +47,13 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
                         order.getMeals().get(i).incAmount();
                         order.incTotalPrice(meal.getPrice());
 
-                        restaurantMenuView.showToast("Dodano do koszyka " + otherMeal.getId());
+                        restaurantMenuView.showToast("Dodano do koszyka " + otherMeal.getName());
                         jest = true;
                     }
                 }
                 if (!jest) {
                     order.add(meal);
-                    restaurantMenuView.showToast("Dodano do koszyka " + otherMeal.getId());
+                    restaurantMenuView.showToast("Dodano do koszyka " + otherMeal.getName());
                 }
 
 
