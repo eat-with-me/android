@@ -36,9 +36,17 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     }
 
     @Override
-    public void onBindViewHolder(RestaurantsAdapter.ViewHolder holder, int position) {
-        RestaurantMenu restaurant = restaurants.get(position);
+    public void onBindViewHolder(final RestaurantsAdapter.ViewHolder holder, final int position) {
+        final RestaurantMenu restaurant = restaurants.get(position);
         holder.restaurantName.setText(restaurant.getName());
+        holder.arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.equals(holder.arrow )) {
+                    ((NewOrderInGroupActivity)context).navigateToDisabledMenu(restaurant.getId().toString());
+                }
+            }
+        });
 
     }
 
@@ -46,7 +54,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     public int getItemCount() {
         return restaurants.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView restaurantName;
         public ImageButton arrow;
@@ -57,18 +65,10 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             super(view);
             restaurantName = (TextView) view.findViewById(R.id.restaurant_name);
             arrow = (ImageButton) view.findViewById(R.id.arrow_button);
-            arrow.setOnClickListener(this);
+
 
         }
 
-
-        @Override
-        public void onClick(View v) {
-
-            if(v.equals(arrow)) {
-                ((NewOrderInGroupActivity)context).onClickShowDetails();
-            }
-        }
     }
 }
 

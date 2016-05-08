@@ -19,6 +19,7 @@ import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
+import com.example.win7.restapitest.screens.new_order_in_group_screen.NewOrderInGroupActivity;
 import com.example.win7.restapitest.screens.order_screen.OrderFragmentActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
@@ -61,11 +62,21 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
 
 
         Intent intent = getIntent();
-        groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
-        orderInGroup = (OrderInGroup) intent.getSerializableExtra(OrdersInGroupActivity.ORDER);
-        restaurantId = orderInGroup.getRestaurantId();
-        orderId = orderInGroup.getId();
-        restaurantName = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_NAME);
+        boolean disabledMenu = intent.getExtras().getBoolean(NewOrderInGroupActivity.DISABLED_MENU);
+
+        if(disabledMenu){
+
+            restaurantId = intent.getStringExtra(NewOrderInGroupActivity.RESTAURANT_ID);
+
+        }
+        else{
+            groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
+            orderInGroup = (OrderInGroup) intent.getSerializableExtra(OrdersInGroupActivity.ORDER);
+            restaurantId = orderInGroup.getRestaurantId();
+            orderId = orderInGroup.getId();
+            restaurantName = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_NAME);
+        }
+
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         myToolbar.setTitle(restaurantName);
@@ -75,7 +86,8 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
 
         recycleViewInit();
 
-        restaurantMenuPresenter.disableMenu();
+        if(disabledMenu)
+            restaurantMenuPresenter.disableMenu();
         restaurantMenuPresenter.getMenu(restaurantId);
 
 
@@ -180,15 +192,6 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
     public void hideButton() {
         relativeLayout.setVisibility(View.GONE);
     }
-
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        if (ORDER_ACTIVITY_REQUEST_CODE == requestCode && resultCode == RESULT_OK) {
-//            Order response = data.getParcelableExtra("resp");
-//            restaurantMenuPresenter.setOrder(response);
-//        }
-//
-//    }
 
 
 

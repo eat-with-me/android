@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.api.ApiConnectionImp;
 import com.example.win7.restapitest.model.Group;
+import com.example.win7.restapitest.model.NewOrderInGroup;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Orders;
 import com.example.win7.restapitest.others.ClickListener;
@@ -173,6 +174,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
 
 
         Intent intent = new Intent(this, RestaurantMenuActivity.class);
+        intent.putExtra(NewOrderInGroupActivity.DISABLED_MENU,false);
         intent.putExtra(OrdersInGroupActivity.GROUP_ID,group.getId());
         intent.putExtra(ORDER,order);
         intent.putExtra(RESTAURANT_NAME,order.getRestaurant().getName());

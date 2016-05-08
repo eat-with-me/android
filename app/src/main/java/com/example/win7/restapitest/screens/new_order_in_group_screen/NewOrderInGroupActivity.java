@@ -30,6 +30,7 @@ import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.MenuAdapter;
+import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 
 import java.util.Calendar;
 import java.util.List;
@@ -56,6 +57,10 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
     private NewOrderInGroup newOrder;
     private Fragment restaurantMenuFragment;
     private AlertDialog dialog;
+
+
+    public final static String RESTAURANT_ID = "restaurantId";
+    public final static String DISABLED_MENU = "disabledMenu" ;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,9 +187,12 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         }
     }
     public void onClickShowDetails() {
-        if (getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment).isHidden()) {
-            getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment)).addToBackStack(null).commit();
-        }
+
+
+
+//        if (getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment).isHidden()) {
+//            getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentById(R.id.restaurants_menu_fragment)).addToBackStack(null).commit();
+//        }
     }
     public void showTimePickerDialog(View v) {
         Calendar calendar = Calendar.getInstance();
@@ -242,6 +250,15 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         dialog = builder.create();
 
     }
+
+    public void navigateToDisabledMenu(String id) {
+        Intent intent = new Intent(this, RestaurantMenuActivity.class);
+        intent.putExtra(RESTAURANT_ID, id);
+        intent.putExtra(DISABLED_MENU, true);
+        startActivity(intent);
+
+    }
+
 
 //    public void restaurantMenuRecyclerInit()
 //    {
