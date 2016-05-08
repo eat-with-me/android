@@ -31,8 +31,28 @@ public class Meal implements Parcelable {
     @SerializedName("amount")
     private Integer amount;
 
+    @SerializedName("meal_type_id")
+    private Integer mealTypeId;
+
     @SerializedName("meal_type")
-    private MealType meal_type;
+    private MealType mealType;
+
+    public Integer getMealTypeId() {
+        return mealTypeId;
+    }
+
+    public void setMealTypeId(Integer mealTypeId) {
+        this.mealTypeId = mealTypeId;
+    }
+
+    public MealType getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(MealType mealType) {
+        this.mealType = mealType;
+    }
+
 
     public Meal(String name, Double price)
     {
@@ -42,6 +62,8 @@ public class Meal implements Parcelable {
     }
     public Meal(Meal otherMeal)
     {
+
+        //TODO @Mateusz Cierpka there is something like clone()
         this.id = otherMeal.getId();
         this.name = otherMeal.getName();
         this.price = otherMeal.getPrice();
@@ -161,10 +183,10 @@ public class Meal implements Parcelable {
     }
 
     public MealType getMeal_type() {
-        return meal_type;
+        return mealType;
     }
 
     public void setMeal_type(MealType meal_type) {
-        this.meal_type = meal_type;
+        this.mealType = meal_type;
     }
 }

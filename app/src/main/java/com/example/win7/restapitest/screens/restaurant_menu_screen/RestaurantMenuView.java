@@ -2,15 +2,19 @@ package com.example.win7.restapitest.screens.restaurant_menu_screen;
 
 import android.view.View;
 
+import com.example.win7.restapitest.model.MealCategory;
 import com.example.win7.restapitest.model.RestaurantMenu;
+
+import java.util.List;
 
 /**
  * Created by win7 on 02/04/2016.
  */
 public interface RestaurantMenuView {
+
     void setEmptyView();
 
-    void loadMenu(RestaurantMenu menuResult);
+    void loadMenu(List<MealCategory> menu);
 
     void showToast(String message);
 
@@ -29,4 +33,6 @@ public interface RestaurantMenuView {
     void navigateToOrderActivity();
 
     void showAlertDialog();
+
+    void hideButton();
 }

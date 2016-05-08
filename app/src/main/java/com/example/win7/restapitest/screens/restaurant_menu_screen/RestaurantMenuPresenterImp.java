@@ -3,11 +3,14 @@ package com.example.win7.restapitest.screens.restaurant_menu_screen;
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.model.Meal;
+import com.example.win7.restapitest.model.MealCategory;
 import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.Factory;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by win7 on 02/04/2016.
@@ -19,21 +22,24 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
     private ApiConnection apiConnection;
     private Order order;
     private RestaurantMenu menuResult = null;
+    private boolean menuDisabled;
 
     public RestaurantMenuPresenterImp(RestaurantMenuView restaurantMenuView) {
         this.restaurantMenuView = restaurantMenuView;
         this.apiConnection = Factory.getApiConnection();
-        //TODO wyrzucić stąd kompozycje
+        //TODO dispose of composition
         this.order = new Order();
     }
 
     @Override
-    public void onClickMeal(int position) {
+    public void onClickMeal(Meal otherMeal) {
 
-        Meal meal = new Meal(menuResult.getMeals().get(position));
-        meal.setMeal_id(menuResult.getMeals().get(position).getId());
-        boolean jest = false;
-        if (!order.getMeals().isEmpty()) {
+        if(!menuDisabled) {
+
+            Meal meal = new Meal(otherMeal);
+            meal.setMeal_id(otherMeal.getId());
+            boolean jest = false;
+            if (!order.getMeals().isEmpty()) {
 
 
                 for (int i = 0; i < order.getMeals().size(); i++) {
@@ -41,27 +47,24 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
                         order.getMeals().get(i).incAmount();
                         order.incTotalPrice(meal.getPrice());
 
-                        restaurantMenuView.showToast("Dodano do koszyka " + menuResult.getMeals().get(position).getId());
+                        restaurantMenuView.showToast("Dodano do koszyka " + otherMeal.getId());
                         jest = true;
                     }
                 }
-                if(!jest)
-                {
+                if (!jest) {
                     order.add(meal);
-                    restaurantMenuView.showToast("Dodano do koszyka " + menuResult.getMeals().get(position).getId());
+                    restaurantMenuView.showToast("Dodano do koszyka " + otherMeal.getId());
                 }
 
 
+            } else {
 
+                order.add(meal);
+                restaurantMenuView.showToast("Dodano do koszyka " + otherMeal.getName());
+            }
 
-        } else {
-
-            order.add(meal);
-            restaurantMenuView.showToast("Dodano do koszyka " + menuResult.getMeals().get(position).getId());
+            setTotalPriceAndNumberOfProducts();
         }
-
-        setTotalPriceAndNumberOfProducts();
-
 
     }
 
@@ -83,14 +86,16 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
             @Override
             public void onSuccess(RestaurantMenu arg) {
                 menuResult = arg;
-                restaurantMenuView.hideProgress();
 
                 if (menuResult.isEmpty()) {
                     restaurantMenuView.setEmptyView();
                 } else {
-
-                    restaurantMenuView.loadMenu(menuResult);
+                    ArrayList<MealCategory> menu = createCorrectMenu(menuResult);
+                    restaurantMenuView.loadMenu(menu);
                 }
+                restaurantMenuView.hideProgress();
+                if(menuDisabled)
+                    hideButton();
             }
 
             @Override
@@ -99,6 +104,50 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
             }
         });
 
+
+    }
+
+    @Override
+    public void hideButton() {
+        restaurantMenuView.hideButton();
+    }
+
+    //TODO move this function from here
+    private ArrayList<MealCategory> createCorrectMenu(RestaurantMenu menuResult) {
+
+        List<MealCategory> correctMenu = new ArrayList<>();
+        List<Meal> meals = menuResult.getMeals();
+        boolean found = false;
+
+        for(Meal meal : meals){
+
+           int categoryId = meal.getMealType().getId();
+
+            for(MealCategory mealCategory : correctMenu){
+
+                found = false;
+
+                if(mealCategory.getId() == categoryId){
+
+                    mealCategory.getMeals().add(meal);
+                    found = true;
+                    break;
+                }
+
+            }
+
+            if(!found){
+
+                MealCategory category = new MealCategory();
+                category.setId(categoryId);
+                category.setName(meal.getMealType().getName());
+                category.getMeals().add(meal);
+                correctMenu.add(category);
+            }
+
+        }
+
+        return (ArrayList<MealCategory>) correctMenu;
 
     }
 
@@ -130,5 +179,14 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
         this.order = order;
     }
 
+    @Override
+    public void disableMenu(){
+        menuDisabled = true;
+    }
+
+    @Override
+    public void enableMenu(){
+        menuDisabled = false;
+    }
 
 }
