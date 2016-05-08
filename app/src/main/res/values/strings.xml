@@ -81,7 +81,8 @@
     <string name="order_closed">Zamówienie zakończone</string>
 
     <string name="back">Wróć</string>
-
+    <string name="go_to_order">Przejdź do zamówienia</string>
+    <string name="exit">Zakończ</string>
 
 
 </resources>

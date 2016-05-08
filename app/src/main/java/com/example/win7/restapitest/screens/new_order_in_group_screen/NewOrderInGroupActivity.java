@@ -22,7 +22,8 @@ import android.widget.TimePicker;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.api.ApiConnection;
-import com.example.win7.restapitest.model.NewOrderInGroup;
+import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.Restaurant;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.Factory;
@@ -54,7 +55,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
     private NewOrderPresenter newOrderPresenter;
     private String groupId;
     private RestaurantMenu selectedRestaurant;
-    private NewOrderInGroup newOrder;
+    private OrderInGroup newOrder;
     private Fragment restaurantMenuFragment;
     private AlertDialog dialog;
 
@@ -112,7 +113,18 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         //adapter2 = new MenuAdapter(restaurantMenu);
         restaurantMenuRecycler.setAdapter(adapter2);
     }
+    public void goToRestaurantMenuActivity(OrderInGroup order) {
+        Restaurant restaurant = new Restaurant();
+        restaurant.setName(selectedRestaurant.getName());
+        order.setRestaurant(restaurant);
+        Intent intent = new Intent(this, RestaurantMenuActivity.class);
+        intent.putExtra(OrdersInGroupActivity.GROUP_ID,groupId);
+        intent.putExtra(OrdersInGroupActivity.ORDER,order);
+        intent.putExtra(OrdersInGroupActivity.RESTAURANT_NAME,order.getRestaurant().getName());
+        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+        startActivity(intent);
 
+    }
     public void showProgress() {
 
         //TODO rozwiązać to jakoś inaczej (przeładowanie całego widoku)
@@ -157,6 +169,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
             @Override
             public void onClick(View view, int position) {
                 selectedRestaurant = restaurantsResult.get(position);
+                showToast("Wybrano "+selectedRestaurant.getName());
                 loadRestaurantMenu(selectedRestaurant);
 
             }
@@ -228,7 +241,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        final String choice = "Wybrałeś: \n\n   " + time.getText().toString() + "\n   " + selectedRestaurant.getName();
+        final String choice = "Wybrałeś: \n\n   " + time.getText().toString() + "\n   " + selectedRestaurant.getName() +"\n\nPrzejdź dalej, aby złożyć zamówienie.";
 
         builder.setTitle(R.string.new_order)
                 .setMessage(choice);
@@ -238,10 +251,12 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
 
             }
         });
-        builder.setPositiveButton(R.string.akceptuj, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.go_to_order, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                newOrder = new NewOrderInGroup(selectedRestaurant.getId(), time.getText().toString());
+                newOrder = new OrderInGroup();
+                newOrder.setRestaurantId(selectedRestaurant.getId().toString());
+                newOrder.setClosingTime(time.getText().toString());
                 newOrderPresenter.OnClickAccept(groupId, newOrder);
             }
         });

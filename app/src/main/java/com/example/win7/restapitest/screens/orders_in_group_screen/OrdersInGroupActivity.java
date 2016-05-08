@@ -103,6 +103,7 @@ public class OrdersInGroupActivity extends MyActivity implements OrdersInGroupVi
         Intent intent = new Intent(this, NewOrderInGroupActivity.class);
         Log.d("GROUPID", group.getId());
         intent.putExtra(GROUP_ID, group.getId());
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
