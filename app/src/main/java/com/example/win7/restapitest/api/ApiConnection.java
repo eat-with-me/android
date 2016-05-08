@@ -3,7 +3,7 @@ package com.example.win7.restapitest.api;
 import com.example.win7.restapitest.model.Credentials;
 import com.example.win7.restapitest.model.FinalOrder;
 import com.example.win7.restapitest.model.GroupName;
-import com.example.win7.restapitest.model.NewOrderInGroup;
+import com.example.win7.restapitest.model.OrderInGroup;
 
 /**
  * Created by win7 on 28/03/2016.
@@ -28,7 +28,7 @@ public interface ApiConnection {
 
     void createNewGroup(GroupName groupName, OnDownloadFinishedListener listener);
 
-    void createNewOrder(NewOrderInGroup orderInGroup, String groupId, final OnDownloadFinishedListener listener);
+    void createNewOrder(OrderInGroup orderInGroup, String groupId, final OnDownloadFinishedListener listener);
 
     void closeSession();
 }

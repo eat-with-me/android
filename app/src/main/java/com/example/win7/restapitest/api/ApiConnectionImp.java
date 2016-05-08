@@ -8,7 +8,6 @@ import com.example.win7.restapitest.model.FinalOrder;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.model.GroupName;
 import com.example.win7.restapitest.model.LoginAnswer;
-import com.example.win7.restapitest.model.NewOrderInGroup;
 import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.Purchaser;
 import com.example.win7.restapitest.model.RestaurantMenu;
@@ -318,18 +317,18 @@ public class ApiConnectionImp implements ApiConnection {
     }
 
     @Override
-    public void createNewOrder(NewOrderInGroup orderInGroup, String groupId, final OnDownloadFinishedListener listener) {
-        Log.d("createNewOrder", "" + orderInGroup.getRestaurant_id() + " " + orderInGroup.getClosing_time());
-        Call<NewOrderInGroup> call = api.createNewOrder(orderInGroup,Integer.parseInt(groupId));
-        call.enqueue(new Callback<NewOrderInGroup>() {
+    public void createNewOrder(OrderInGroup orderInGroup, String groupId, final OnDownloadFinishedListener listener) {
+        Log.d("createNewOrder", "" + orderInGroup.getRestaurantId() + " " + orderInGroup.getNormalClsingTime());
+        Call<OrderInGroup> call = api.createNewOrder(orderInGroup,Integer.parseInt(groupId));
+        call.enqueue(new Callback<OrderInGroup>() {
             @Override
-            public void onResponse(Call<NewOrderInGroup> call, Response<NewOrderInGroup> response) {
-                NewOrderInGroup newOrder = response.body();
+            public void onResponse(Call<OrderInGroup> call, Response<OrderInGroup> response) {
+                OrderInGroup newOrder = response.body();
                 listener.onSuccess(newOrder);
             }
 
             @Override
-            public void onFailure(Call<NewOrderInGroup> call, Throwable t) {
+            public void onFailure(Call<OrderInGroup> call, Throwable t) {
                 Log.d("onFailura",t.getMessage());
                 listener.onError();
             }

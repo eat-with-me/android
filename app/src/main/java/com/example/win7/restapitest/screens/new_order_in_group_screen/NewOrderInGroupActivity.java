@@ -22,7 +22,8 @@ import android.widget.TimePicker;
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.api.ApiConnection;
-import com.example.win7.restapitest.model.NewOrderInGroup;
+import com.example.win7.restapitest.model.OrderInGroup;
+import com.example.win7.restapitest.model.Restaurant;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.Factory;
@@ -30,6 +31,7 @@ import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 import com.example.win7.restapitest.screens.restaurant_menu_screen.MenuAdapter;
+import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 
 import java.util.Calendar;
 import java.util.List;
@@ -53,7 +55,7 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
     private NewOrderPresenter newOrderPresenter;
     private String groupId;
     private RestaurantMenu selectedRestaurant;
-    private NewOrderInGroup newOrder;
+    private OrderInGroup newOrder;
     private Fragment restaurantMenuFragment;
     private AlertDialog dialog;
 
@@ -107,7 +109,17 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         adapter2 = new MenuAdapter(restaurantMenu);
         restaurantMenuRecycler.setAdapter(adapter2);
     }
+    public void goToRestaurantMenuActivity(OrderInGroup order) {
+        Restaurant restaurant = new Restaurant();
+        restaurant.setName(selectedRestaurant.getName());
+        order.setRestaurant(restaurant);
+        Intent intent = new Intent(this, RestaurantMenuActivity.class);
+        intent.putExtra(OrdersInGroupActivity.GROUP_ID,groupId);
+        intent.putExtra(OrdersInGroupActivity.ORDER,order);
+        intent.putExtra(OrdersInGroupActivity.RESTAURANT_NAME,order.getRestaurant().getName());
+        startActivity(intent);
 
+    }
     public void showProgress() {
 
         //TODO rozwiązać to jakoś inaczej (przeładowanie całego widoku)
@@ -233,7 +245,9 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         builder.setPositiveButton(R.string.akceptuj, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                newOrder = new NewOrderInGroup(selectedRestaurant.getId(), time.getText().toString());
+                newOrder = new OrderInGroup();
+                newOrder.setRestaurantId(selectedRestaurant.getId().toString());
+                newOrder.setClosingTime(time.getText().toString());
                 newOrderPresenter.OnClickAccept(groupId, newOrder);
             }
         });

@@ -2,7 +2,7 @@ package com.example.win7.restapitest.screens.new_order_in_group_screen;
 
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
-import com.example.win7.restapitest.model.NewOrderInGroup;
+import com.example.win7.restapitest.model.OrderInGroup;
 import com.example.win7.restapitest.model.RestaurantMenu;
 import com.example.win7.restapitest.others.Factory;
 
@@ -23,13 +23,14 @@ public class NewOrderPresenterImpl implements NewOrderPresenter {
     }
 
     @Override
-    public void OnClickAccept(String groupId, NewOrderInGroup newOrderInGroup) {
+    public void OnClickAccept(String groupId, final OrderInGroup newOrderInGroup) {
 
-        apiConnection.createNewOrder(newOrderInGroup, groupId, new OnDownloadFinishedListener<NewOrderInGroup>() {
+        apiConnection.createNewOrder(newOrderInGroup, groupId, new OnDownloadFinishedListener<OrderInGroup>() {
             @Override
-            public void onSuccess(NewOrderInGroup arg) {
+            public void onSuccess(OrderInGroup arg) {
                 newOrderInGroupActivity.showToast("Dodano nowe zamówienie");
                 newOrderInGroupActivity.clearNewOrder();
+                newOrderInGroupActivity.goToRestaurantMenuActivity(newOrderInGroup);
 
             }
 
