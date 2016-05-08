@@ -22,21 +22,24 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
     private ApiConnection apiConnection;
     private Order order;
     private RestaurantMenu menuResult = null;
+    private boolean menuDisabled;
 
     public RestaurantMenuPresenterImp(RestaurantMenuView restaurantMenuView) {
         this.restaurantMenuView = restaurantMenuView;
         this.apiConnection = Factory.getApiConnection();
-        //TODO wyrzucić stąd kompozycje
+        //TODO dispose of composition
         this.order = new Order();
     }
 
     @Override
-    public void onClickMeal(int position) {
+    public void onClickMeal(Meal otherMeal) {
 
-        Meal meal = new Meal(menuResult.getMeals().get(position));
-        meal.setMeal_id(menuResult.getMeals().get(position).getId());
-        boolean jest = false;
-        if (!order.getMeals().isEmpty()) {
+        if(!menuDisabled) {
+
+            Meal meal = new Meal(otherMeal);
+            meal.setMeal_id(otherMeal.getId());
+            boolean jest = false;
+            if (!order.getMeals().isEmpty()) {
 
 
                 for (int i = 0; i < order.getMeals().size(); i++) {
@@ -44,27 +47,24 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
                         order.getMeals().get(i).incAmount();
                         order.incTotalPrice(meal.getPrice());
 
-                        restaurantMenuView.showToast("Dodano do koszyka " + menuResult.getMeals().get(position).getId());
+                        restaurantMenuView.showToast("Dodano do koszyka " + otherMeal.getId());
                         jest = true;
                     }
                 }
-                if(!jest)
-                {
+                if (!jest) {
                     order.add(meal);
-                    restaurantMenuView.showToast("Dodano do koszyka " + menuResult.getMeals().get(position).getId());
+                    restaurantMenuView.showToast("Dodano do koszyka " + otherMeal.getId());
                 }
 
 
+            } else {
 
+                order.add(meal);
+                restaurantMenuView.showToast("Dodano do koszyka " + otherMeal.getName());
+            }
 
-        } else {
-
-            order.add(meal);
-            restaurantMenuView.showToast("Dodano do koszyka " + menuResult.getMeals().get(position).getId());
+            setTotalPriceAndNumberOfProducts();
         }
-
-        setTotalPriceAndNumberOfProducts();
-
 
     }
 
@@ -86,7 +86,6 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
             @Override
             public void onSuccess(RestaurantMenu arg) {
                 menuResult = arg;
-                restaurantMenuView.hideProgress();
 
                 if (menuResult.isEmpty()) {
                     restaurantMenuView.setEmptyView();
@@ -94,6 +93,9 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
                     ArrayList<MealCategory> menu = createCorrectMenu(menuResult);
                     restaurantMenuView.loadMenu(menu);
                 }
+                restaurantMenuView.hideProgress();
+                if(menuDisabled)
+                    hideButton();
             }
 
             @Override
@@ -103,6 +105,10 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
         });
 
 
+    }
+
+    private void hideButton() {
+        restaurantMenuView.hideButton();
     }
 
     //TODO move this function from here
@@ -172,5 +178,15 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
         this.order = order;
     }
 
+
+    @Override
+    public void disableMenu(){
+        menuDisabled = true;
+    }
+
+    @Override
+    public void enableMenu(){
+        menuDisabled = false;
+    }
 
 }

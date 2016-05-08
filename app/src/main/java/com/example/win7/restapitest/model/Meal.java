@@ -61,6 +61,8 @@ public class Meal implements Parcelable {
     }
     public Meal(Meal otherMeal)
     {
+
+        //TODO @Mateusz Cierpka there is something like clone()
         this.id = otherMeal.getId();
         this.name = otherMeal.getName();
         this.price = otherMeal.getPrice();

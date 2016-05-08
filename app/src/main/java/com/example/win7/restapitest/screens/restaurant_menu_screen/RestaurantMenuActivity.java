@@ -70,6 +70,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
 
         recycleViewInit();
 
+        restaurantMenuPresenter.disableMenu();
         restaurantMenuPresenter.getMenu(restaurantId);
 
     }
@@ -106,7 +107,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
     @Override
     public void loadMenu(List<MealCategory> menu)
     {
-        adapter = new MenuAdapter(this,menu);
+        adapter = new MenuAdapter(this,menu,restaurantMenuPresenter);
 
         recyclerView.setAdapter(adapter);
     }
@@ -168,6 +169,11 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         startActivityForResult(intent,ORDER_ACTIVITY_REQUEST_CODE);
     }
 
+    @Override
+    public void hideButton() {
+        relativeLayout.setVisibility(View.GONE);
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (ORDER_ACTIVITY_REQUEST_CODE == requestCode && resultCode == RESULT_OK) {
@@ -185,20 +191,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //recyclerView.setAdapter(adapter);
-//
-//        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
-//            @Override
-//            public void onClick(View view, int position) {
-//
-//                restaurantMenuPresenter.onClickMeal(position);
-//            }
-//
-//            @Override
-//            public void onLongClick(View view, int position) {
-//
-//            }
-//        }));
+
 
     }
 }

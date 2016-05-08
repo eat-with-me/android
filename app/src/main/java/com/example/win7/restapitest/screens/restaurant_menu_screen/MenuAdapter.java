@@ -2,6 +2,7 @@ package com.example.win7.restapitest.screens.restaurant_menu_screen;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,12 @@ public class MenuAdapter extends ExpandableRecyclerAdapter<MenuParentViewHolder,
 
     private LayoutInflater mInflator;
 
+    private RestaurantMenuPresenter restaurantMenuPresenter;
 
-
-    public MenuAdapter(Context context, List<? extends ParentListItem> parentItemList) {
+    public MenuAdapter(Context context, List<? extends ParentListItem> parentItemList, RestaurantMenuPresenter restaurantMenuPresenter) {
         super(parentItemList);
         mInflator = LayoutInflater.from(context);
+        this.restaurantMenuPresenter = restaurantMenuPresenter;
     }
 
 
@@ -54,10 +56,18 @@ public class MenuAdapter extends ExpandableRecyclerAdapter<MenuParentViewHolder,
         parentViewHolder.categoryName.setText(category.getName());
     }
 
+
+
     @Override
     public void onBindChildViewHolder(MenuChildViewHolder childViewHolder, int position, Object childListItem) {
-        Meal meal = (Meal) childListItem;
+        final Meal meal = (Meal) childListItem;
         childViewHolder.dish.setText(meal.getName());
+        childViewHolder.dish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restaurantMenuPresenter.onClickMeal(meal);
+            }
+        });
         childViewHolder.price.setText(meal.getPrice().toString());
     }
 
