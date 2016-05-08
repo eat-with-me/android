@@ -15,10 +15,7 @@ import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.MealCategory;
 import com.example.win7.restapitest.model.Order;
 import com.example.win7.restapitest.model.OrderInGroup;
-import com.example.win7.restapitest.model.RestaurantMenu;
-import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.MyActivity;
-import com.example.win7.restapitest.others.RecyclerTouchListener;
 import com.example.win7.restapitest.screens.new_order_in_group_screen.NewOrderInGroupActivity;
 import com.example.win7.restapitest.screens.order_screen.OrderFragmentActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
@@ -180,13 +177,21 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
     public void navigateToOrderActivity() {
 
         Intent intent = new Intent(this, OrderFragmentActivity.class);
-        intent.putExtra("order", restaurantMenuPresenter.getOrder());
+
         intent.putExtra(OrdersInGroupActivity.GROUP_ID,groupId);
         intent.putExtra(ORDER,orderInGroup);
-
+        intent.putExtra("order", restaurantMenuPresenter.getOrder());
         startActivityForResult(intent,ORDER_ACTIVITY_REQUEST_CODE);
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (ORDER_ACTIVITY_REQUEST_CODE == requestCode && resultCode == RESULT_OK) {
+            Order response = data.getParcelableExtra("resp");
+            restaurantMenuPresenter.setOrder(response);
+        }
+
+    }
     @Override
 
     public void hideButton() {
