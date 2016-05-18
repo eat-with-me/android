@@ -12,7 +12,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -211,11 +210,12 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
     public void showTimePickerDialog(View v) {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
+
         int minutes = calendar.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,TimePickerDialog.THEME_HOLO_LIGHT, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                time.setText("" + hourOfDay + ":" + minute);
+                time.setText(String.format("%02d:%02d", hourOfDay, minute));
                 time.setError(null);
             }
         },hour,minutes,true);
@@ -258,8 +258,8 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
                 newOrder = new OrderInGroup();
                 newOrder.setRestaurantId(selectedRestaurant.getId().toString());
                 String correctTime = subtractTwoHours(time.getText().toString()); //TODO it doesn't work between 00:00 - 02:00, unlucky
-
                 newOrder.setClosingTime(correctTime);
+//                newOrder.setClosingTime(time.getText().toString());
                 newOrderPresenter.OnClickAccept(groupId, newOrder);
 
             }
@@ -275,6 +275,8 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         String hour = s.substring(0,2);
         Integer hourInt = Integer.parseInt(hour);
         hourInt -= 2;
+        if (hourInt == -1) hourInt = 23;
+        if (hourInt == -2) hourInt = 22;
         return hourInt.toString() + s.substring(2,5);
     }
 
