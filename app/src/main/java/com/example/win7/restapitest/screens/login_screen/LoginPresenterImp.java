@@ -1,10 +1,8 @@
 package com.example.win7.restapitest.screens.login_screen;
 
 import com.example.win7.restapitest.api.ApiConnection;
-import com.example.win7.restapitest.api.OnDownloadFinishedListener;
 import com.example.win7.restapitest.api.OnLoginListener;
 import com.example.win7.restapitest.model.Credentials;
-import com.example.win7.restapitest.model.User;
 import com.example.win7.restapitest.others.Factory;
 
 
