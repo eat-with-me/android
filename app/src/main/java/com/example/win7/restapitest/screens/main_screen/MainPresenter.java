@@ -15,5 +15,5 @@ public interface MainPresenter {
 
     void onClickNewGroup();
 
-
+    void addToGroup(String token);
 }

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnDownloadFinishedListener;
+import com.example.win7.restapitest.api.OnRequestListener;
 import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.others.Factory;
 
@@ -73,5 +74,22 @@ public class MainPresenterImp implements MainPresenter {
         mainView.navigateToNewGroupActivity();
     }
 
- }
+    @Override
+    public void addToGroup(String token) {
+        apiConnection.addToGroup(token, new OnRequestListener() {
+            @Override
+            public void onSuccess() {
+
+                getGroups();
+                mainView.showToast("Zostałeś dodany do grupy");
+            }
+
+            @Override
+            public void onError() {
+                mainView.showAlertDialog();
+            }
+        });
+    }
+
+}
 

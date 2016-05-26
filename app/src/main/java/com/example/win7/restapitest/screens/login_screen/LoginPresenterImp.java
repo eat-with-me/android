@@ -53,8 +53,7 @@ public class LoginPresenterImp implements LoginPresenter{
                 public void onError() {
 
                     loginView.showAlertDialog();
-                    //loginView.hideProgressBar();
-                    //loginView.navigateToErrorScreen();
+
                 }
             });
         }

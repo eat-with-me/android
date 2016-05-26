@@ -48,4 +48,7 @@ public interface Endpoints {
 
     @POST("/groups/{group_id}/orders")
     Call<OrderInGroup> createNewOrder(@Body OrderInGroup orderInGroup, @Path("group_id") Integer group_id);
+
+    @GET("/join/{token}")
+    Call<Void> addToGroup(@Path("token") String token);
 }

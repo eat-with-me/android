@@ -31,4 +31,6 @@ public interface ApiConnection {
     void createNewOrder(OrderInGroup orderInGroup, String groupId, final OnDownloadFinishedListener listener);
 
     void closeSession();
+
+    void addToGroup(String linkToAddToGroup, OnRequestListener onRequestListener);
 }

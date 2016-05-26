@@ -15,28 +15,28 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="eat24.herokuapp.com" />
+            </intent-filter>
+
         </activity>
         <activity android:name=".screens.orders_in_group_screen.OrdersInGroupActivity" />
         <activity android:name=".screens.restaurant_menu_screen.RestaurantMenuActivity" />
         <activity android:name=".screens.order_screen.OrderFragmentActivity" />
         <activity android:name=".screens.new_order_in_group_screen.NewOrderInGroupActivity" />
-        <activity android:name=".screens.main_screen.MainActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+        <activity android:name=".screens.main_screen.MainActivity"/>
         <activity android:name=".screens.sign_up_screen.SignUpActivity" />
-        <activity android:name=".screens.error_screen.ErrorActivity" />
         <activity android:name=".screens.new_group_screen.NewGroupActivity" />
         <activity android:name=".screens.persons_in_group.PersonsInGroupActivity" />
-        <activity android:name=".screens.out_of_date_order.OutOfDateOrderActivity"></activity>
-    </application>
+        <activity android:name=".screens.out_of_date_order.OutOfDateOrderActivity"/>
+    </application>>
 
 </manifest> <!-- .screens.main_screen.MainActivity" -->

@@ -84,7 +84,6 @@ public class ApiConnectionImp implements ApiConnection {
 
             public void onFailure(Call<List<Group>> call, Throwable t) {
 
-                Log.d("Message from error",t.getMessage());
                 listener.onError();
 
             }
@@ -318,7 +317,7 @@ public class ApiConnectionImp implements ApiConnection {
 
     @Override
     public void createNewOrder(OrderInGroup orderInGroup, String groupId, final OnDownloadFinishedListener listener) {
-        Log.d("createNewOrder", "" + orderInGroup.getRestaurantId() + " " + orderInGroup.getNormalClsingTime());
+        //Log.d("createNewOrder", "" + orderInGroup.getRestaurantId() + " " + orderInGroup.getNormalClsingTime());
 
         Call<OrderInGroup> call = api.createNewOrder(orderInGroup,Integer.parseInt(groupId));
         call.enqueue(new Callback<OrderInGroup>() {
@@ -341,6 +340,25 @@ public class ApiConnectionImp implements ApiConnection {
     public void closeSession() {
         //TODO close session on server
         cookie = "";
+    }
+
+    @Override
+    public void addToGroup(String token, final OnRequestListener onRequestListener) {
+        Call<Void> call = api.addToGroup(token);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                onRequestListener.onSuccess();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                onRequestListener.onError();
+            }
+        });
+
+
+
     }
 
 

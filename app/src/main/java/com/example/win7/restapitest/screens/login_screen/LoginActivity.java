@@ -24,6 +24,7 @@ import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.Credentials;
 import com.example.win7.restapitest.others.MyBaseActivity;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
+import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 import com.example.win7.restapitest.screens.sign_up_screen.SignUpActivity;
 
 
@@ -39,6 +40,10 @@ public class LoginActivity extends MyBaseActivity implements LoginView{
     private TextView loginGoesWrongView;
 
     private LoginPresenter loginPresenter;
+    private boolean appOpenedWithLink;
+    private String linkToAddToGroup;
+    public final static String APP_OPENED_WITH_LINK = "appOpenedWithLink";
+    public final static String LINK_TO_ADD_TO_GROUP = "linkToAddGroup";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,15 @@ public class LoginActivity extends MyBaseActivity implements LoginView{
         loginGoesWrongView = (TextView) findViewById(R.id.login_goes_wrong);
 
         loginPresenter = new LoginPresenterImp(this);
+
+        final Intent intent = getIntent();
+        final String action = intent.getAction();
+
+        if(Intent.ACTION_VIEW.equals(action)) {
+            appOpenedWithLink = true;
+            linkToAddToGroup = intent.getDataString();
+        }
+
         loginPresenter.tryLogin();
 
     }
@@ -143,7 +157,12 @@ public class LoginActivity extends MyBaseActivity implements LoginView{
 
     @Override
     public void navigateToMainActivity(){
-        startActivity(new Intent(this, MainActivity.class));
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(APP_OPENED_WITH_LINK,appOpenedWithLink);
+        intent.putExtra(LINK_TO_ADD_TO_GROUP, linkToAddToGroup);
+
+        startActivity(intent);
         finish();
     }
 

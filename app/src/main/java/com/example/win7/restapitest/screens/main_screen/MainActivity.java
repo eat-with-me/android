@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,7 +28,9 @@ import com.example.win7.restapitest.model.Group;
 import com.example.win7.restapitest.others.ClickListener;
 import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.others.RecyclerTouchListener;
+import com.example.win7.restapitest.screens.login_screen.LoginActivity;
 import com.example.win7.restapitest.screens.new_group_screen.NewGroupActivity;
+import com.example.win7.restapitest.screens.new_order_in_group_screen.NewOrderInGroupActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
 
 import java.util.List;
@@ -41,6 +44,8 @@ public  class MainActivity extends MyActivity implements MainView {
     private TextView messageTextView;
     private ProgressBar progressBar;
     private Button button;
+    private String token;
+    private boolean appOpenedWithLink;
 
 
     private MainPresenter mainPresenter;
@@ -58,13 +63,22 @@ public  class MainActivity extends MyActivity implements MainView {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        appOpenedWithLink = getIntent().getBooleanExtra(LoginActivity.APP_OPENED_WITH_LINK,false);
+
+        if(appOpenedWithLink) {
+            String linkToAddToGroup = getIntent().getStringExtra(LoginActivity.LINK_TO_ADD_TO_GROUP);
+            token = linkToAddToGroup.substring(32);
+        }
         recycleViewInit();
 
         mainPresenter = new MainPresenterImp(this);
 
         showProgress();
 
-        mainPresenter.getGroups();
+        if(appOpenedWithLink)
+            mainPresenter.addToGroup(token);
+        else
+            mainPresenter.getGroups();
 
     }
 
