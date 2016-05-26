@@ -79,7 +79,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         myToolbar.setTitle(restaurantName);
         setSupportActionBar(myToolbar);
 
-        showProgress();
+        showProgress();http://eat24.herokuapp.com/restaurants/1
 
         recycleViewInit();
 

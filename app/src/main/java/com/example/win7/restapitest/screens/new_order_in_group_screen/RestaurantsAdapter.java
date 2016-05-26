@@ -39,14 +39,6 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     public void onBindViewHolder(final RestaurantsAdapter.ViewHolder holder, final int position) {
         final RestaurantMenu restaurant = restaurants.get(position);
         holder.restaurantName.setText(restaurant.getName());
-        holder.arrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(v.equals(holder.arrow )) {
-                    ((NewOrderInGroupActivity)context).navigateToDisabledMenu(restaurant.getId().toString());
-                }
-            }
-        });
 
     }
 
@@ -64,10 +56,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         public ViewHolder(View view) {
             super(view);
             restaurantName = (TextView) view.findViewById(R.id.restaurant_name);
-            arrow = (ImageButton) view.findViewById(R.id.arrow_button);
-
-
-        }
+                 }
 
     }
 }

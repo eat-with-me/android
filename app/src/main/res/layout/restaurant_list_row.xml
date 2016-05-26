@@ -17,7 +17,7 @@
         android:focusable="true"
 
         android:clickable="true"
-        android:background="#FFFFFF"
+        android:background="?attr/selectableItemBackground"
         android:orientation="vertical">
 
         <TextView
@@ -32,19 +32,6 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:padding="10dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/arrow_button"
-            android:background="@drawable/ic_chevron_right_black_36dp"
-            android:clickable="false"
-            android:alpha="0.5"
-            android:layout_marginRight="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
 
 
     </RelativeLayout>

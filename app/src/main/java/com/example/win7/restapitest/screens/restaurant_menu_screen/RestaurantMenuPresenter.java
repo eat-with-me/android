@@ -24,7 +24,6 @@ public interface RestaurantMenuPresenter {
 
     void setOrder(Order response);
 
-
     void disableMenu();
 
     void enableMenu();

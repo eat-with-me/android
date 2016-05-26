@@ -73,7 +73,6 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
         recyclerView = (RecyclerView) findViewById(R.id.restaurants_recycler);
         restaurantMenuRecycler = (RecyclerView) findViewById(R.id.restaurants_menu_recycler);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        arrow = (ImageButton) findViewById(R.id.arrow_button);
         newOrderPresenter = new NewOrderPresenterImpl(this);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.include);
@@ -176,7 +175,8 @@ public class NewOrderInGroupActivity extends MyActivity implements NewOrderInGro
 
             @Override
             public void onLongClick(View view, int position) {
-
+                RestaurantMenu restaurantMenu = restaurantsResult.get(position);
+                navigateToDisabledMenu(restaurantMenu.getId().toString());
             }
         }));
 
