@@ -27,4 +27,6 @@ public interface RestaurantMenuPresenter {
     void disableMenu();
 
     void enableMenu();
+
+    void onLongClickMeal(Meal meal);
 }

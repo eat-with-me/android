@@ -189,4 +189,9 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
         menuDisabled = false;
     }
 
+    @Override
+    public void onLongClickMeal(Meal meal) {
+        restaurantMenuView.showToast("Tutaj wyskoczy zdjęcie posiłku :-)");
+    }
+
 }

@@ -58,10 +58,20 @@ public class MenuAdapter extends ExpandableRecyclerAdapter<MenuParentViewHolder,
     public void onBindChildViewHolder(MenuChildViewHolder childViewHolder, int position, Object childListItem) {
         final Meal meal = (Meal) childListItem;
         childViewHolder.dish.setText(meal.getName());
-        childViewHolder.dish.setOnClickListener(new View.OnClickListener() {
+        childViewHolder.description.setText(meal.getDescription());
+
+        childViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 restaurantMenuPresenter.onClickMeal(meal);
+            }
+        });
+
+        childViewHolder.relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                restaurantMenuPresenter.onLongClickMeal(meal);
+                return true;
             }
         });
         childViewHolder.price.setText(meal.getPrice().toString());

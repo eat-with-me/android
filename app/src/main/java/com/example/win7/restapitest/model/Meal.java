@@ -37,6 +37,8 @@ public class Meal implements Parcelable {
     @SerializedName("meal_type")
     private MealType mealType;
 
+    private String description = "Salami pepperoni, ser gouda, sos pomidorowy, oregano";
+
     public Integer getMealTypeId() {
         return mealTypeId;
     }
@@ -189,4 +191,13 @@ public class Meal implements Parcelable {
     public void setMeal_type(MealType meal_type) {
         this.mealType = meal_type;
     }
+
+    public String getDescription() {
+        return "Salami pepperoni, ser gouda, sos pomidorowy, oregano";
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 }
