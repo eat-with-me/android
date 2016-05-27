@@ -2,29 +2,20 @@ package com.example.win7.restapitest.screens.login_screen;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.example.win7.restapitest.R;
 import com.example.win7.restapitest.model.Credentials;
 import com.example.win7.restapitest.others.MyBaseActivity;
 import com.example.win7.restapitest.screens.main_screen.MainActivity;
-import com.example.win7.restapitest.screens.restaurant_menu_screen.RestaurantMenuActivity;
 import com.example.win7.restapitest.screens.sign_up_screen.SignUpActivity;
 
 
@@ -124,7 +115,7 @@ public class LoginActivity extends MyBaseActivity implements LoginView{
     }
 
     @Override
-    public void setEmailTooShortError() {
+    public void setPasswordTooShortError() {
 
         String passwordTooShort = getString(R.string.error_short_password);
         passwordText.setError(passwordTooShort);

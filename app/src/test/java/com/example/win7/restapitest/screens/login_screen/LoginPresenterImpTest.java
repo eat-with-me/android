@@ -31,5 +31,31 @@ public class LoginPresenterImpTest {
         presenter.onClickLogin();
         verify(view).setEmptyEmailError();
     }
-    
+
+    @Test
+    public void shouldShowErrorMessageWhenUsernameIsInvalid() throws Exception {
+
+        when(view.getEmail()).thenReturn("test");
+        presenter.onClickLogin();
+        verify(view).setInvalidEmailError();
+    }
+    @Test
+    public void shouldShowErrorMessageWhenPasswordIsTooShort() throws Exception {
+
+        when(view.getEmail()).thenReturn("mock@test.com");
+        when(view.getPassword()).thenReturn("short");
+        presenter.onClickLogin();
+        verify(view).setPasswordTooShortError();
+    }
+
+    @Test
+    public void shouldShowErrorMessageWhenPasswordIsEmpty() throws Exception {
+
+        when(view.getEmail()).thenReturn("mock@test.com");
+        when(view.getPassword()).thenReturn("");
+        presenter.onClickLogin();
+        verify(view).setEmptyPasswordError();
+    }
+
+
 }

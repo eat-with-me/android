@@ -15,7 +15,7 @@ public interface SignUpView {
 
     void setEmptyEmailError();
 
-    void setDefferentPasswordError();
+    void setDifferentPasswordError();
 
     void setEmptyPasswordError();
 
@@ -23,7 +23,7 @@ public interface SignUpView {
 
     void setInvalidEmailError();
 
-    void setEmailTooShortError();
+    void setPasswordTooShortError();
 
     void showProgressBar();
 

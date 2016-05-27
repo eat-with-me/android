@@ -18,7 +18,7 @@ public interface LoginView {
 
     void setInvalidEmailError();
 
-    void setEmailTooShortError();
+    void setPasswordTooShortError();
 
     void showProgressBar();
 

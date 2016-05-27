@@ -86,7 +86,7 @@ public class SignUpActivity extends MyBaseActivity implements SignUpView {
     }
 
     @Override
-    public void setDefferentPasswordError() {
+    public void setDifferentPasswordError() {
         String differentPasswords = getString(R.string.error_defferent_passwords);
         passwordText.setError(differentPasswords);
     }
@@ -111,7 +111,7 @@ public class SignUpActivity extends MyBaseActivity implements SignUpView {
     }
 
     @Override
-    public void setEmailTooShortError() {
+    public void setPasswordTooShortError() {
         String passwordTooShort = getString(R.string.error_short_password);
         passwordText.setError(passwordTooShort);
 

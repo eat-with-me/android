@@ -5,17 +5,29 @@ import com.example.win7.restapitest.api.OnLoginListener;
 import com.example.win7.restapitest.model.Credentials;
 import com.example.win7.restapitest.others.Factory;
 
+import java.util.regex.Pattern;
+
 
 public class LoginPresenterImp implements LoginPresenter{
 
     private LoginView loginView;
     private ApiConnection apiConnection;
+    private static final Pattern EMAIL = Pattern.compile(
+            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                    "\\." +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                    ")+"
+    );
 
 
 
     public LoginPresenterImp(LoginView loginView) {
         this.loginView = loginView;
         apiConnection = Factory.getApiConnection();
+
     }
 
     @Override
@@ -88,7 +100,8 @@ public class LoginPresenterImp implements LoginPresenter{
     @Override
     public boolean isEmailValid(String email) {
 
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        return EMAIL.matcher(email).matches();
+
     }
 
 
@@ -104,7 +117,7 @@ public class LoginPresenterImp implements LoginPresenter{
             }
             else if(password.length() < 8){
 
-                loginView.setEmailTooShortError();
+                loginView.setPasswordTooShortError();
                 return false;
             }
             else{

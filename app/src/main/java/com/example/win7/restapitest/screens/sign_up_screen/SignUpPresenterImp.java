@@ -3,16 +3,24 @@ package com.example.win7.restapitest.screens.sign_up_screen;
 import com.example.win7.restapitest.api.ApiConnection;
 import com.example.win7.restapitest.api.OnLoginListener;
 import com.example.win7.restapitest.model.Credentials;
-import com.example.win7.restapitest.model.User;
 import com.example.win7.restapitest.others.Factory;
-import com.example.win7.restapitest.screens.login_screen.LoginView;
+
+import java.util.regex.Pattern;
 
 
 public class SignUpPresenterImp implements SignUpPresenter {
 
     private SignUpView signUpView;
     private ApiConnection apiConnection;
-
+    private static final Pattern EMAIL = Pattern.compile(
+            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                    "\\." +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                    ")+"
+    );
 
     public SignUpPresenterImp(SignUpView signUpView){
 
@@ -27,7 +35,7 @@ public class SignUpPresenterImp implements SignUpPresenter {
 
         final String email = signUpView.getEmail();
         final String password = signUpView.getPassword();
-        String secondPassword = signUpView.getPasswordAgain();
+        final String secondPassword = signUpView.getPasswordAgain();
 
 
         signUpView.resetErrors();
@@ -38,8 +46,12 @@ public class SignUpPresenterImp implements SignUpPresenter {
         else if(!isPasswordCorrect(password)){
             return;
         }
+        else if(secondPassword.isEmpty()){
+            signUpView.setEmptyPasswordAgainError();
+            return;
+        }
         else if(!secondPassword.equals(password)){
-            signUpView.setDefferentPasswordError();
+            signUpView.setDifferentPasswordError();
             return;
         }
         else
@@ -97,7 +109,7 @@ public class SignUpPresenterImp implements SignUpPresenter {
     @Override
     public boolean isEmailValid(String email) {
 
-        return !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        return !EMAIL.matcher(email).matches();
     }
 
 
@@ -113,7 +125,7 @@ public class SignUpPresenterImp implements SignUpPresenter {
         }
         else if(password.length() < 8){
 
-            signUpView.setEmailTooShortError();
+            signUpView.setPasswordTooShortError();
             return false;
         }
         else{
