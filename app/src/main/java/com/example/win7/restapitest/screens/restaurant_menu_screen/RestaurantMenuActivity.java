@@ -1,12 +1,16 @@
 package com.example.win7.restapitest.screens.restaurant_menu_screen;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,12 +23,13 @@ import com.example.win7.restapitest.others.MyActivity;
 import com.example.win7.restapitest.screens.new_order_in_group_screen.NewOrderInGroupActivity;
 import com.example.win7.restapitest.screens.order_screen.OrderFragmentActivity;
 import com.example.win7.restapitest.screens.orders_in_group_screen.OrdersInGroupActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class RestaurantMenuActivity extends MyActivity implements RestaurantMenuView{
 
-
+    private ImageView imageView;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private TextView messageTextView;
@@ -42,6 +47,12 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
     private static  final  int ORDER_ACTIVITY_REQUEST_CODE = 1;
     public static final String ORDER = "orderInGroup";
 
+
+    AlertDialog pictureDialog;
+    private boolean disabledMenu;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,36 +69,19 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         restaurantMenuPresenter = new RestaurantMenuPresenterImp(this);
 
 
-        Intent intent = getIntent();
-        boolean disabledMenu = intent.getExtras().getBoolean(NewOrderInGroupActivity.DISABLED_MENU);
+        getDataFromPreviousActivity();
 
-        if(disabledMenu){
+        toolbarInit();
 
-            restaurantId = intent.getStringExtra(NewOrderInGroupActivity.RESTAURANT_ID);
-
-        }
-        else{
-            groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
-            orderInGroup = (OrderInGroup) intent.getSerializableExtra(OrdersInGroupActivity.ORDER);
-            restaurantId = orderInGroup.getRestaurantId();
-            orderId = orderInGroup.getId();
-            restaurantName = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_NAME);
-        }
-
-
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        myToolbar.setTitle(restaurantName);
-        setSupportActionBar(myToolbar);
-
-        showProgress();http://eat24.herokuapp.com/restaurants/1
+        showProgress();//http://eat24.herokuapp.com/restaurants/1
 
         recycleViewInit();
+
+        pictureDialogInit();
 
         if(disabledMenu)
             restaurantMenuPresenter.disableMenu();
         restaurantMenuPresenter.getMenu(restaurantId);
-
-
 
     }
 
@@ -184,14 +178,7 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         startActivityForResult(intent,ORDER_ACTIVITY_REQUEST_CODE);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (ORDER_ACTIVITY_REQUEST_CODE == requestCode && resultCode == RESULT_OK) {
-            Order response = data.getParcelableExtra("resp");
-            restaurantMenuPresenter.setOrder(response);
-        }
-
-    }
     @Override
 
     public void hideButton() {
@@ -209,5 +196,67 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
+    }
+
+
+    private void getDataFromPreviousActivity(){
+        Intent intent = getIntent();
+        disabledMenu = intent.getExtras().getBoolean(NewOrderInGroupActivity.DISABLED_MENU);
+
+        if(disabledMenu){
+
+            restaurantId = intent.getStringExtra(NewOrderInGroupActivity.RESTAURANT_ID);
+
+        }
+        else{
+            groupId = intent.getStringExtra(OrdersInGroupActivity.GROUP_ID);
+            orderInGroup = (OrderInGroup) intent.getSerializableExtra(OrdersInGroupActivity.ORDER);
+            restaurantId = orderInGroup.getRestaurantId();
+            orderId = orderInGroup.getId();
+            restaurantName = intent.getStringExtra(OrdersInGroupActivity.RESTAURANT_NAME);
+        }
+    }
+
+
+    private void toolbarInit(){
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar.setTitle(restaurantName);
+        setSupportActionBar(myToolbar);
+    }
+
+
+    private void pictureDialogInit(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                pictureDialog.dismiss();
+            }
+        });
+
+        pictureDialog = builder.create();
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.dialog_picture,null);
+        pictureDialog.setView(dialogLayout);
+
+    }
+
+    @Override
+    public void showPictureDialog(String mealsName) {
+        pictureDialog.setTitle(mealsName);
+        pictureDialog.show();
+        showToast("toast");
+    }
+
+    @Override
+    public void loadPicture(String url){
+        imageView = (ImageView) pictureDialog.findViewById(R.id.mealsPicture);
+        if(pictureDialog.isShowing()) {
+            Picasso
+                    .with(this)
+                    .load(url)
+                    .into(imageView);
+
+        }
     }
 }

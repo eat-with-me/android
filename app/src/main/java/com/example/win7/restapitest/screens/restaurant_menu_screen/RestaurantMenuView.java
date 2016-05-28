@@ -35,4 +35,8 @@ public interface RestaurantMenuView {
     void showAlertDialog();
 
     void hideButton();
+
+    void showPictureDialog(String mealsName);
+
+    void loadPicture(String url);
 }

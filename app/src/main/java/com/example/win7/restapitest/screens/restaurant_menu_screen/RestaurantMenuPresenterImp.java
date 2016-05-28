@@ -191,7 +191,9 @@ public class RestaurantMenuPresenterImp implements RestaurantMenuPresenter {
 
     @Override
     public void onLongClickMeal(Meal meal) {
-        restaurantMenuView.showToast("Tutaj wyskoczy zdjęcie posiłku :-)");
+        restaurantMenuView.showPictureDialog(meal.getName());
+        restaurantMenuView.loadPicture("http://i.imgur.com/DvpvklR.png");
+
     }
 
 }
