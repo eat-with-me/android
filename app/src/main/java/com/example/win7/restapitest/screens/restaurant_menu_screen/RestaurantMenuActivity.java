@@ -245,7 +245,6 @@ public class RestaurantMenuActivity extends MyActivity implements RestaurantMenu
     public void showPictureDialog(String mealsName) {
         pictureDialog.setTitle(mealsName);
         pictureDialog.show();
-        showToast("toast");
     }
 
     @Override

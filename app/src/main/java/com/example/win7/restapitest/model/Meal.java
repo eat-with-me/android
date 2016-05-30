@@ -37,7 +37,11 @@ public class Meal implements Parcelable {
     @SerializedName("meal_type")
     private MealType mealType;
 
-    private String description = "Salami pepperoni, ser gouda, sos pomidorowy, oregano";
+    @SerializedName("description")
+    private String description;
+
+    @SerializedName("image_url")
+    private String imageUrl;
 
     public Integer getMealTypeId() {
         return mealTypeId;
@@ -170,7 +174,8 @@ public class Meal implements Parcelable {
     public void incAmount(){
         this.amount+=1;
     }
-    public void decAmount() { this.amount-=1; }
+    public void decAmount() {
+        this.amount-=1; }
 
     public void setAmount(Integer amount) {
         this.amount = amount;
@@ -193,11 +198,18 @@ public class Meal implements Parcelable {
     }
 
     public String getDescription() {
-        return "Salami pepperoni, ser gouda, sos pomidorowy, oregano";
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
